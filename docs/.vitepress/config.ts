@@ -20,6 +20,11 @@ export default defineConfig({
         activeMatch: "^/config/",
       },
       {
+        text: "开发记录",
+        link: "/record/index",
+        activeMatch: '"^/record/"',
+      },
+      {
         text: "Release Notes",
         link: "https://github.com/vuejs/vitepress/releases",
       },
@@ -40,7 +45,7 @@ function getGuideSidebar() {
       children: [
         { text: "简介", link: "/guide/introduction" },
         { text: "开始", link: "/guide/start" },
-        // { text: "Configuration", link: "/guide/configuration" },
+        { text: "项目配置", link: "/guide/configuration" },
         // { text: "Asset Handling", link: "/guide/assets" },
         // { text: "Markdown Extensions", link: "/guide/markdown" },
         // { text: "Using Vue in Markdown", link: "/guide/using-vue" },
