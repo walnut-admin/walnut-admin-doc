@@ -21,7 +21,7 @@ export default defineConfig({
       },
       {
         text: "开发记录",
-        link: "/record/index",
+        link: "/record/daily",
         activeMatch: '"^/record/"',
       },
       {
@@ -33,6 +33,16 @@ export default defineConfig({
     sidebar: {
       "/guide/": getGuideSidebar(),
       "/config/": getConfigSidebar(),
+      "/record/": [
+        {
+          text: "日常记录",
+          link: "/record/daily",
+        },
+        {
+          text: "部署记录",
+          link: "/record/deploy",
+        },
+      ],
       "/": getGuideSidebar(),
     },
   },
