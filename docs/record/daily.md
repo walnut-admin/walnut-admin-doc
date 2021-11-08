@@ -1,20 +1,36 @@
 # 日常记录
 
+## 2021.11.08
+
+- 今天完成的事情
+  - 移除了 i18n 的 plugin（貌似用处不大，作者也好久没更新了）
+  - vite proxy 那里暂时做了一个解决方案，就是开发时是用 proxy（prefix 默认是/api）代理到后台，具体是用 rewrite 方法（后台 api 真有前缀，所以 rewrite 是把/api 重写成/dev-api/v1 这样子）。axios 那里的 baseURL，开发时就写/api 就好，proxy 会代理到后台的。打包环境下好像是没有 proxy 的说法的（个人理解哈），所以 axios 的 baseURL 是直接上真实的 api 地址
+  - layout 做了下优化，主要是屏幕变小时 header 的一些变化以及左侧菜单需要放到一个 drawer 里去显示。把 header 和 side 的 inverted 属性也提到 appsettings 里了，打包时 header 的 inverted 还是失效。
+  - naive 相关的 class 定义在 tailwind 的 extend 里后，使用时后半段一定要用驼峰
+  - 把 html 也从 stylelint 中移除了（因为 commit 时报错了，就暴力解决了）
+  - DeepMaybeRefSelf 类型还是有问题，字面量类型的都变成 string 了，今天查了 3.4 个小时，关于 ts 的一些高级用法。
+- 想法
+  - DeepMaybeRefSelf 这个类型，应该只需要在 vueuse 的 DeepMaybeRef 类型上把函数忽略一下就好，但是现在飘红的都是 schema 里的 boolean，字面量类型和数组类型的错误，感觉时处理数组类型那里有问题，明天测试一下
+  - form 的 prop，感觉需要重写，不能用 attrs 的方式偷懒，要不类型支持和绑定值有问题
+  - form完事，就开始弄下table，把role和user的业务页面撸一下
+  - 明天花点时间好好写个todo-list放在开发记录里，一天一天记录，总是忘记打算或准备要做的事情
+  - 又仔细看了一下，或许组件都应该做成inher false的类型 然后手动处理naive的prop和自己新增的prop（如果真的要做，那就是又把UI文件夹从头到尾捋一遍）
+
 ## 2021.11.07
 
 - 今天完成的事情
-  - 在vueuse的DeepMayBeRef类型基础上优化了一个自己适用的类型，用到了form和table的hook函数参数类型上，一个类型一劳永逸，再也不担心回有ref类型的错误了
+  - 在 vueuse 的 DeepMayBeRef 类型基础上优化了一个自己适用的类型，用到了 form 和 table 的 hook 函数参数类型上，一个类型一劳永逸，再也不担心回有 ref 类型的错误了
   - 面包屑的函数写冗余了，删除了一些
-  - 修复了window上的naive消息组件api的类型
+  - 修复了 window 上的 naive 消息组件 api 的类型
   - **阶段性成功**：清除了项目所有的类型错误（暂时）
-  - 重新梳理了一下vite的相关配置，发现proxy那里写的真的好乱，明天继续优化
+  - 重新梳理了一下 vite 的相关配置，发现 proxy 那里写的真的好乱，明天继续优化
 - 想法
-  - menu页面几个树相关的函数，类型推导还需要优化
-  - 一般proxy代理的都是以api为前缀的转发到后台地址上，并且后台的真实地址是不带api这样的前缀，但是这个项目的后台我决定还是带api字眼的前缀（还包括api的版本），感觉增加了一些工作量
+  - menu 页面几个树相关的函数，类型推导还需要优化
+  - 一般 proxy 代理的都是以 api 为前缀的转发到后台地址上，并且后台的真实地址是不带 api 这样的前缀，但是这个项目的后台我决定还是带 api 字眼的前缀（还包括 api 的版本），感觉增加了一些工作量
   - 环境变量的命名再好好规范一下
-  - 打包后header的样式和开发时不一致，好像inverted的问题，但不清楚为什么打完包表现就不一样了
-  - chunk的分割需要研究一下
-  - vben的打包信息相关部分很有意思，可以学习一下
+  - 打包后 header 的样式和开发时不一致，好像 inverted 的问题，但不清楚为什么打完包表现就不一样了
+  - chunk 的分割需要研究一下
+  - vben 的打包信息相关部分很有意思，可以学习一下
   - 打包流程需要研究一些，还有相关的版本更新（CI/CD？）
 
 ## 2021.11.06
