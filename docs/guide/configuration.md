@@ -131,6 +131,8 @@ VITE_APP_CACHE_MAXAGE = 604800
 
 - 在之后开始使用 [vueuse][vueuse] 后，发现了[createGlobalState][vueuse-createglobalstate]函数，就果断采用了此种方案作为全局的状态管理。
 
+- 最近又再考虑使用[pinia][pinia]了，为了hmr，为了修改的统一管理和追踪管理，为了devtool的良好支持，后续应该还是要换成[pinia][pinia]的。
+
 :::
 
 本项目的全局状态分为两大类，一类是有 localeStorage 支持[useAppStateStorage][useappstatestorage]函数的和没有持久化支持的（即在内存中，刷新就会回到初始状态）[useAppStateMemory][useappstatememory]函数。
