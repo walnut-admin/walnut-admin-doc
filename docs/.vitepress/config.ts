@@ -13,9 +13,9 @@ export default defineConfig({
     lastUpdated: "Last Updated",
 
     nav: [
-      { text: "Guide", link: "/", activeMatch: "^/$|^/guide/" },
+      { text: "指南", link: "/", activeMatch: "^/$|^/guide/" },
       {
-        text: "Config Reference",
+        text: "组件",
         link: "/config/basics",
         activeMatch: "^/config/",
       },
@@ -24,10 +24,10 @@ export default defineConfig({
         link: "/record/daily",
         activeMatch: '"^/record/"',
       },
-      {
-        text: "Release Notes",
-        link: "https://github.com/vuejs/vitepress/releases",
-      },
+      // {
+      //   text: "Release Notes",
+      //   link: "https://github.com/vuejs/vitepress/releases",
+      // },
     ],
 
     sidebar: {
@@ -56,10 +56,10 @@ function getGuideSidebar() {
         { text: "简介", link: "/guide/introduction" },
         { text: "开始", link: "/guide/start" },
         { text: "项目配置", link: "/guide/configuration" },
-        // { text: "Asset Handling", link: "/guide/assets" },
-        // { text: "Markdown Extensions", link: "/guide/markdown" },
-        // { text: "Using Vue in Markdown", link: "/guide/using-vue" },
-        // { text: "Deploying", link: "/guide/deploy" },
+        { text: "菜单", link: "/guide/menu" },
+        { text: "路由", link: "/guide/route" },
+        { text: "权限", link: "/guide/permission" },
+        { text: "选项卡", link: "/guide/tab" },
       ],
     },
   ];
