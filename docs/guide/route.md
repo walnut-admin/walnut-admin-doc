@@ -2,7 +2,11 @@
 
 ## 介绍
 
-路由是根据 menu 生成数据，此处涉及到 vue-router 动态路由部分的相关知识。
+路由是根据 menu 生成数据，此处涉及到 vue-router 动态路由部分的相关知识。思路简单来说，就是通过 menu 构建 routes，最后通过[addRoute](https://next.router.vuejs.org/api/#addroute)添加到 router 实例中。
+
+:::tip
+说实话，本人对 router 的文档阅读还比较少，接触最多的 api 也就是 push/replace/beforeEach 等等。有时间需要仔细的好好的阅读一下 router 的文档，能学习到很多东西，为设计提供更多广角的思路。
+:::
 
 :::warning
 
@@ -12,7 +16,7 @@
 
 ### ts 类型
 
-具体查看[types/app.d.ts](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/types/vue-router.d.ts)。
+具体查看[types/vue-router.d.ts](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/types/vue-router.d.ts)。
 
 ```ts
 // 对应menu的一些字段，查看menu即可

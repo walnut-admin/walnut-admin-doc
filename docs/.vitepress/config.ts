@@ -13,7 +13,11 @@ export default defineConfig({
     lastUpdated: "Last Updated",
 
     nav: [
-      { text: "指南", link: "/", activeMatch: "^/$|^/guide/" },
+      {
+        text: "指南",
+        link: "/",
+        activeMatch: "^/$|^/guide/",
+      },
       {
         text: "组件",
         link: "/config/basics",
@@ -43,7 +47,7 @@ export default defineConfig({
           link: "/record/deploy",
         },
       ],
-      "/": getGuideSidebar(),
+      // "/": getGuideSidebar(),
     },
   },
 });
@@ -51,11 +55,17 @@ export default defineConfig({
 function getGuideSidebar() {
   return [
     {
-      text: "指南",
+      text: "介绍",
       children: [
         { text: "简介", link: "/guide/introduction" },
         { text: "开始", link: "/guide/start" },
         { text: "项目配置", link: "/guide/configuration" },
+        { text: "项目规范", link: "/guide/lint" },
+      ],
+    },
+    {
+      text: "深入",
+      children: [
         { text: "菜单", link: "/guide/menu" },
         { text: "路由", link: "/guide/route" },
         { text: "权限", link: "/guide/permission" },

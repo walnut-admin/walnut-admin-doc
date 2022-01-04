@@ -1,5 +1,38 @@
 # 项目配置
 
+## vscode 配置
+
+### snippets
+
+在 [.vscode](https://github.com/Zhaocl1997/walnut-admin-client/tree/naive-ui/.vscode) 的文件夹下的 [vue.code-snippets](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/.vscode/vue.code-snippets) 中，我写好了几个常用的代码片段。
+
+- vue3-comp
+  最基本的组件文件格式，默认 inheritAttrs 为 false，同时带有 props 和 emits
+- vue3-view
+  上面的简化版本，script 只剩 component 和 setup，同时添加了 style 标签
+- vue3-tsx
+  没有 template，使用 tsx 开发
+- vue3-setup
+  setup 语法糖，有两个 script 标签
+
+### volar
+
+:::tip
+在开始之前，请先仔细阅读[Use Take Over Mode instead of TS Plugin](https://github.com/johnsoncodehk/volar/discussions/471)。
+:::
+
+省流：使用 volar 的 take over 模式（下面就叫它接管模式了）而不是 [ts-plugin](https://github.com/johnsoncodehk/volar/tree/master/extensions/vscode-typescript-vue-plugin)。
+
+简单来说，如果只是单纯使用 volar 而不使用接管模式的话，vscode 内置的 js/ts server 和 volar 会创建两个 service 实例。而且 ts-plugin 也会创建相应的实例，就结论来说就是会占用 CPU 资源。而使用接管模式只会有两个实例。
+
+#### 开启接管模式的步骤
+
+- 确保`Vue Language Features (volar)`在工作区中启用
+
+- 在 vscode 中，`ctrl + shift + p`，输入`Extensions: Show Built-in Extensions`选中
+
+- 拉到底，选中`TypeScript and JavaScript Language Features`，并禁用即可
+
 ## 环境变量配置
 
 项目的环境变量配置位于[env][env]目录下的[.env][.env]、[.env.development][.env.development]、[.env.production][.env.production]和[.env.staging][.env.staging]。其中[.env.staging][.env.staging]文件用途是模拟生产的阶段性打包，会借助一些 vite 插件和 rollup 插件处理一些相关打包逻辑。
@@ -131,7 +164,7 @@ VITE_APP_CACHE_MAXAGE = 604800
 
 - 在之后开始使用 [vueuse][vueuse] 后，发现了[createGlobalState][vueuse-createglobalstate]函数，就果断采用了此种方案作为全局的状态管理。
 
-- 最近又再考虑使用[pinia][pinia]了，为了hmr，为了修改的统一管理和追踪管理，为了devtool的良好支持，后续应该还是要换成[pinia][pinia]的。
+- 最近又再考虑使用[pinia][pinia]了，为了 hmr，为了修改的统一管理和追踪管理，为了 devtool 的良好支持，后续应该还是要换成[pinia][pinia]的。
 
 :::
 
@@ -375,7 +408,7 @@ const appStateStorage = {
     - 很难再和后台做脱离了
     - 系统管理里多了两个模块需要开发（语言管理和国际化词条管理）
     - 国际化词条数量多了后，或许需要做接口查询的词条分割
-    - 需要很好的数据库设计，我现在的设计是一个词条一条数据，即例如登录字样，如果有系统有五种语言，那么登录这个词条就会在词条表里生成五条数据，在语言数量很多时查询的接口压力或许会很大（当然我这想的有点多了，一般不会有很多种的语言，除了像谷歌那种规模公司做的产品）。
+    - 需要很好的数据库设计，我现在的设计是一个词条一条数据，即例如登录字样，如果系统里有五种语言，那么登录这个词条就会在词条表里生成五条数据，对应语言表里的五种语言。在语言数量很多时查询的接口压力或许会很大（当然我这想的有点多了，一般不会有很多种的语言，除了像谷歌那种规模公司做的产品）。
 
   - 好处
 

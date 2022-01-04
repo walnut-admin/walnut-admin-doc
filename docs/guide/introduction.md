@@ -2,7 +2,7 @@
 
 ## 介绍
 
-[Walnut Admin][walnut-admin-client] 是一个基于 [Vue3.0][vue3]、[Vite][vite]、 [Naive UI][naiveui]、[TypeScript][ts] 的前后端分离的全栈解决方案，目标是为开发中大型项目提供开箱即用的解决方案。项目的重点是前端，所以本文档的重点也是偏向前端。后台使用的也是 ts 支持很好的[nestjs][nestjs]，在后面我也会具体介绍一下。其中前端包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。项目会使用前端较新的技术栈，可以作为项目的启动模版，以帮助你快速搭建企业级中后台产品原型。也可以作为一个示例，用于学习 `vue3`、`vite`、`ts` 等主流技术。该项目会持续跟进最新技术，并将其应用在项目中。
+[Walnut Admin][walnut-admin-client] 是一个基于 [Vue3.0][vue3]、[Vite][vite]、 [Naive UI][naiveui]、[TypeScript][ts]、[Nest.js][nestjs] 的前后端分离的全栈解决方案，目标是为开发中大型项目提供开箱即用的解决方案。项目的重点是前端，所以本文档的重点也是偏向前端。其中前端包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。项目会使用前端较新的技术栈，可以作为项目的启动模版，以帮助你快速搭建企业级中后台产品原型。也可以作为一个示例，用于学习 `vue3`、`vite`、`ts` 等主流技术。该项目会持续跟进最新技术，并将其应用在项目中。
 
 ## 文档
 
@@ -40,15 +40,15 @@
 
 ## vite 插件推荐
 
-项目使用了数个[大佬][antfu]参与开发的各类 vite 插件，不用不知道，是真的很爽！
+项目使用了数个[antfu 大佬][antfu]参与开发的各类 vite 插件，不用不知道，是真的很爽！
 
-- [unplugin-auto-import][unplugin-auto-import] - api 的自动引入，再也不用 import 这儿 import 那儿啦！后续可能还会支持类型的自动引入（那就更爽了）。
+- [unplugin-auto-import][unplugin-auto-import] - 自动引入，再也不用 import 这儿 import 那儿啦！后续可能还会支持类型的自动引入（那就更爽了）。
 - [unplugin-vue-components][unplugin-vue-components] - 组件的自动引入，同时支持类型优化，用过的都较好！
 - [unplugin-icons][unplugin-icons] - 项目暂时还没引用，不过我也是用的 iconify 做的图标集，后续可能迁移。
 - [vite-plugin-windicss][vite-plugin-windicss] - 再也不用写 css/scss/sass 啦！功能十分强大！
 - [rollup-plugin-visualizer][rollup-plugin-visualizer] - rollup 的打包大小可视化插件，打完包哪里大一目了然！
 - [vite-plugin-compression][vite-plugin-compression] - 打包压缩插件
-- [vite-plugin-html][vite-plugin-html] - html 插件，主要用于生成 title。
+- [vite-plugin-html][vite-plugin-html] - html 插件，主要用于生成 title
 
 ## 浏览器支持
 
@@ -56,9 +56,9 @@
 
 **生产环境**支持现代浏览器，不支持 IE。
 
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png" alt="IE" width="24px" height="24px"  />](http://godban.github.io/browsers-support-badges/)IE | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt=" Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)Safari |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|                                                                                                                not support                                                                                                                |                                                                                          last 2 versions                                                                                          |                                                                                               last 2 versions                                                                                                |                                                                                             last 2 versions                                                                                              |                                                                                             last 2 versions                                                                                              |
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari-ios/safari-ios_48x48.png" alt="iOS Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>iOS Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/samsung-internet/samsung-internet_48x48.png" alt="Samsung" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Samsung | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Opera |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Edge                                                                                                                                                                                                            | last 2 versions                                                                                                                                                                                                   | last 2 versions                                                                                                                                                                                               | last 2 versions                                                                                                                                                                                               | last 2 versions                                                                                                                                                                                                               | last 2 versions                                                                                                                                                                                                                     | last 2 versions                                                                                                                                                                                           |
 
 ## 如何加入我们
 
@@ -67,7 +67,7 @@
 
 ## 特别鸣谢
 
-[anncwb][anncwb]大佬，Vben Admin 做的很好！给了我很多启发！这个文档的大致结构也是借用此项目的[文档]。我本人不是很会组织语言，后续内容若有语言不通的地方，请见谅！
+[anncwb][anncwb]大佬，Vben Admin 做的很好！给了我很多启发！这个文档的大致结构也是借用此项目的文档。我本人不是很会组织语言，后续内容若有语言不通的地方，请见谅！
 
 <!-- links -->
 

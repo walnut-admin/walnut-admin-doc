@@ -121,15 +121,3 @@ const buildKeepAliveRouteNameList = (payload: AppMenu[]): string[] =>
     .filter((i) => i.type === MenuTypeConst.MENU && i.cache)
     .map((i) => i.name!);
 ```
-
-### buildPermissions
-
-- 通过 menu 数组构建权限数组
-
-- 具体介绍
-
-```ts
-// 直接map出permission数组且滤掉空的项目
-const buildPermissions = (payload: AppMenu[]): string[] =>
-  payload.map((i) => i.permission!).filter((i) => i);
-```
