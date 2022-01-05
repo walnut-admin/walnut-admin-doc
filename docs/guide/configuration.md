@@ -35,7 +35,7 @@
 
 ## 环境变量配置
 
-项目的环境变量配置位于[env][env]目录下的[.env][.env]、[.env.development][.env.development]、[.env.production][.env.production]和[.env.staging][.env.staging]。其中[.env.staging][.env.staging]文件用途是模拟生产的阶段性打包，会借助一些 vite 插件和 rollup 插件处理一些相关打包逻辑。
+项目的环境变量配置位于[env]目录下的[.env]、[.env.development]、[.env.production]和[.env.staging]。其中[.env.staging]文件用途是模拟生产的阶段性打包，会借助一些 vite 插件和 rollup 插件处理一些相关打包逻辑。
 
 更多相关环境变量的配置请查看[vite 关于 env 文档][vite-env]。
 
@@ -154,23 +154,23 @@ VITE_APP_CACHE_MAXAGE = 604800
 
 ### 具体说明
 
-本项目并没有采用任何的状态管理库，而是采用了[vueuse][vueuse]的[createGlobalState][vueuse-createglobalstate]函数。
+本项目并没有采用任何的状态管理库，而是采用了[vueuse]的[createGlobalState][vueuse-createglobalstate]函数。
 
 ::: info
 
 - 最开始搭建这个架子的时候，采用也是 vuex。但后续观看 vue3 的文档发现了非常好用的 provide/inject，以及在 ts 的辅助下，context 的使用得十分顺手。
 
-- 之后也看到了[pinia][pinia]这个包（已经是现在的 vuex5 了），但是并没有采用，因为在熟悉了 context 这个概念后，个人认为 vue3 的状态管理完全可以自己手撸。
+- 之后也看到了[pinia]这个包（已经是现在的 vuex5 了），但是并没有采用，因为在熟悉了 context 这个概念后，个人认为 vue3 的状态管理完全可以自己手撸。
 
-- 在之后开始使用 [vueuse][vueuse] 后，发现了[createGlobalState][vueuse-createglobalstate]函数，就果断采用了此种方案作为全局的状态管理。
+- 在之后开始使用 [vueuse] 后，发现了[createGlobalState][vueuse-createglobalstate]函数，就果断采用了此种方案作为全局的状态管理。
 
-- 最近又再考虑使用[pinia][pinia]了，为了 hmr，为了修改的统一管理和追踪管理，为了 devtool 的良好支持，后续应该还是要换成[pinia][pinia]的。
+- 最近又再考虑使用[pinia]了，为了 hmr，为了修改的统一管理和追踪管理，为了 devtool 的良好支持，后续应该还是要换成[pinia]的。
 
 :::
 
 本项目的全局状态分为两大类，一类是有 localeStorage 支持[useAppStateStorage][useappstatestorage]函数的和没有持久化支持的（即在内存中，刷新就会回到初始状态）[useAppStateMemory][useappstatememory]函数。
 
-[useAppStateStorage][useappstatestorage]此函数的持久化也是在[vueuse][vueuse]的[useStorage][vueuse-usestorage]基础上做的二次封装，主要就是添加了超时的逻辑和加密的逻辑。
+[useAppStateStorage][useappstatestorage]此函数的持久化也是在[vueuse]的[useStorage][vueuse-usestorage]基础上做的二次封装，主要就是添加了超时的逻辑和加密的逻辑。
 
 ::: info
 
@@ -390,14 +390,16 @@ const appStateStorage = {
 ```
 
 - 加密配置
-  在 [crypto-js][crypto-js] 的基础上做了一下简单的二次封装，具体查看[src/utils/crypto](https://github.com/zhaocl1997/walnut-admin-client/blob/naive-ui/src/utils/crypto/crypto.ts)即可。
+  在 [crypto-js] 的基础上做了一下简单的二次封装，具体查看[src/utils/crypto](https://github.com/zhaocl1997/walnut-admin-client/blob/naive-ui/src/utils/crypto/crypto.ts)即可。
 
-  默认采用 aes 加密，mode 是 CBC，padding 是 Pkcs7（mode 和 padding 是什么，我也不清楚...，详细看 [crypto-js][crypto-js] 的文档吧）
+  默认采用 aes 加密，mode 是 CBC，padding 是 Pkcs7（mode 和 padding 是什么，我也不清楚...，详细看 [crypto-js]的文档吧）
 
 - 存储配置
   在[useStorage][vueuse-usestorage]的基础上做了加密和超时的二次封装，在具体查看[src/utils/persistent/src/Storage](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/src/utils/persistent/src/Storage.ts)即可。
 
 ### 国际化配置
+
+- naiveui 的国际化详细查看[这里](https://www.naiveui.com/zh-CN/os-theme/docs/i18n)
 
 - 具体说明
 
@@ -419,7 +421,39 @@ const appStateStorage = {
 
 ### 主题色配置
 
-- 因为 naive-ui 提供了很好的 css-in-js 的支持，所以这里的配置应该可以很丰富，但是还没做，以后做了会来唠唠的。
+- 因为 naive-ui 提供了很好的 css-in-js 的支持，所以这里的配置应该可以很丰富，但是还没做，以后做了会来补充文档的。
+
+### 暗色模式配置
+
+项目的暗色模式主要是两部分组成，一是 naiveui 自带的暗色模式，再一个是通过 [tailwindcss] 的 `darkMode: 'class'`实现的。
+
+- naive-ui
+
+具体查看[这里](https://www.naiveui.com/zh-CN/os-theme/docs/customize-theme)。暗色模式的配置，说白就是主题色配置中的一种特殊种类，所以等上面的主题色配置完成后，再来补充这里的内容。
+
+- tailwindcss
+
+tailwindcss 主要是配合 naive-ui 的风格，在[tailwind.config.ts](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/tailwind.config.ts)里，是通过 extend 的方式添加自定义的 tailwind 的 class，值就是 naive-ui 在全局定义的 css 变量，例如`--primary-color`等。另外一种不采用 tailwind 的 extend 的方式，就是在 css 文件里写一些内置好的 class，然后在 main 挂载 css 即可。
+
+- 其他
+
+默认跟随系统配色，提供暗色/亮色/跟随系统三种选项。
+
+## 插件配置
+
+### [auto-import](https://github.com/antfu/unplugin-auto-import)
+
+### [components](https://github.com/antfu/unplugin-vue-components)
+
+### [windicss](https://github.com/windicss/vite-plugin-windicss)
+
+### [html](https://github.com/anncwb/vite-plugin-html)
+
+### [visualizer](https://github.com/btd/rollup-plugin-visualizer)
+
+### [legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)
+
+### [compression](https://github.com/anncwb/vite-plugin-compression)
 
 <!-- links -->
 
@@ -430,6 +464,7 @@ const appStateStorage = {
 [.env.staging]: https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/env/.env.staging
 [vite-env]: https://cn.vitejs.dev/guide/env-and-mode.html#env-files
 [vueuse]: https://vueuse.org/
+[tailwindcss]: https://tailwindcss.com/docs
 [pinia]: https://pinia.vuejs.org/
 [vueuse-createglobalstate]: https://vueuse.org/shared/createglobalstate/
 [vueuse-usestorage]: https://vueuse.org/core/usestorage/
