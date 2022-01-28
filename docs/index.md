@@ -10,7 +10,7 @@ actionText: 快速开始 →
 actionLink: /guide/introduction
 
 altActionText: 在线预览
-altActionLink: https://github.com/Zhaocl1997
+altActionLink: http://152.136.25.175
 
 features:
   - title: 💡 最新技术栈
