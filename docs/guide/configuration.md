@@ -172,15 +172,7 @@ VITE_APP_CACHE_MAXAGE = 604800
 
 [useAppStateStorage][useappstatestorage]此函数的持久化也是在[vueuse]的[useStorage][vueuse-usestorage]基础上做的二次封装，主要就是添加了超时的逻辑和加密的逻辑。
 
-::: info
-
-- 一些其他的想法
-
-- 想过把每一个属性都做成可配置的，一种是就在内存中，一种是本地持久化，还有一种就是需要后台接口配合的高度用户自定义配置，不过这想法确实有点离大谱了，想要真是实现的话，怕是要有一段过程。
-
-:::
-
-- 下面是非持久化部分的配置。
+- 下面是项目非持久化部分的配置。
 
 ```js
 const appStateMemory = {
@@ -197,12 +189,6 @@ const appStateMemory = {
 
     // 是否显示左侧菜单，用于手机情况下的逻辑判断，比下面的showMenu有更高优先级
     showAside: false,
-
-    // 是否全屏
-    isFullScreen: false,
-
-    // 全屏的目标，这个需要改，逻辑有些愚蠢
-    fullscreenTarget: "",
   },
 
   menu: {
@@ -265,6 +251,16 @@ const appStateMemory = {
 
         // 是否通过keep-alive缓存页面
         keepAlive: true,
+
+        // 应用整体布局风格
+        layout: AppLayoutModeConst.LEFT_MENU,
+
+        // 是否开启鼠标离开页面就开启锁屏，默认false，主要用于一些安全性比较高的应用。
+        pageLeaveLock: false,
+
+        // user多久没有操作鼠标键盘（即不活跃状态）就开启锁屏，默认60秒
+        // 此配置项不能动态设置且看到效果，所以AppSettings中是禁用的状态
+        idleMS: 1000 * 60,
       },
 
       menu: {
@@ -346,7 +342,7 @@ const appStateMemory = {
         // 选项卡是否开启开发者工具
         // 非开发环境不会显示此功能
         // 此功能是为了开发时快速寻找当前页面的vue文件而设计的
-        // 通过一些奇淫技巧打开vscode并根据component字段打开对应的vue文件
+        // 通过url打开vscode并根据component字段打开对应的vue文件
         devtool: true,
       },
 
@@ -362,146 +358,11 @@ const appStateMemory = {
       },
     },
 
-    // 为用户提供的一些接口，还没设计
+    // 为用户提供的一些接口，暂无任何设计
     ForUsers: {},
   },
 };
 ```
-
-## 持久化配置
-
-- 下面是持久化部分的配置。
-
-```js
-const appStateStorage = {
-  // 暗色模式和国际化
-  app: {
-    isDark: false,
-    darkMode: preferredColor.value,
-    locale: preferredLanguages.value,
-  },
-
-  // token
-  token: "",
-
-  // 记住密码，把账号密码存到local里了
-  auth: {},
-};
-```
-
-### 加密配置
-
-在 [crypto-js] 的基础上做了一下简单的二次封装，具体查看[src/utils/crypto](https://github.com/zhaocl1997/walnut-admin-client/blob/naive-ui/src/utils/crypto/crypto.ts)即可。
-
-默认采用 aes 加密，mode 是 CBC，padding 是 Pkcs7（mode 和 padding 是什么，我也不清楚...，详细看 [crypto-js]的文档吧）
-
-### 存储配置
-
-在[useStorage][vueuse-usestorage]的基础上做了加密和超时的二次封装，在具体查看[src/utils/persistent/src/Storage](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/src/utils/persistent/src/Storage.ts)即可。
-
-## 国际化配置
-
-### 基本介绍
-
-- naive-ui 的国际化详细查看[这里](https://www.naiveui.com/zh-CN/os-theme/docs/i18n)
-
-- 项目一开始采用的是在前台 locale 文件夹中写死国际化信息，但后续发现随着项目文件变多，需要国际化的地方也越来越多，locale 下的信息越来越多。索性直接把国际化的部分移到了后台管理。具体查看[src/locales/backend](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/src/locales/backend.ts)即可。
-
-- 坏处
-
-  - 很难再和后台做脱离了
-  - 系统管理里多了两个模块需要开发（语言管理和国际化词条管理）
-  - 国际化词条数量多了后，或许需要做接口查询的词条分割
-  - 需要很好的数据库设计，我现在的设计是一个词条一条数据，即例如登录字样，如果系统里有五种语言，那么登录这个词条就会在词条表里生成五条数据，对应语言表里的五种语言。在语言数量很多时查询的接口压力或许会很大（当然我这想的有点多了，一般不会有很多种的语言，除了像谷歌那种规模公司做的产品）。
-
-- 好处
-
-  - 再也不用在 locale 文件夹下找相应文件添加或修改国际化信息（而且是没有热加载的支持，需要手动刷新页面）
-  - 可以通过一套自定义的规则管理所有的国际化词条（比如 form/table 等的国际化部分）
-  - 页面可见的文字，且非入库的部分都可快速方便的添加和管理国际化词条
-  - 方便后续的迭代开发和管理，以及分割词条的想法
-
-### 详细介绍
-
-本项目的国际化自定义了一套 key 的规则，下面具体讲一下。
-
-#### form 的相关规则
-
-```js
-`form:${表单的唯一标识，即key值}:${对应表单项的path}`
-```
-
-- 为了便于管理，项目封装好的 form 提供了一个`localeUniqueKey`的 prop 来统一填充国际化 key 的第二部分，同时自动获取 formProps 下的 path 字段填充到第三部分中。
-
-- 同时为了更好的扩展一些边角化的信息，目前的想法有
-
-  - `helpMsg` - 帮助信息，即 label 边会出现个小图标，鼠标移过会有 tooltip 提示的辅助信息
-  - `PH` - placeholder 自定义占位信息
-  - `rule` - rule 自定义规则
-
-暂时实现的只有`helpMsg`。
-
-```ts
-const [register] = useForm<SomeType>({
-  // ...
-
-  // 只需要提供下面的属性，schemas中的formProps里就不用写lable字段了。
-  // 同时在国际化管理菜单中，添加一条`form:user:userName`即可，在切换语言时会根据配置的不同语言的内容进而显示。
-  localeUniqueKey: "user",
-
-  schemas: [
-    {
-      type: "Base:Input",
-      formProps: {
-        path: "userName",
-
-        // 设置为true会显示提示小图标，同时需要在国际化管理菜单中添加一条`form:user:userName:helpMsg`的词条。
-        labelHelpMessage: true,
-      },
-    },
-  ],
-});
-```
-
-#### table 的相关规则
-
-```js
-`table:${表格的唯一标识，即key值}:${对应column的title}`
-```
-
-- 规则基本同上，后续如果有边角化处理信息的话再加。
-
-## 主题色配置
-
-### 基本介绍
-
-- 主题色的配置，主要是根据 naive-ui 提供好的 interface 来做的扩展，完整的详细配置请查看[这里](https://www.naiveui.com/zh-CN/os-theme/docs/customize-theme)。
-
-- 在全局设置中提供了四种主配色的选项（其实应该有五种，因为 primary 和 success 默认就是相同颜色），另外加一种暗色模式的主配色。每一种配色都提供了 9 种颜色逐渐变深的选项，可以通过实时的效果选择最想要的配色。
-
-- 默认配色是 naive-ui 的配色，同时也是颜色选项中的默认第一项。如果想要改变基本配色，直接修改`settings/theme.ts`里的颜色即可。
-
-- 这个后续会做一个保存的功能，目前是刷新效果就没了。还有一种想法是把这种配置与后台联动，成为真正的个性化设置。
-
-### 详细介绍
-
-```ts
-
-```
-
-## 暗色模式配置
-
-### 基本介绍
-
-- 项目的暗色模式主要是两部分组成，一是 naiveui 自带的暗色模式，再一个是通过 [tailwindcss] 的 `darkMode: 'class'`实现的。
-
-- naive-ui 具体查看[这里](https://www.naiveui.com/zh-CN/os-theme/docs/customize-theme)。
-
-- tailwindcss 主要是配合 naive-ui 的风格，在[tailwind.config.ts](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/tailwind.config.ts)里，是通过 extend 的方式添加自定义的 tailwind 的 class，值就是 naive-ui 在全局定义的 css 变量，例如`--primary-color`等。另外一种不采用 tailwind 的 extend 的方式，就是在 css 文件里写一些内置好的 class，然后在 main 挂载 css 即可。
-
-- 默认跟随系统配色，提供暗色/亮色/跟随系统三种选项。
-
-### 详细介绍
 
 ## 插件配置
 
@@ -744,4 +605,3 @@ const [register] = useForm<SomeType>({
 [vueuse-usestorage]: https://vueuse.org/core/usestorage/
 [useappstatestorage]: https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/src/store/index.ts
 [useappstatememory]: https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/src/store/index.ts
-[crypto-js]: https://cryptojs.gitbook.io/docs/
