@@ -1,59 +1,31 @@
 import { defineConfig } from "vitepress";
 
-export default defineConfig({
-  lang: "zh-CN",
-  title: "Walnut Admin",
-  description: "Walnut Admin Docs",
-
-  themeConfig: {
-    docsDir: "docs",
-
-    editLinks: true,
-    editLinkText: "Edit this page on GitHub",
-    lastUpdated: "Last Updated",
-
-    nav: [
-      {
-        text: "指南",
-        link: "/",
-        activeMatch: "^/$|^/guide/",
-      },
-      {
-        text: "组件",
-        link: "/component/button",
-        activeMatch: "^/component/",
-      },
-      {
-        text: "开发记录",
-        link: "/record/daily",
-        activeMatch: '"^/record/"',
-      },
-      // {
-      //   text: "Release Notes",
-      //   link: "https://github.com/vuejs/vitepress/releases",
-      // },
+const nav = [
+  {
+    text: "指南",
+    activeMatch: `^/(guide)/`,
+    items: [
+      { text: "介绍", link: "/guide/introduction" },
+      { text: "深入", link: "/guide/config" },
     ],
-
-    sidebar: {
-      "/guide/": getGuideSidebar(),
-      "/component/": getComponentSidebar(),
-      "/record/": [
-        {
-          text: "日常记录",
-          link: "/record/daily",
-        },
-        {
-          text: "部署记录",
-          link: "/record/deploy",
-        },
-      ],
-      // "/": getGuideSidebar(),
-    },
   },
-});
+  {
+    text: "组件",
+    activeMatch: `^/(component/UI|component/Extra)/`,
+    items: [
+      { text: "UI组件", link: "/component/UI/button" },
+      { text: "其他组件", link: "/component/Extra/arrow" },
+    ],
+  },
+  {
+    text: "开发记录",
+    link: "/record/daily",
+    activeMatch: '"^/record/"',
+  },
+];
 
-function getGuideSidebar() {
-  return [
+const sidebar = {
+  "/guide/": [
     {
       text: "介绍",
       children: [
@@ -73,31 +45,28 @@ function getGuideSidebar() {
         { text: "选项卡", link: "/guide/tab" },
       ],
     },
-  ];
-}
-
-function getComponentSidebar() {
-  return [
+  ],
+  "/component/": [
     {
       text: "UI组件",
       children: [
-        { text: "按钮", link: "/component/button" },
-        { text: "按钮组", link: "/component/buttonGroup" },
-        { text: "卡片", link: "/component/card" },
-        { text: "多选框", link: "/component/checkbox" },
-        { text: "日期选择器", link: "/component/datePicker" },
-        { text: "描述", link: "/component/descriptions" },
-        { text: "抽屉", link: "/component/drawer" },
-        { text: "动态标签", link: "/component/dynamicTags" },
-        { text: "表单", link: "/component/form" },
-        { text: "图标", link: "/component/icon" },
-        { text: "输入框", link: "/component/input" },
-        { text: "数字输入框", link: "/component/inputNumber" },
-        { text: "单选框", link: "/component/radio" },
-        { text: "下拉框", link: "/component/select" },
-        { text: "开关", link: "/component/switch" },
-        { text: "表格", link: "/component/table" },
-        { text: "时间选择器", link: "/component/timePicker" },
+        { text: "按钮", link: "/component/UI/button" },
+        { text: "按钮组", link: "/component/UI/buttonGroup" },
+        { text: "卡片", link: "/component/UI/card" },
+        { text: "多选框", link: "/component/UI/checkbox" },
+        { text: "日期选择器", link: "/component/UI/datePicker" },
+        { text: "描述", link: "/component/UI/descriptions" },
+        { text: "抽屉", link: "/component/UI/drawer" },
+        { text: "动态标签", link: "/component/UI/dynamicTags" },
+        { text: "表单", link: "/component/UI/form" },
+        { text: "图标", link: "/component/UI/icon" },
+        { text: "输入框", link: "/component/UI/input" },
+        { text: "数字输入框", link: "/component/UI/inputNumber" },
+        { text: "单选框", link: "/component/UI/radio" },
+        { text: "下拉框", link: "/component/UI/select" },
+        { text: "开关", link: "/component/UI/switch" },
+        { text: "表格", link: "/component/UI/table" },
+        { text: "时间选择器", link: "/component/UI/timePicker" },
       ],
     },
     {
@@ -115,5 +84,32 @@ function getComponentSidebar() {
     {
       text: "HOC",
     },
-  ];
-}
+  ],
+  "/record/": [
+    {
+      text: "日常记录",
+      link: "/record/daily",
+    },
+    {
+      text: "部署记录",
+      link: "/record/deploy",
+    },
+  ],
+};
+
+export default defineConfig({
+  lang: "zh-CN",
+  title: "Walnut Admin",
+  description: "Walnut Admin Docs",
+
+  themeConfig: {
+    docsDir: "docs",
+
+    editLinks: true,
+    editLinkText: "Edit this page on GitHub",
+    lastUpdated: "Last Updated",
+
+    nav,
+    sidebar,
+  },
+});

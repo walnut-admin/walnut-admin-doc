@@ -1,4 +1,4 @@
-# 日期选择器
+# 动态标签
 
 基于 naive-ui 的[dynamic-tags](https://www.naiveui.com/zh-CN/os-theme/components/dynamic-tags)二次封装。
 
