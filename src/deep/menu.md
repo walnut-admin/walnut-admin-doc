@@ -107,17 +107,3 @@ const buildMenus = (payload: AppMenu[]) => {
   return menus;
 };
 ```
-
-### buildKeepAliveRouteNameList
-
-- 通过 menu 数组构建 keep-alive 的路由 name 的数组
-
-- 具体介绍
-
-```ts
-// 过滤出type为菜单且开启缓存的menu，然后再map出name的数组
-const buildKeepAliveRouteNameList = (payload: AppMenu[]): string[] =>
-  payload
-    .filter((i) => i.type === MenuTypeConst.MENU && i.cache)
-    .map((i) => i.name!);
-```

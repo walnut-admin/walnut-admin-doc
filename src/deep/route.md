@@ -65,16 +65,6 @@ const buildCommonRoute = (node: AppMenu): AppTab => {
 
 - 根据 name 生成对应目录的 component
 
-:::warning
-
-这个函数后续会进行修改，因为还有几个很严重的问题没解决
-
-- 嵌套路由下的 keep-alive 因为这个 ParentComponent 的问题会失效，应该是设计上的错误，还需要仔细研究一下
-
-- parentView 后续得删掉，这个是为了做 id 判断用来全屏使用的，全屏那里逻辑有点愚蠢，也需要大改
-
-:::
-
 - 具体介绍
 
 ```ts
@@ -83,7 +73,6 @@ const resolveParentComponent = (name: string) => () =>
     resolve({
       ...ParentComponent,
       name,
-      parentView: true,
     });
   });
 ```
@@ -111,11 +100,11 @@ const resolveIFrameComponent = (name: string) => () =>
 - 具体介绍
 
 ```ts
-const resolveViewModules = (component: string) => {
-  // 获取views文件夹下的所有vue文件模块
-  // 后续或许需要要加上tsx，ts，js，jsx的glob支持
-  const allViewModules = import.meta.glob("../views/**/*.vue");
+// 获取views文件夹下的所有vue文件模块
+// 后续或许需要要加上tsx，ts，js，jsx的glob支持
+const allViewModules = import.meta.glob("../views/**/*.vue");
 
+const resolveViewModules = (component: string) => {
   const keys = Object.keys(allViewModules);
 
   // 根据component查找索引
@@ -124,6 +113,40 @@ const resolveViewModules = (component: string) => {
   );
 
   return allViewModules[keys[index]];
+};
+```
+
+### buildKeepAliveRouteNameList
+
+- 根据 menu 树结构数据去构建 keep-alive 的 name 数组
+
+- 具体介绍
+
+:::warning
+
+- [嵌套路由的 keep-alive 的问题](https://github.com/vuejs/vue-router-next/issues/626)一直没解决，项目暂时不建议开启 keep-alive
+
+- 嵌套路由的缓存同时需要父节点的 name 存在于数组中才会生效，这个问题我也是近期才发现的，记不太清 v2 的 router 是不是也有这个问题。
+
+:::
+
+```ts
+const buildKeepAliveRouteNameList = (
+  menus: AppMenu[],
+  payload: AppMenu[]
+): string[] => {
+  const res: string[] = [];
+
+  menus.map((i) => {
+    if (i.cache) {
+      // 利用一个findPath函数，在菜单树中查出路径，把name遍历出来，最后返回时去重即可
+      const path = findPath<AppMenu>(payload, (n) => n._id === i._id);
+
+      res.push(...(path as AppMenu[]).map((i) => i.name!));
+    }
+  });
+
+  return [...new Set(res)];
 };
 ```
 
