@@ -1,6 +1,6 @@
 # 图标
 
-图标目前采用的是 iconify 的 vue 组件，具体可查看[这里](https://docs.iconify.design/icon-components/vue/)。
+图标目前采用的是 iconify 的 vue 组件，具体可查看[这里](/deep/icon)。
 
 ## 使用方式
 
