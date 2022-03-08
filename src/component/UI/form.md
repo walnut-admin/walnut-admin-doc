@@ -2,8 +2,6 @@
 
 基于 naive-ui 的[form](https://www.naiveui.com/zh-CN/os-theme/components/form)二次封装。
 
-内置了布局，查看[grid](https://www.naiveui.com/zh-CN/os-theme/components/grid)。
-
 ## Props
 
 :::info
@@ -111,11 +109,11 @@ export type WFormPropType = ExtractPropTypes<typeof props>;
 
 ### Grid Prop
 
-具体查看 naive 的`GridItemProps`即可。并无扩展配置项。
+具体查看 naive 的[grid-item-props](https://www.naiveui.com/zh-CN/os-theme/components/grid#GridItem-Props)即可。并无扩展配置项。
 
 ### Transition Prop
 
-具体查看其他组件中`过渡组件`的`WTransitionProps`即可。
+具体查看其他组件中[w-transition](/component/Extra/transition#props)即可。
 
 ### Extra Prop
 

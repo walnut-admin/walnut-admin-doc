@@ -25,6 +25,11 @@ const nav = [
         link: "/component/Extra/arrow",
         activeMatch: `^/(component/Extra)/`,
       },
+      {
+        text: "App级别组件",
+        link: "/component/App/authorize",
+        activeMatch: `^/(component/App)/`,
+      },
     ],
   },
   {
@@ -96,6 +101,19 @@ const sidebar = {
         { text: "通用标题", link: "/component/Extra/title" },
         { text: "过渡", link: "/component/Extra/transition" },
         { text: "过渡下拉框", link: "/component/Extra/transitionSelect" },
+      ],
+    },
+  ],
+  "/component/App": [
+    {
+      text: "App级别组件",
+      children: [
+        { text: "权限组件", link: "/component/App/authorize" },
+        { text: "暗色模式切换组件", link: "/component/App/darkmode" },
+        { text: "全屏组件", link: "/component/App/fullscreen" },
+        { text: "国际化切换组件", link: "/component/App/localepicker" },
+        { text: "锁屏组件", link: "/component/App/lock" },
+        { text: "应用设置组件", link: "/component/App/settings" },
       ],
     },
   ],
