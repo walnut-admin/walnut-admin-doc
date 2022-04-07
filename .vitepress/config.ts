@@ -33,7 +33,7 @@ const nav = [
     ],
   },
   {
-    text: "开发记录",
+    text: "记录",
     activeMatch: `^/(record)/`,
     link: "/record/daily",
   },
