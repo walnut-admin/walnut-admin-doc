@@ -2,6 +2,18 @@
 
 基于 naive-ui 的[radio](https://www.naiveui.com/zh-CN/os-theme/components/radio)二次封装。
 
+:::info
+无需引入，可直接使用
+:::
+
+## Usage
+
+```vue
+<template>
+  <w-radio v-model:value="radioValue" :options="radioOptions"></w-radio>
+</template>
+```
+
 ## Props
 
 | 名称    | 类型                              | 默认值 | 说明                                     |

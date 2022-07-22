@@ -13,9 +13,10 @@ naive 本身的 select 已经很强大了，所以对于 select 的封装会变�
 
 ## Type
 
+`WithValueProp` 具体查看[高阶组件](/component/HOC/WithValue)
+
 ```ts
 import type { SelectProps } from "naive-ui";
-// 具体查看高阶组件
 import type { WithValueProp } from "/@/components/HOC/WithValue";
 
 import { props } from "./props";

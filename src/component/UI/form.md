@@ -8,20 +8,20 @@
 下面展示的均是二封时设计的 props。需要注意的是 xGap 默认给了 20，在一个 item 就占一行的表单中，需要手动把 xGap 设置为 0。
 :::
 
-| 名称                   | 类型                | 默认值    | 说明                                                                                                                                                                                                                                                         |
-| ---------------------- | ------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| schemas                | WForm.Schema.Item[] | []        | 表单模式数组                                                                                                                                                                                                                                                 |
-| cols                   | number              | 24        | 表单整体显示的栅格数量                                                                                                                                                                                                                                       |
-| span                   | number              | 24        | 表单项栅格占据的列数，为 0 的时候会隐藏                                                                                                                                                                                                                      |
-| xGap                   | number              | 20        | 表单项横向的间距                                                                                                                                                                                                                                             |
-| yGap                   | number              | 0         | 表单项横向的间距                                                                                                                                                                                                                                             |
-| preset                 | WForm.preset        | undefined | 表单预设，内置了 modal 和 drawer 两种常见的弹出表单形式                                                                                                                                                                                                      |
-| baseRules              | boolean             | false     | 是否开启默认表单校验。基于 schemas 的加持上内置了一套默认规则，同时也内置了相应的校验信息。暂时只有 `schema type` 在`defaultTriggerPool`中的表单项填充了默认规则的逻辑。如其他类型的表单项也需要默认规则，需要把 formProp 中的 `baseRuleApplied` 设置为 true |
-| advancedProps          | advancedProps       | undefined | preset 的属性传递，下方有具体介绍                                                                                                                                                                                                                            |
-| formItemClass          | string              | undefined | 表单中单项的样式，包括 label 和 component 部分                                                                                                                                                                                                               |
-| formItemComponentClass | string              | undefined | 表单中 component 部分的样式                                                                                                                                                                                                                                  |
-| localeUniqueKey        | string              | undefined | 表单的国际化唯一标识                                                                                                                                                                                                                                         |
-| localeWithTable        | boolean             | false     | 设置为 true，国际化 key 的开头的`form`会被替代为`table`，此设计是为了 table 列的表头国际化和 form 的 label 在绝大数情况下是相同的内容，只要添加过 table 列部分的国际化信息，form 的 label 就无需重复设置了                                                   |
+| 名称                   | 类型                | 默认值 | 说明                                                                                                                                                                                                                                                         |
+| ---------------------- | ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| schemas                | WForm.Schema.Item[] | []     | 表单模式数组                                                                                                                                                                                                                                                 |
+| cols                   | number              | 24     | 表单整体显示的栅格数量                                                                                                                                                                                                                                       |
+| span                   | number              | 24     | 表单项栅格占据的列数，为 0 的时候会隐藏                                                                                                                                                                                                                      |
+| xGap                   | number              | 20     | 表单项横向的间距                                                                                                                                                                                                                                             |
+| yGap                   | number              | 0      | 表单项横向的间距                                                                                                                                                                                                                                             |
+| preset                 | WForm.preset        | -      | 表单预设，内置了 modal 和 drawer 两种常见的弹出表单形式                                                                                                                                                                                                      |
+| baseRules              | boolean             | false  | 是否开启默认表单校验。基于 schemas 的加持上内置了一套默认规则，同时也内置了相应的校验信息。暂时只有 `schema type` 在`defaultTriggerPool`中的表单项填充了默认规则的逻辑。如其他类型的表单项也需要默认规则，需要把 formProp 中的 `baseRuleApplied` 设置为 true |
+| advancedProps          | advancedProps       | -      | preset 的属性传递，下方有具体介绍                                                                                                                                                                                                                            |
+| formItemClass          | string              | -      | 表单中单项的样式，包括 label 和 component 部分                                                                                                                                                                                                               |
+| formItemComponentClass | string              | -      | 表单中 component 部分的样式                                                                                                                                                                                                                                  |
+| localeUniqueKey        | string              | -      | 表单的国际化唯一标识                                                                                                                                                                                                                                         |
+| localeWithTable        | boolean             | false  | 设置为 true，国际化 key 的开头的`form`会被替代为`table`，此设计是为了 table 列的表头国际化和 form 的 label 在绝大数情况下是相同的内容，只要添加过 table 列部分的国际化信息，form 的 label 就无需重复设置了                                                   |
 
 ## Type
 
@@ -99,13 +99,13 @@ export type WFormPropType = ExtractPropTypes<typeof props>;
 下方介绍的是扩展的一些配置项目，naive 的默认 `formItemProps` 查看文档即可。
 :::
 
-| 名称             | 类型                    | 默认值    | 说明                                                                                                                                              |
-| ---------------- | ----------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| rule             | object/boolean          | undefined | 扩展 naive 的 rule 字段，添加了 boolean 类型，目的是配合 baseRules 为 true 时部分项目不需要验证                                                   |
-| baseRuleApplied  | boolean                 | false     | 不在`defaultTriggerPool`中的表单项如果也想要默认规则，可以设置此项为 true                                                                         |
-| labelHelpMessage | string/string[]/boolean | undefined | 通常是字符串或字符串数组，具体可查看其他组件的 WMessage。但在国际化的加持下，同时也可以是个布尔值，true 即会从国际化实例中根据 key 值读取帮助消息 |
-| locale           | boolean                 | true      | 用于某一项的 label 无需国际化翻译的情景，优先级高于下面的 localeWithTable                                                                         |
-| localeWithTable  | boolean                 | false     | 用于在整个表单设置了 localeWithTable 为 true 的时候某一项不想和整体同步国际化的情景                                                               |
+| 名称             | 类型                    | 默认值 | 说明                                                                                                                                              |
+| ---------------- | ----------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| rule             | object/boolean          | -      | 扩展 naive 的 rule 字段，添加了 boolean 类型，目的是配合 baseRules 为 true 时部分项目不需要验证                                                   |
+| baseRuleApplied  | boolean                 | false  | 不在`defaultTriggerPool`中的表单项如果也想要默认规则，可以设置此项为 true                                                                         |
+| labelHelpMessage | string/string[]/boolean | -      | 通常是字符串或字符串数组，具体可查看其他组件的 WMessage。但在国际化的加持下，同时也可以是个布尔值，true 即会从国际化实例中根据 key 值读取帮助消息 |
+| locale           | boolean                 | true   | 用于某一项的 label 无需国际化翻译的情景，优先级高于下面的 localeWithTable                                                                         |
+| localeWithTable  | boolean                 | false  | 用于在整个表单设置了 localeWithTable 为 true 的时候某一项不想和整体同步国际化的情景                                                               |
 
 ### Grid Prop
 
@@ -131,10 +131,10 @@ export type WFormPropType = ExtractPropTypes<typeof props>;
 
 - Divider Extra Prop
 
-| 名称    | 类型    | 默认值    | 说明                                                             |
-| ------- | ------- | --------- | ---------------------------------------------------------------- |
-| sticky  | boolean | false     | 实现 position: 'sticky'，在表单内容过多出现滚动条时体验更好      |
-| bgColor | string  | undefined | 在 sticky 时同时需要设置一个背景颜色，否则会有透视图层错乱的效果 |
+| 名称    | 类型    | 默认值 | 说明                                                             |
+| ------- | ------- | ------ | ---------------------------------------------------------------- |
+| sticky  | boolean | false  | 实现 position: 'sticky'，在表单内容过多出现滚动条时体验更好      |
+| bgColor | string  | -      | 在 sticky 时同时需要设置一个背景颜色，否则会有透视图层错乱的效果 |
 
 ## Component
 
@@ -142,17 +142,17 @@ export type WFormPropType = ExtractPropTypes<typeof props>;
 
 - Prop
 
-| 名称           | 类型    | 默认值    | 说明                                                                |
-| -------------- | ------- | --------- | ------------------------------------------------------------------- |
-| prefix         | string  | undefined | naive 的 h3 组件的 prefix                                           |
-| type           | string  | undefined | naive 的 h3 组件的 type                                             |
-| titlePlacement | string  | false     | naive 的 divider 组件的 titlePlacement                              |
-| dashed         | boolean | false     | naive 的 divider 组件的 dashed                                      |
-| title          | string  | undefined | 分割线标题                                                          |
-| helpMessage    | string  | undefined | 标题旁边的帮助信息，基于 WTitle 的，具体可以查看其他组件中的 WTitle |
-| foldable       | boolean | false     | 是否可折叠                                                          |
-| startIndex     | number  | 0         | 可选从第几项开始折叠                                                |
-| endIndex       | number  | 0         | 可选第几项结束折叠，默认推荐填入此 divider 下的所有想涵盖的项目总数 |
+| 名称           | 类型    | 默认值 | 说明                                                                |
+| -------------- | ------- | ------ | ------------------------------------------------------------------- |
+| prefix         | string  | -      | naive 的 h3 组件的 prefix                                           |
+| type           | string  | -      | naive 的 h3 组件的 type                                             |
+| titlePlacement | string  | false  | naive 的 divider 组件的 titlePlacement                              |
+| dashed         | boolean | false  | naive 的 divider 组件的 dashed                                      |
+| title          | string  | -      | 分割线标题                                                          |
+| helpMessage    | string  | -      | 标题旁边的帮助信息，基于 WTitle 的，具体可以查看其他组件中的 WTitle |
+| foldable       | boolean | false  | 是否可折叠                                                          |
+| startIndex     | number  | 0      | 可选从第几项开始折叠                                                |
+| endIndex       | number  | 0      | 可选第几项结束折叠，默认推荐填入此 divider 下的所有想涵盖的项目总数 |
 
 ### Query
 
@@ -265,7 +265,7 @@ const onYes = async () => {
 
       if (ret) {
         // 在成功的情况下关闭弹出层，并且弹出成功消息
-        // （这里是预设了如果接口报错，在axios一层就会resolve undefined，ret就会为空。项目中的axios封装就是这么做的）
+        // （这里是预设了如果接口报错，在axios一层就会resolve -，ret就会为空。项目中的axios封装就是这么做的）
         onClose();
         AppSuccess();
       } else {

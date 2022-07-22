@@ -11,21 +11,20 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "项目规范", link: "/guide/lint" },
       ],
     },
-  ],
-  "/deep/": [
     {
       text: "深入",
       items: [
-        { text: "配置", link: "/deep/config" },
-        { text: "菜单", link: "/deep/menu" },
-        { text: "路由", link: "/deep/route" },
-        { text: "权限", link: "/deep/permission" },
-        { text: "选项卡", link: "/deep/tab" },
-        { text: "图标", link: "/deep/icon" },
+        { text: "配置", link: "/guide/deep/config" },
+        { text: "菜单", link: "/guide/deep/menu" },
+        { text: "路由", link: "/guide/deep/route" },
+        { text: "权限", link: "/guide/deep/permission" },
+        { text: "选项卡", link: "/guide/deep/tab" },
+        { text: "图标", link: "/guide/deep/icon" },
       ],
     },
   ],
-  "/component/UI": [
+
+  "/component/": [
     {
       text: "UI组件",
       items: [
@@ -48,8 +47,7 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "时间选择器", link: "/component/UI/timePicker" },
       ],
     },
-  ],
-  "/component/Extra": [
+
     {
       text: "其他组件",
       items: [
@@ -64,8 +62,7 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "过渡下拉框", link: "/component/Extra/transitionSelect" },
       ],
     },
-  ],
-  "/component/App": [
+
     {
       text: "App级别组件",
       items: [
@@ -77,7 +74,61 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "应用设置组件", link: "/component/App/settings" },
       ],
     },
+
+    {
+      text: "高阶组件",
+      items: [{ text: "value值拦截处理", link: "/component/HOC/withValue" }],
+    },
+
+    {
+      text: "进阶组件",
+      items: [
+        {
+          text: "下拉框(接口)",
+          link: "/component/Advanced/apiSelect",
+        },
+        {
+          text: "省地市级联面板(接口)",
+          link: "/component/Advanced/areaCascader",
+        },
+        {
+          text: "国际化词条选择器(接口)",
+          link: "/component/Advanced/localeSelect",
+        },
+      ],
+    },
+
+    {
+      text: "第三方组件",
+      items: [
+        {
+          text: "头像裁剪上传(cropper + OSS)",
+          link: "/component/vendor/avatarUpload",
+        },
+        {
+          text: "图片裁剪(cropper)",
+          link: "/component/vendor/cropper",
+        },
+        {
+          text: "图表(echarts)",
+          link: "/component/vendor/echarts",
+        },
+        {
+          text: "地点选择(百度map)",
+          link: "/component/vendor/locationPicker",
+        },
+        {
+          text: "文件前端直传(阿里OSS)",
+          link: "/component/vendor/OSSUpload",
+        },
+        {
+          text: "富文本(tinymce)",
+          link: "/component/vendor/tinymce",
+        },
+      ],
+    },
   ],
+
   "/record/": [
     {
       text: "记录",

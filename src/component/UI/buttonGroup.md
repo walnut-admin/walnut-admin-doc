@@ -2,6 +2,18 @@
 
 基于 naive-ui 的[button](https://www.naiveui.com/zh-CN/os-theme/components/button)二次封装。
 
+:::info
+无需引入，可直接使用
+:::
+
+## Usage
+
+```vue
+<template>
+  <w-button-group :groups="buttonGroups" />
+</template>
+```
+
 ## Props
 
 | 名称   | 类型           | 默认值 | 说明                 |

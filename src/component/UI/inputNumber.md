@@ -2,6 +2,18 @@
 
 基于 naive-ui 的[input-number](https://www.naiveui.com/zh-CN/os-theme/components/input-number)二次封装。
 
+:::info
+无需引入，可直接使用
+:::
+
+## Usage
+
+```vue
+<template>
+  <w-input-number v-model:value="inputNumberValue"></w-input-number>
+</template>
+```
+
 ## Props
 
 | 名称   | 类型   | 默认值 | 说明                                          |
