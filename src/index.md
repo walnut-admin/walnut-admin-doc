@@ -1,16 +1,20 @@
 ---
-home: true
-heroImage: /logo.png
-heroAlt: Walnut Admin
-heroText: Walnut Admin
+layout: home
 
-tagline: Vue 前沿技术栈中后台管理模板
-
-actionText: 快速开始 →
-actionLink: /guide/introduction
-
-altActionText: 在线预览
-altActionLink: http://152.136.25.175
+hero:
+  name: Walnut Admin
+  text: Typescript & Vite & Naive UI & Nestjs
+  tagline: Vue 前沿技术栈中后台管理模板
+  image:
+    src: /logo.png
+    alt: Walnut Admin
+  actions:
+    - theme: brand
+      text: 快速开始
+      link: /guide/introduction
+    - theme: alt
+      text: 在线预览
+      link: https://www.walnut-admin.com
 
 features:
   - title: 💡 最新技术栈
@@ -25,5 +29,4 @@ features:
     details: 国际化、丰富的主题配置及黑暗主题适配
   - title: 🔑 权限管理
     details: 完善的前后端权限管理方案
-footer: MIT Licensed | Copyright © 2020-present Zhaocl
 ---
