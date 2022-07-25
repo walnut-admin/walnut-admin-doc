@@ -12,6 +12,9 @@ export default defineConfig({
   appearance: true,
 
   lastUpdated: true,
+  
+  // @ts-ignore
+  ignoreDeadLinks: true,
 
   themeConfig: {
     nav,
