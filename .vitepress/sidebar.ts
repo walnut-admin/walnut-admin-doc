@@ -27,6 +27,8 @@ export const sidebar: DefaultTheme.Sidebar = {
   "/component/": [
     {
       text: "UI组件",
+      collapsed: true,
+      collapsible: true,
       items: [
         { text: "按钮", link: "/component/UI/button" },
         { text: "按钮组", link: "/component/UI/buttonGroup" },
@@ -50,6 +52,8 @@ export const sidebar: DefaultTheme.Sidebar = {
 
     {
       text: "其他组件",
+      collapsed: true,
+      collapsible: true,
       items: [
         { text: "箭头", link: "/component/Extra/arrow" },
         { text: "翻转卡片", link: "/component/Extra/flipper" },
@@ -65,6 +69,8 @@ export const sidebar: DefaultTheme.Sidebar = {
 
     {
       text: "App级别组件",
+      collapsed: true,
+      collapsible: true,
       items: [
         { text: "权限组件", link: "/component/App/authorize" },
         { text: "暗色模式切换组件", link: "/component/App/darkmode" },
@@ -77,11 +83,15 @@ export const sidebar: DefaultTheme.Sidebar = {
 
     {
       text: "高阶组件",
+      collapsed: true,
+      collapsible: true,
       items: [{ text: "value值拦截处理", link: "/component/HOC/withValue" }],
     },
 
     {
       text: "进阶组件",
+      collapsed: true,
+      collapsible: true,
       items: [
         {
           text: "下拉框(接口)",
@@ -100,6 +110,8 @@ export const sidebar: DefaultTheme.Sidebar = {
 
     {
       text: "第三方组件",
+      collapsed: true,
+      collapsible: true,
       items: [
         {
           text: "头像裁剪上传(cropper + OSS)",
