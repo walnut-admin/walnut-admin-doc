@@ -9,7 +9,7 @@
 - 中文文档地址为 [wadlnut-admin-doc][doc]，采用 [vitepress][vitepress] 开发。如发现文档有误，欢迎提 pr 帮助我们改进。
 - 英文文档暂时写，[vitepress][vitepress]还未进入稳定版本。
 
-## 需要掌握的基础知识
+## 所需知识
 
 本项目需要一定前端基础知识，请确保掌握 Vue 的基础知识，以便能处理一些常见的问题。
 建议在开发前先学一下以下内容，提前了解和学习这些知识，会对项目理解非常有帮助:
@@ -25,10 +25,10 @@
 - [Vue-i18n][vue-i18n]
 - [Naive UI][naiveui]
 - [Vueuse][vueuse]
-- [WindiCss][windicss]
+- [Unocss][unocss]
 - [Iconify][iconify]
 
-## 模版
+## 代码
 
 - [walnut-admin-client][walnut-admin-client]
 
@@ -38,9 +38,13 @@
 
 项目后端地址，数据库使用的是 mongodb。
 
+:::info
+第一版是[Nest.js][nestjs]的单体应用，最近在用微服务重构后台（WIP）。仓库暂时设置为私有了。
+:::
+
 ## vite 插件推荐
 
-项目使用了数个[antfu 大佬][antfu]参与开发的各类 vite 插件，不用不知道，是真的很爽！
+项目使用了数个[antfu][antfu]参与开发的各类 vite 插件，不用不知道，是真的很爽！
 
 - [unplugin-auto-import][unplugin-auto-import] - 自动引入，再也不用 import 这儿 import 那儿啦！后续可能还会支持类型的自动引入（那就更爽了）。
 - [unplugin-vue-components][unplugin-vue-components] - 组件的自动引入，同时支持类型优化，用过的都较好！
@@ -67,7 +71,7 @@
 
 ## 特别鸣谢
 
-[anncwb][anncwb]大佬，Vben Admin 做的很好！给了我很多启发！这个文档的大致结构也是借用此项目的文档。我本人不是很会组织语言，后续内容若有语言不通的地方，请见谅！
+[anncwb][anncwb]，[Vben Admin](https://github.com/vbenjs/vue-vben-admin) 做的很好！给了我很多启发！这个文档的大致结构也是借用此项目的文档。我本人不是很会组织语言，后续内容若有语言不通的地方，请见谅！
 
 <!-- links -->
 
@@ -85,6 +89,7 @@
 [nestjs]: https://nestjs.com/
 [vueuse]: https://vueuse.org/
 [windicss]: https://windicss.org/
+[unocss]: https://github.com/unocss/unocss
 [iconify]: https://iconify.design/
 [vue-i18n]: https://vue-i18n.intlify.dev/
 [anncwb]: https://github.com/anncwb

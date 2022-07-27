@@ -1,10 +1,13 @@
 # 配置
 
+:::tip
+下面的 [AppSettings]，有一部分是为开发者而设计的，有一部分也完全可以作为用户喜好配置，我没做具体区分，有需要的可以自行抽离状态和逻辑。
+:::
+
 - 应用的配置项，可以通过页面右下角的 [AppSettings] 组件实时改变查看效果。
 - 同时提供了复制当前配置项的功能，只需要复制到[src/settings.json]中刷新页面即会生效。
 - 目前这些配置项都是没有做持久化支持的，即修改完后刷新就会回到初始状态。
-- 同时为了在[src/settings.json]中做更好的智能提示支持，项目采用了[typescript-json-schema]来通过定义好的 interface 生成`json.schema`到[.vscode/settings.json]中。这样可以直接在[src/settings.json]中获得很好的智能提示（在 IDE 是 VSCode 的情况下）。
-- 具体生成的相关逻辑可以查看[这里](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/build/generate/genJSONSchemas.ts)。
+- 同时为了在[src/settings.json]中做更好的智能提示支持，项目采用了[typescript-json-schema]来通过定义好的 interface 生成`json.schema`到[.vscode/settings.json]中。这样可以直接在[src/settings.json]中获得很好的智能提示（在 IDE 是 VSCode 的情况下）。具体生成的相关逻辑可以查看[这里](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/build/generate/genJSONSchemas.ts)。
 
 ## 持久化
 

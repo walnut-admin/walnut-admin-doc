@@ -1,6 +1,6 @@
 # 开始
 
-本文会帮助你从头启动项目
+本篇章会帮助你从头启动项目
 
 ## 前言
 
@@ -13,8 +13,9 @@
 本地环境需要安装[Node.js][node] 和 [Git][git]，npm 是 node 的配套，一般无需特意安装。
 
 ::: warning 注意
-- [Node.js][node] 版本推荐 `14.x` 及以上。
-:::
+
+- [Node.js][node] 版本推荐 `16.x` 及以上。
+  :::
 
 ## 工具配置
 
@@ -77,11 +78,18 @@ node -v
 
 ### 安装依赖
 
+项目采用了[pnpm][pnpm]，所以第一步就是安装[pnpm][pnpm]
+
+```bash
+# 全局安装pnpm
+npm i -g pnpm
+```
+
 在项目根目录下，打开命令窗口执行，耐心等待安装完成即可
 
 ```bash
 # 安装依赖
-npm i
+pnpm i
 ```
 
 ::: tip 安装依赖时 husky 安装失败
@@ -238,6 +246,7 @@ npm i
 
 [node]: http://nodejs.org/
 [git]: https://git-scm.com/
+[pnpm]: https://pnpm.io/zh/
 [vscode]: https://code.visualstudio.com/
 [nvm]: https://github.com/nvm-sh/nvm
 [volar]: https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar

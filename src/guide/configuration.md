@@ -1,24 +1,24 @@
 # 项目配置
 
-## vscode 配置
+## vscode
 
 ### snippets
 
-在 [.vscode](https://github.com/Zhaocl1997/walnut-admin-client/tree/naive-ui/.vscode) 的文件夹下的 [vue.code-snippets](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/.vscode/vue.code-snippets) 中，我写好了几个常用的代码片段。
+在 [.vscode](https://github.com/Zhaocl1997/walnut-admin-client/tree/naive-ui/.vscode) 的文件夹下的 [vue.code-snippets](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/.vscode/vue.code-snippets) 中，我写好了几个常用的代码片段。在工作区内可直接使用。
 
-- vue3-comp
-  最基本的组件文件格式，默认 inheritAttrs 为 false，同时带有 props 和 emits
-- vue3-view
-  上面的简化版本，script 只剩 component 和 setup，同时添加了 style 标签
-- vue3-tsx
-  没有 template，使用 tsx 开发
-- vue3-setup
-  setup 语法糖，有两个 script 标签
+- `vue3-comp`
+  适用于传统组件开发，默认 inheritAttrs 为 false，同时带有 props 和 emits
+- `vue3-view`
+  适用于普通的页面开发，上面的简化版本，script 只剩 component 和 setup，同时添加了 style 标签
+- `vue3-tsx`
+  适用于复杂逻辑页面/组件，没有 template，使用 tsx 开发
+- `vue3-setup`
+  适用于常见的组件开发，setup 语法糖，有两个 script 标签
 
 ### volar
 
 :::tip
-在开始之前，请先仔细阅读[Use Take Over Mode instead of TS Plugin](https://github.com/johnsoncodehk/volar/discussions/471)。
+在开始之前，请先仔细阅读 [Use Take Over Mode instead of TS Plugin](https://github.com/johnsoncodehk/volar/discussions/471)。
 :::
 
 省流：使用 volar 的 take over 模式（下面就叫它接管模式了）而不是 [ts-plugin](https://github.com/johnsoncodehk/volar/tree/master/extensions/vscode-typescript-vue-plugin)。
@@ -33,7 +33,7 @@
 
 - 拉到底，选中`TypeScript and JavaScript Language Features`，并禁用即可
 
-## 环境变量配置
+## 环境变量
 
 项目的环境变量配置位于[env]目录下的[.env]、[.env.development]、[.env.production]和[.env.staging]。其中[.env.staging]文件用途是模拟生产的阶段性打包，会借助一些 vite 插件和 rollup 插件处理一些相关打包逻辑。
 
@@ -150,7 +150,7 @@ VITE_AXIOS_CACHE_MAXAGE = 5
 VITE_APP_CACHE_MAXAGE = 604800
 ```
 
-## 应用配置
+<!-- ## 应用配置
 
 ### 具体说明
 
@@ -362,9 +362,9 @@ const appStateMemory = {
     ForUsers: {},
   },
 };
-```
+``` -->
 
-## 插件配置
+## vite插件
 
 ### [auto-import](https://github.com/antfu/unplugin-auto-import)
 

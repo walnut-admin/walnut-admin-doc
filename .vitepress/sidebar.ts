@@ -14,6 +14,7 @@ export const sidebar: DefaultTheme.Sidebar = {
     {
       text: "深入",
       items: [
+        { text: "状态", link: "/guide/deep/state" },
         { text: "配置", link: "/guide/deep/config" },
         { text: "菜单", link: "/guide/deep/menu" },
         { text: "路由", link: "/guide/deep/route" },
