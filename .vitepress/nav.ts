@@ -9,7 +9,7 @@ export const nav: DefaultTheme.NavItem[] = [
         text: "介绍",
         link: "/guide/introduction",
       },
-      { text: "深入", link: "/guide/deep/config" },
+      { text: "深入", link: "/guide/deep/state" },
     ],
   },
   {

@@ -86,7 +86,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       text: "高阶组件",
       collapsed: true,
       collapsible: true,
-      items: [{ text: "value值拦截处理", link: "/component/HOC/withValue" }],
+      items: [{ text: "WithValue", link: "/component/HOC/withValue" }],
     },
 
     {

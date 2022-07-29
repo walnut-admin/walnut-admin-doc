@@ -6,253 +6,113 @@
 说实话，在写这个文档的时候，tab 相关的部分有了些不一样的想法。可能写文档也算一种复盘把，能重新捋一下当时的设计思路，并且从中发现一些设计可以优化甚至有问题的地方。
 :::
 
-tab 在中后台的模板，也算是一个比较重要的模块了。最初我使用 vue2 和 elementui 的时候，也自己实现过一套非常非常简单的 tab，没有右键菜单，没有排序，没有左右两侧功能按钮等等。后来工作中使用了若依的前后台分离的架子，开始初步了解了 tab 最基本的相关组件和逻辑。再后来接触了 vben，学习了不少 hook 设计思路上的知识。现在这个版本的 tab，可以算是一个最终版本的 beta 了。不仅涵盖了主流的 tab 功能，并且实现了横向滑轮滚动、滚动到最左/最右、当前选项卡定位、以及 devtools 的功能。我想后续如果再深入研究的话，可以实现更多有意思有实际用处的功能。
+tab 在中后台的模板，算是一个比较重要的模块了。最初我使用 vue2 和 elementui 的时候，也自己实现过一套非常非常简单的 tab，没有右键菜单，没有排序，没有左右两侧功能按钮等等。后来工作中使用了若依的前后台分离的架子，开始初步了解了 tab 最基本的相关组件和逻辑。再后来接触了 vben，学习了不少 hook 设计思路上的知识。现在这个版本的 tab，可以算是一个最终版本了。不仅涵盖了主流的 tab 功能，并且实现了横向滑轮滚动、滚动到最左/最右、当前选项卡定位、以及 devtools 的功能。我想后续如果再深入研究的话，可以实现更多有意思有实际用处的功能。
 
-### ts 类型
+本项目的选项卡是根据 name 字段作为一标识的。同时扩展了`排序`、`拖拽`、`固定`、`定位`、`左右滑动`、`丰富的右键菜单`、`不同风格的选项卡`、`持久化支持`和`开发者工具`。同时为了适应一些场景，还做了`同选项卡详细页`和`带参选项卡`两种扩展功能。后面会详细介绍。
+
+## ts 类型
 
 具体查看[types/app.d.ts](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/types/app.d.ts)。
 
 ```ts
-// 和vue-router的基本结构一致，只不过没有了component字段
+// 对应路由对象的meta字段
+interface RouteMeta {
+  title?: string;
+  icon?: string;
+  cache?: boolean;
+  affix?: boolean;
+  url?: string;
+  type?: ValueOfMenuTypeConst;
+  component?: string;
+  badge?: string;
+  menuActiveName?: string;
+  menuActiveSameTab?: boolean;
+}
+
+// 和route对象结构基本一致，只不过少了例如 component 字段等
 interface AppTab {
   name: string;
   path: string;
-  // 下面和RouteMeta类型一致
-  meta: {
-    title?: string;
-    icon?: string;
-    cache?: boolean;
-    affix?: boolean;
-    url?: string;
-    type?: ValueOfMenuTypeConst;
-    component?: string;
-  };
+  meta: RouteMeta;
+  query?: Recordable;
+  params?: Recordable;
 }
 ```
 
-### 功能点
+## 状态
 
-- 可配置选项卡高度，默认 32
+<details>
+<summary>state</summary>
 
-- 可配置是否显示图标，默认当前激活页面会有一个前缀的球作为标识
+- `tabs` 选项卡数组
 
-- 可配置左右两侧是否显示辅助性按钮，其中包括滚动到最左、滚动到最右、聚焦（在选项卡溢出时可以到看效果）和刷新
+- `visitedTabs` 访问过的选项卡数组缓存，用于新建选项卡时的逻辑处理问题
 
-- 右键菜单
+</details>
 
+<details>
+<summary>getters</summary>
+
+</details>
+
+<details>
+<summary>actions</summary>
+
+- `setTab` 通过索引重新给指定选项卡赋值
+
+- `setTabs` 重新赋值整个 tabs
+
+- `setVisitedTabs` 设置访问过的 tabs
+
+- `createTabByRoute` 根据 route 对象构建 tab 对象
+
+- `createTabs` 新建 tab，即往 tabs 数组中 push 或 unshift 新的选项卡。函数为了适应[menuActiveName](/guide/deep/menu#menuActiveName)配置项，内部多了两段处理相应逻辑的代码。函数最后会调用`setVisitedTabs`来设置访问过的 tabs
+
+- `deleteTabsByNameList` 根据 name 集合 filter 掉不想要的 tab
+
+- `deleteTabs` 根据 name 删除选项卡，包含`删除自己`、`删除其他`、`删除所有`、`删除右边`和`删除左边`
+
+- `clearTabs` 清空状态，一般用于退出登录
+
+- `changeTabOrder` 根据新旧索引改变选项卡顺序
+
+- `sortTabs` 根据是否固定排序，用于固定了某个选项卡后把其位置提到最前面
+
+- `goTab` 点击 tab 时的跳转函数，可带 params 参数或者 query 参数
+
+- `initAffixedTabs` 初始化需要固定的选项卡。用于在构建好`菜单`后把默认`affix`的选项卡`unshift`到 tabs 数组中
+
+- `leaveRoomForTabs` 实际就是个函数，不涉及到状态处理。用于电脑端选项卡过多时的美观
+
+</details>
+
+## 功能点
+
+- 高度可配置。默认高度 32px
+
+- 图标可配置。默认不显示，默认当前激活页面会有一个前缀的球作为标识
+
+- 辅助性按钮可配置。默认显示。其中包括滚动到最左/右、定位（在选项卡溢出时可以到看效果）和刷新当前页面
+
+- 右键菜单可配置。默认显示右键菜单
+
+  - 刷新
+  - 全屏
   - 关闭
   - 关闭左侧
   - 关闭右侧
   - 关闭其他
   - 关闭所有
-  - 刷新
-  - 全屏
-  - 固定（wip）
+  - 固定
+  - 快照
+  - 新窗口打开
 
-- 可配置是否拖拽，还没有做排序处理和持久化处理，暂时只是是可拖拽的
+- 拖拽可配置。默认可拖拽
 
-- 可配置开发者工具。鼠标悬停在 tab 上 2 秒中，就会显示一个 popover，里面有选项卡（即路由）的相关信息，同时提供了点击底部按钮即可在**VSCode**中打开当前页面对应的 vue 文件。此功能只在开发环境下生效。此功能主要是本人亲身经历，在一些后台管理的项目中，随着项目的迭代和功能的增加，页面会越来越多，有时想找到当前页面对应的 vue 文件都要消耗一些精力，而有了此功能，只需要鼠标移到 tab 上，点击底部按钮即可帮助开发者迅速的定位到当前 vue 文件。
+- 开发者工具可配置。默认开启且只在开发环境下生效。此功能是为开发者而设计，方便快速定位当前页面的 vue 文件。
 
-- 可配置不同风格，目前有card（默认）、flex、round三种样式（wip，flex和round样式还没完善）
+> 详细说明：鼠标悬停在 tab 上 2 秒中，就会显示一个 popover，里面有选项卡（即路由）的相关信息，同时提供了点击底部按钮即可在**VSCode**中打开当前页面对应的 vue 文件。此功能主要是本人亲身经历，在一些后台管理的项目中，随着项目的迭代和功能的增加，页面会越来越多，有时想找到当前页面对应的 vue 文件都要消耗一些精力，而有了此功能，只需要鼠标移到 tab 上，点击底部按钮即可帮助开发者迅速的定位到当前 vue 文件。
 
-## 相关函数
+- 风格可配置。目前有 card（默认）、flex、round 三种样式。还可扩展和完善。
 
-### closeMultipleTabs
-
-- 关闭多个选项卡，通用方法
-
-- 具体介绍
-
-```ts
-// filter配合includes过滤掉不想要的选项卡，再重新赋值到tabs上
-const closeMultipleTabs = (lists: string[]) => {
-  tab.value.tabs = tab.value.tabs.filter((i) => !lists.includes(i.name));
-};
-```
-
-### clearTabs
-
-- 清空选项卡，用于登出
-
-- 具体介绍
-
-```ts
-// 不仅要清空tabs，还要清空visitedTabs
-const clearTabs = () => {
-  tab.value.tabs.length = 0;
-  tab.value.visitedTabs.clear();
-};
-```
-
-### sortTabs
-
-- 选项卡排序，即位置互换
-
-- 具体介绍
-
-```ts
-// 通过新旧索引和splice实现最基本的元素位置互换
-const sortTabs = (oldIndex: number, newIndex: number) => {
-  const currentTab = tab.value.tabs[oldIndex];
-  tab.value.tabs.splice(oldIndex, 1);
-  tab.value.tabs.splice(newIndex, 0, currentTab);
-};
-```
-
-### buildTabs
-
-- 新建选项卡，在路由变化时通过 watchEffect 新建选项卡
-
-- 具体介绍
-
-```ts
-// TODO 参数名写成paayload了
-const buildTabs = (payload: AppTab, method: "push" | "unshift" = "push") => {
-  // 重定向或404等类似的页面不需要添加到tab中
-  if (nameBlackList.includes(payload.name)) return;
-
-  // 查找索引
-  const index = tab.value.tabs.findIndex((item) => item.name === payload.name);
-
-  // 没找到
-  if (index === -1) {
-    const cached = tab.value.visitedTabs.get(SymbolKeyConst.TABS_KEY);
-
-    // 在visitedTabs里寻找，如果没找到，才会push到tabs里
-    // 此措施是为了防止相同页面多次访问，而导致的多次向tabs中添加出现的重复性错误
-    if (!cached || (cached && !cached.includes(payload.name))) {
-      tab.value.tabs[method](payload);
-    }
-  }
-
-  // 每次调用新建选项卡的函数，都重新set visitedTabs
-  tab.value.visitedTabs.set(
-    SymbolKeyConst.TABS_KEY,
-    tab.value.tabs.map((item) => item.name)
-  );
-};
-```
-
-### removeTabs
-
-- 关闭选项卡，逻辑最复杂的函数，因为涉及到多种类型的关闭，即关闭左右和其他以及所有
-
-- 具体介绍
-
-```ts
-// 四个入参
-// name: 要关闭的tabName
-// type: 关闭类型，即单个/左/右/其他/所有
-// currentMouseTabName: 当前鼠标所在的tabName。仅用在单个关闭的逻辑里。
-// currentRouteName: 当前所在页面的路由名称，用于关闭左右和其他的逻辑里。
-const removeTabs = (
-  name: string,
-  type: ValueOfDeleteTabConst,
-  currentMouseTabName: string,
-  currentRouteName: string
-) => {
-  const index = tab.value.tabs.findIndex((item) => item.name === name);
-
-  if (index === -1) return;
-
-  switch (type) {
-    case DeleteTabConst.TAB_SINGLE:
-      {
-        // 最简单的splice删除
-        tab.value.tabs.splice(index, 1);
-
-        // 如果关闭的是当前页面，即tabName和当前鼠标所在的tabName是相等的，需要做一些其他的逻辑处理
-        // TODO 突然发现这里的currentMouseTabName参数多余了，貌似只要有currentRouteName就行了
-        if (currentMouseTabName === name) {
-          const next = tab.value.tabs[index];
-          const previous = tab.value.tabs[index - 1];
-
-          // 获取前一个和后一个选项卡，如果有next，就push到next，没有就push到previous
-          useRouterPush({ name: next ? next.name : previous.name });
-        }
-      }
-      break;
-
-    case DeleteTabConst.TAB_LEFT:
-      {
-        const nameList: string[] = [];
-
-        // 通过索引过滤出在左侧的并且没有affix的选项卡
-        tab.value.tabs.map((item, i) => {
-          if (i < index && !item.meta.affix) {
-            nameList.push(item.name);
-          }
-        });
-
-        // 这里如果左侧的nameList里有当前页面，需要push到当前事件触发的选项卡对应的页面
-        if (nameList.includes(currentRouteName)) {
-          useRouterPush({ name });
-        }
-
-        // 关闭多个选项卡
-        closeMultipleTabs(nameList);
-      }
-      break;
-
-    case DeleteTabConst.TAB_RIGHT:
-      {
-        // 逻辑与关闭左侧大致相同
-        const nameList: string[] = [];
-
-        tab.value.tabs.map((item, i) => {
-          if (i > index && !item.meta.affix) {
-            nameList.push(item.name);
-          }
-        });
-
-        if (nameList.includes(currentRouteName)) {
-          useRouterPush({ name });
-        }
-
-        closeMultipleTabs(nameList);
-      }
-      break;
-
-    case DeleteTabConst.TAB_OTHER:
-      {
-        const nameList: string[] = [];
-
-        tab.value.tabs.map((item) => {
-          // 过滤出除了当前选项卡并且没有affix的tabs
-          if (item.name !== name && !item.meta.affix) {
-            nameList.push(item.name);
-          }
-        });
-
-        // 如果当前选项卡与当前路由不匹配，需要push到当前的选项卡
-        if (currentRouteName !== name) {
-          useRouterPush({ name });
-        }
-
-        closeMultipleTabs(nameList);
-      }
-      break;
-
-    case DeleteTabConst.TAB_ALL:
-      {
-        const nameList: string[] = [];
-
-        tab.value.tabs.map((item) => {
-          // 只要不是affix的，都关闭
-          if (!item.meta.affix) {
-            nameList.push(item.name);
-          }
-        });
-
-        // push到indexMenuName即可
-        useRouterPush({ name: menu.value.indexMenuName });
-
-        closeMultipleTabs(nameList);
-      }
-      break;
-
-    default:
-      break;
-  }
-};
-```
+- 持久化支持可配置。默认支持

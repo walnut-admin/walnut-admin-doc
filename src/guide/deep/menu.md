@@ -17,7 +17,7 @@
 
 :::
 
-### ts 类型
+## ts 类型
 
 具体查看[types/app.d.ts](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/types/app.d.ts)。
 
@@ -71,8 +71,51 @@ interface AppMenu extends BaseAppModel {
   // 状态
   // 即开关，false指菜单禁用了
   status?: boolean;
+
+  // 页面菜单激活name
+  menuActiveName?: string;
+
+  // 是否和menuActiveName的菜单同tab
+  menuActiveSameTab?: boolean;
 }
 ```
+
+## 状态
+
+<details>
+<summary>state</summary>
+
+- `collapse` 菜单折叠状态
+
+- `showAside` 用于适配手机环境
+
+- `menus` 菜单数组，是树状结构数据
+
+- `keepAliveRouteNames` 用于缓存页面，是 name 的一个集合
+
+- `indexMenuName` 本项目不指定首页，会用构建出的菜单树的第一项的 name 作为首页跳转的 name，所以在给角色配置菜单时要注意第一项（即排序在第一位的）的菜单一定要是 type 为`menu`的，否则首页跳转会出现问题
+
+</details>
+
+<details>
+<summary>getters</summary>
+
+</details>
+
+<details>
+<summary>actions</summary>
+
+- `createRouteByMenu` 根据 menu 对象构建 route 对象
+
+- `createMenus` 根据 menu 数组构建 menu 树状结构
+
+- `clearMenus` 初始化所有菜单的状态
+
+- `createKeepAliveRouteNames` 生成缓存页面的 name 集合
+
+</details>
+
+## 功能点
 
 ## 相关函数
 
