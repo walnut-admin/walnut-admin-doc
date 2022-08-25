@@ -1,5 +1,65 @@
 # 日常记录
 
+## 2022.08.24
+
+又是 4 个月（
+
+- 做了哪些（这里我是看 commit 写的，实在想不起来了
+
+  - 1. 添加了 form 中的字典表单项，当然是和后台接口高度封装的。支持`select`、`checkbox`和`radio`，只需要传递`dictType`，即字典的 key 值即可。同时字典表单项的 label 支持使用字典的`name`属性。使用起来更加方便。
+  - 2. 对`WithValue`的 hoc 做了 Boolean 的处理，同时在 axios 层也加了对 boolean 的处理配置
+  - 3. 因为使用国际化的地方实在太多了，就抽离了`LocaleSelect`的组件
+  - 4. 算是彻底完成了 table 的列设置组件，支持显隐、拖拽排序和固定
+  - 5. 重新做了登录页面，支持账号登录、短信登陆和二维码登录（当然只是个模板，目前只有账号登陆能用）
+  - 6. 添加了服务协议和隐私权条款的页面（当然是空白页了
+  - 7. 添加了`Verify`组件，十分简单，无接口配合，纯前端 canvas 实现的。我是直接扒的[这个](https://github.com/javaLuo/vue-puzzle-vcode)，自己改了改逻辑方便使用。
+  - 8. 添加了`qrcode`组件，使用的`vueuse`里的`useORCode`函数，支持过期样式和成功样式
+  - 9. 添加了首页的模板，就是数字组件和一些图表的展示，有点难看哈，凑合着看吧
+  - 10. 添加了`alioss`配合`n-upload`前端直传文件的示例，后台配合写了一个`sts`的接口，取回 oss 的密钥和区域等参数，传输时做了简单的加密处理
+  - 11. `axios`层面添加了自动加密解密的配置项目，request 时支持挑选字段加密，response 目前只能通量解密
+  - 12. 添加了`modal`组件，并且尽可能的使其 api 和`drawer`相同。`modal`支持了拖拽。同时都内嵌进了高级表单的使用方式中
+  - 13. 添加了`cropper.js`的组件和示例。本项目使用的`cropper.js v3`，其性能和用法本人觉得都比 v2 强了不少，值得推荐使用
+  - 14. 添加了头像上传的组件，使用的是`modal` + `cropper` + `alioss`三个组件的结合
+  - 15. breaking change: **_全局状态彻底换成了 pinia_**，前后改了得有上百个文件，工作量不小
+  - 16. 添加了`notifaction`和`message`的示例
+  - 17. 添加了`AbsImage`组件，即抽象选择图片的组件，同时封装了 blob、base64 和 url 之间互相转换的函数和不同方式下载文件的函数
+  - 18. perf: 做了一点性能优化，即第三方库的 ref 采用`shallowRef`可以提高性能，例如`tinymce`、`baiduMap`、`cropper`和`echarts`的实例
+  - 19. 重构了`auto-import`，现在`const`、`locales`、`router`、`store/modules`、`hooks`和`utils`文件夹下的所有内容都是默认导出的
+  - 20. 升级了依赖，`vite`也升级到了 3.0，速度确实又提升了不少（小项目可能看出来，我这个项目也是有点规模了，冷加载和首次加载都确实快了很多）
+  - 21. `form`的`drawer`使用方法支持了`resizeable`（这里是 naive 新增的 drawer 特性，我只是把该属性传递了下去
+  - 22. 添加了`animationMode`和`colorMode`配置项，其中`colorMode`支持五种不同滤镜的模式
+  - 23. breaking change: 为了让`auto-import`生成的`d.ts`文件指向正确，同时也为了解决历史遗留问题，把原来的`/@/`别名换成了`@/`
+  - 24. 添加了`intro.js`的示例（说实话，感觉不是很好用
+  - 25. 添加了`transition`的过渡时间自定义，通过的是 vue 内置的`transition`组件的`beforeEnter`事件，给要 transition 的元素添加一个`animationDuration`样式，使得`aniamte.css`的动画可以适应动画时间
+  - 26. 移除了`cz-customizable`，采用了国人 fork 的[`cz-custom`](https://github.com/XPoet/cz-customizable/tree/dev)
+  - 27. 通过`transition`组件的过渡时间自定义，实现了登录 form 的一个从上到下逐渐出现的动画效果
+  - 28. 添加了`password`组件，支持监听大写键开启和密码强度显示
+  - 29. 添加了`SMSInput`组件，主要用于要发送短信验证码的表单项，支持简单的人机验证（即上面说到的图片验证组件
+  - 30. breaking change: 为了以后能配合生成国际化的 json 文件，我把原来分号（:）的设计统一换成了（.）的设计（其实本来就应该是点，一开始大意了，搞成了分号形式的词条，有前台和数据库的联动配合改动，所以工作量也不小
+  - 31. 重构了自定义组件的使用方式，不再采用任何`self-close`模式的组件，以后均使用`<MyComp></MyComp>`的全闭合标签形式
+  - 32. 优化了一波`form`，主要是抽离逻辑，不是直接用到的内部组件均做`asyncComponent`的处理
+  - 33. 添加了`reducedMotion`配置项，使用了`prefers-reduced-motion`的 query。默认如果系统级别关闭了动画，此配置项目就会禁用。
+  - 34. 添加了`restart`插件，为了监听一些不在 vite 热加载范围的文件的变动，目前暂时是为了监听`settings.json`的变动
+  - 35. perf: 优化了一波项目入口的 hook 执行，把一些只有登录进去之后才有效果的 hook 移到`LayoutContent`组件中
+  - 36. 添加了 tab 的动画配置项目
+  - 37. 添加了`scrollbar`的`isOverflow`ref，可以动态判断内容是否出现溢出，从而进行一些逻辑判断
+  - 38. 添加了 tab 的左右工具栏的展示方式配置项（基于上面的`isOverflow`实现的
+  - 39. 重构了锁屏部分的逻辑，添加了日历翻页样式的组件`FlipClock`，是扒的[这个](https://github.com/kuan1/kuan-vue-flip-clock)然后自己改了一下
+
+- 接下来打算要做的
+
+  - 1. 我还是在想应该把配置项目整体分成`FOR_UX`和`FOR_DX`，因为有些配置项目确实只有开发者才用得到
+  - 2. 锁屏添加自定义锁屏密码功能
+  - 3. 添加`codeMirror`第三方组件和示例
+  - 4. 添加`signature_pad`第三方组件和示例
+  - 5. layout，拖了很久了
+  - 6. tab 持久化 优化了
+  - 7. 搜索组件，用处不大
+  - 8. 更丰富的配色选择
+  - 9. 更丰富的form类型（collapse、tab）
+  - 10. 可编辑table单元格
+  - 11. `AbsImage`和头像上传看看要不要用vueuse的替换一下
+
 ## 2022.04.07
 
 - 时隔将近小半年，又来写日常记录了。
