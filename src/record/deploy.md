@@ -18,6 +18,12 @@ lsb_release -a
 
 ### node
 
+- 文章
+
+[how-to-install-node-js-on-ubuntu-20-04](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04)
+
+[nodesource](https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions)
+
 - 执行 NodeSource 安装脚本
 
 ```bash
@@ -70,13 +76,24 @@ npm -v
 
   - [how-to-configure-remote-access-for-mongodb-on-ubuntu-20-04][article2]
 
+:::warning
+mongo6.0 开始 shell 就不默认包含在主包内了，查看[这里](https://www.mongodb.com/docs/mongodb-shell/install/#std-label-mdb-shell-install)
+并且不再是直接mongo了，而是mongosh
+:::
+
 ::: tip
 云服务器，mongo 的配置文件里的 bindip，要配的是内网 ip 不是外网 ip
+:::
+
+::: tip
+同时如果要在本机连接数据库，需要在云服务器的安全组中打开 27017 的端口
 :::
 
 - 配置 mongodb 的用户密码
 
   - [how-to-secure-mongodb-on-ubuntu-20-04][article3]
+
+  - [还是看官网的把](https://www.mongodb.com/docs/manual/tutorial/configure-scram-client-authentication/)
 
 - 完整的配置 admin 用户格式
 
