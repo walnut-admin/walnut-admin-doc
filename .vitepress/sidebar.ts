@@ -154,6 +154,10 @@ export const sidebar: DefaultTheme.Sidebar = {
           text: "部署记录",
           link: "/record/deploy",
         },
+        {
+          text: "docker记录",
+          link: "/record/docker"
+        }
       ],
     },
   ],
