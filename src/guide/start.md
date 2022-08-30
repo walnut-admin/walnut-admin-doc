@@ -28,14 +28,14 @@ IDE 强烈推荐[vscode][vscode]，可以安装以下工具来大幅提高开发
 **推荐等级 B**
 
 - [Iconify IntelliSense][iconify intellisense] - Icon 实时显示
-- [Windicss IntelliSense][windicss intellisense] - windicss 的智能提示
+- [UnoCSS IntelliSense][unocss intellisense] - windicss 的智能提示
 - [I18n-ally][i18n-ally] - 国际化实时显示。
 
 **推荐等级 C**
 
 - [ESLint][eslint] - 脚本代码检查
 - [Prettier][prettier] - 代码格式化
-- [Stylelint][stylelint] - css 格式化(用了 windi 后好像用处不大了)
+- [Stylelint][stylelint] - css 格式化
 - [DotENV][dotenv] - .env 文件 高亮
 
 **推荐等级 D**
@@ -251,7 +251,7 @@ pnpm i
 [nvm]: https://github.com/nvm-sh/nvm
 [volar]: https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar
 [iconify intellisense]: https://marketplace.visualstudio.com/items?itemName=antfu.iconify
-[windicss intellisense]: https://marketplace.visualstudio.com/items?itemName=voorjaar.windicss-intellisense
+[unocss intellisense]: https://marketplace.visualstudio.com/items?itemName=antfu.unocss
 [i18n-ally]: https://marketplace.visualstudio.com/items?itemName=Lokalise.i18n-ally
 [eslint]: https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
 [prettier]: https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode

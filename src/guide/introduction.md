@@ -39,7 +39,7 @@
 项目后端地址，数据库使用的是 mongodb。
 
 :::info
-第一版是[Nest.js][nestjs]的单体应用，最近在用微服务重构后台（WIP）。仓库暂时设置为私有了。
+后台是[Nest.js][nestjs]的单体应用，仓库暂时设置为私有了。
 :::
 
 ## vite 插件推荐
@@ -66,12 +66,10 @@
 
 ## 如何加入我们
 
+- <a href="https://discord.gg/kfVuasVXs2" target='_blank'>discord 讨论</a>
+
 - [Walnut Admin][walnut-admin-client] 还在持续更新中，本项目欢迎您的参与，共同维护，逐步完善，将项目做得更强。同时整个项目本着一切免费的原则，原则上不会收取任何费用及版权，可以放心使用。
 - 如果你想加入我们，可以多提供一些好的建议或者提交 pr，我们会根据你的活跃度邀请你加入。
-
-## 特别鸣谢
-
-[anncwb][anncwb]，[Vben Admin](https://github.com/vbenjs/vue-vben-admin) 做的很好！给了我很多启发！这个文档的大致结构也是借用此项目的文档。我本人不是很会组织语言，后续内容若有语言不通的地方，请见谅！
 
 <!-- links -->
 
@@ -92,8 +90,6 @@
 [unocss]: https://github.com/unocss/unocss
 [iconify]: https://iconify.design/
 [vue-i18n]: https://vue-i18n.intlify.dev/
-[anncwb]: https://github.com/anncwb
-[vben]: https://github.com/anncwb/vue-vben-admin
 [unplugin-auto-import]: https://github.com/antfu/unplugin-auto-import
 [unplugin-vue-components]: https://github.com/antfu/unplugin-vue-components
 [unplugin-icons]: https://github.com/antfu/unplugin-icons
