@@ -2,16 +2,18 @@
 
 ## 介绍
 
-菜单是项目的核心部分，后面介绍的路由和权限都是通过 menu 生成的，所以此 part 一定要仔细阅读。
+:::warning
+菜单是项目的核心部分，后面介绍的路由和权限都是通过 menu 生成的，所以此章节一定要仔细阅读。
+:::
 
 :::tip
 后续还会添加一些字段和功能，目前在脑海中的有：
 
 - badge 即在左侧菜单名称后面显示类似 hot 或 new 的字眼
 
-- params 即为此路由添加 params，在路由守卫中通过逻辑添加跳转此路由时带上设计好的 params，类似于一个写死的参数，但是不会显示在地址栏中
+- params 和 query 获取都可以写一个死值塞到 meta 里
 
-- transitionName 或许可以高度自定义此页面的切换动画
+- transitionName 高度自定义菜单的切换动画
 
 如果好的想法欢迎补充。
 
@@ -22,7 +24,7 @@
 具体查看[types/app.d.ts](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/types/app.d.ts)。
 
 ```ts
-interface AppMenu extends BaseAppModel {
+interface AppSystemMenu extends BaseAppModel {
   // 父节点ID
   pid?: string;
 
@@ -77,6 +79,9 @@ interface AppMenu extends BaseAppModel {
 
   // 是否和menuActiveName的菜单同tab
   menuActiveSameTab?: boolean;
+
+  // 还没设计的badge字段
+  badge?: string;
 }
 ```
 
@@ -113,40 +118,88 @@ interface AppMenu extends BaseAppModel {
 
 - `createKeepAliveRouteNames` 生成缓存页面的 name 集合
 
+- `goIndex` 跳转首页
+
 </details>
 
 ## 功能点
 
+- 支持菜单、目录和元素级别的控制
+
+- 支持海量自定义图标
+
+- 支持排序
+
+- 支持内链、外链的类型
+
+- 支持控制菜单显隐
+
+- 支持缓存菜单类型的页面
+
+- 支持固定在 tab 中的菜单类型页面
+
+- 支持元素级别的权限控制
+
+- 支持菜单禁用
+
+- 支持不显示在菜单中的页面出现菜单激活样式
+
+- 支持不显示在菜单中的页面与上处绑定菜单同 tab 页面
+
+- 支持自定义动画效果（TODO）
+
+- 支持 badge 效果（TODO）
+
+- 支持默认写死的 query 和 params（TODO）
+
 ## 相关函数
 
-具体查看[src/core/menu](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/src/core/menu.ts)。
+### AppCoreFn1
 
-### buildMenus
+- app 核心函数，构建 route、menu、permission 等的关键操作
 
-- 通过 menu 数组构建左侧菜单
+- 目前在两处用到，一是登陆成功后调用，二是路由守卫里调用
 
 - 具体介绍
 
 ```ts
-const buildMenus = (payload: AppMenu[]) => {
-  // 过滤出目录和菜单且可以显示在左侧菜单中的部分
-  const filtered = payload
-    .filter((i) => i.type !== MenuTypeConst.ELEMENT)
-    .filter((i) => i.show);
+export const AppCoreFn1 = async () => {
+  const appMenu = useAppStoreMenu();
+  const userPermission = useAppStoreUserPermission();
 
-  // 过滤出固定在tab中的菜单，排序，并且unshift到tab数组中
-  filtered
-    .filter((i) => i.affix)
-    .sort((a, b) => b.order! - a.order!)
-    .map((i) => buildTabs(buildCommonRoute(i), "unshift"));
+  const { addRoute, getRoutes } = AppRouter;
 
-  // 通过arrToTree函数构建左侧菜单，id标识字段是_id
-  const menuTree = arrToTree(filtered, { id: "_id" });
+  // 获取根路由
+  const rootRoute =
+    getRoutes()[getRoutes().findIndex((i) => i.path === AppRootPath)];
 
-  // orderTree默认通过order排序，menu设计的排序字段也是order，所以不需要第二个参数
-  // 因为是根据一个根节点生成的数组，所以要取数组第一项的children，就是我们想要的拿到的菜单
-  const menus = orderTree(menuTree)[0].children;
+  // 这里就是调接口取回当前用户的menu数组
+  const res = await getPermissions();
 
-  return menus;
+  // 设置左侧菜单
+  appMenu.setMenus(appMenu.createMenus(res)!);
+
+  // 设置用户权限数组
+  userPermission.setPermissions(userPermission.createPermissions(res));
+
+  // 设置缓存页面的name集合
+  appMenu.setKeepAliveRouteNames(appMenu.createKeepAliveRouteNames(res));
+
+  // 设置首页路由的name
+  appMenu.setIndexMenuName(appMenu.menus[0].name!);
+
+  // 构建路由
+  // 后面路由的章节会介绍这个函数
+  const routes = buildRoutes(res);
+
+  // 把构建好的路由挂载到根路由上
+  routes.forEach((route) => {
+    addRoute(AppRootName, route);
+  });
+
+  // 最后要设置根路由的重定向到首页
+  rootRoute.redirect = {
+    name: appMenu.indexMenuName,
+  };
 };
 ```

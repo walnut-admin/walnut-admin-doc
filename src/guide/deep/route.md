@@ -9,12 +9,10 @@
 :::
 
 :::warning
-
-- 多层嵌套的 keep-alive 部分还有问题
-
+现在的版本为了解决嵌套路由缓存会导致 setup 执行多次的问题，暂时把路由拍扁成一级然后挂载到根路由下的
 :::
 
-### ts 类型
+## ts 类型
 
 具体查看[types/vue-router.d.ts](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/types/vue-router.d.ts)。
 
@@ -26,40 +24,27 @@ interface RouteMeta {
   cache?: boolean;
   affix?: boolean;
   url?: string;
-  type?: ValueOfMenuTypeConst;
+  type?: ValueOfAppConstMenuType;
   component?: string;
+  badge?: string;
+  menuActiveName?: string;
+  menuActiveSameTab?: boolean;
 }
 ```
+
+## 功能点
+
+- 完全动态的路由，就只有几个写死的路由
+
+- 目前前端写死的路由：登录、隐私协议、服务条款、根路由、重定向、锁屏、404 和 500 页面，其中锁屏页面也可以配置成动态的，然后配个权限控制锁屏功能的显隐是完全可行的
+
+- loadingbar
+
+- 路由守卫
 
 ## 相关函数
 
 具体查看[src/core/route](https://github.com/Zhaocl1997/walnut-admin-client/blob/naive-ui/src/core/route.ts)。
-
-### buildCommonRoute
-
-- 通过 menu 数组构建 vue-router 的标准结构
-
-- 具体介绍
-
-```ts
-const buildCommonRoute = (node: AppMenu): AppTab => {
-  return {
-    path: node.path!,
-    name: node.name!,
-    // 下面的meta就对应自定义的RouteMeta字段
-    // 实际上tab的结构和route一样，不过为了区分模块，会重命名一个AppTab出来
-    meta: {
-      title: node.title,
-      icon: node.icon,
-      cache: node.cache,
-      url: node.url,
-      affix: node.affix,
-      type: node.type,
-      component: node.component,
-    },
-  };
-};
-```
 
 ### resolveParentComponent
 
@@ -116,40 +101,6 @@ const resolveViewModules = (component: string) => {
 };
 ```
 
-### buildKeepAliveRouteNameList
-
-- 根据 menu 树结构数据去构建 keep-alive 的 name 数组
-
-- 具体介绍
-
-:::warning
-
-- [嵌套路由的 keep-alive 的问题](https://github.com/vuejs/vue-router-next/issues/626)一直没解决，项目暂时不建议开启 keep-alive
-
-- 嵌套路由的缓存同时需要父节点的 name 存在于数组中才会生效，这个问题我也是近期才发现的，记不太清 v2 的 router 是不是也有这个问题。
-
-:::
-
-```ts
-const buildKeepAliveRouteNameList = (
-  menus: AppMenu[],
-  payload: AppMenu[]
-): string[] => {
-  const res: string[] = [];
-
-  menus.map((i) => {
-    if (i.cache) {
-      // 利用一个findPath函数，在菜单树中查出路径，把name遍历出来，最后返回时去重即可
-      const path = findPath<AppMenu>(payload, (n) => n._id === i._id);
-
-      res.push(...(path as AppMenu[]).map((i) => i.name!));
-    }
-  });
-
-  return [...new Set(res)];
-};
-```
-
 ### buildRoutes
 
 - 核心函数，根据菜单数组构建路由表，通过 formatTree 函数构建
@@ -158,43 +109,100 @@ const buildKeepAliveRouteNameList = (
 
 ```ts
 const buildRoutes = (payload: AppMenu[]) => {
-  const routes = formatTree(payload, {
-    format: (node: AppMenu): RouteRecordRaw | undefined => {
+  const appMenu = useAppStoreMenu();
+
+  // 过滤掉元素菜单
+  const filtered = payload.filter((i) => i.type !== AppConstMenuType.ELEMENT);
+
+  // 通过_id构建树
+  const menuTree = arrToTree(filtered, { id: "_id" });
+
+  // children[0]是我们想要的树结构菜单
+  const menus = orderTree(menuTree)[0].children;
+
+  const routes = formatTree<AppSystemMenu, RouteRecordRaw>(menus!, {
+    format: (node) => {
       // 处理目录菜单
-      if (node.type === MenuTypeConst.CATALOG) {
+      if (node.type === AppConstMenuType.CATALOG) {
         return {
-          ...buildCommonRoute(node),
+          ...appMenu.createRouteByMenu(node),
           component: resolveParentComponent(node.name!),
         };
       }
 
-      // 处理正常菜单
-      if (node.type === MenuTypeConst.MENU) {
-        // 处理内链
-        if (node.ternal === "internal") {
+      // 处理普通菜单
+      if (node.type === AppConstMenuType.MENU) {
+        // 单独处理一些内链菜单
+        if (node.ternal === AppConstMenuTernal.INTERNAL) {
           return {
-            ...buildCommonRoute(node),
-            component: resolveIFrameComponent(node.name!),
+            ...appMenu.createRouteByMenu(node),
+            component: resolveIFrameComponent(node.name!, node.cache),
           };
         }
 
-        // ...
-        // 外链的不需要处理
-        // 只需要在layout的aside里的menu-click事件里做逻辑处理即可
-        // ...
-
-        // 最普通的页面
+        // 普通的视图
         return {
-          ...buildCommonRoute(node),
+          ...appMenu.createRouteByMenu(node),
           component: resolveViewModules(node.component),
         };
       }
     },
   });
 
-  // 最后把404推进去
-  routes.push(App404Route);
+  // 本来应该是直接推入404然后返回的
+  // 但是为了让页面缓存功能好使，暂时写了个函数又拍扁了路由（就是拍成只有两级的，不是原来嵌套的模式）
+  // routes.push(App404Route)
+  // return routes
 
-  return routes;
+  // TODO 999
+  const _tempRoutes = _tempFlatNestedRoutes(routes);
+  _tempRoutes.push(App404Route);
+  return _tempRoutes;
+};
+
+// TODO 999
+/**
+ * @link https://github.com/vuejs/vue-router-next/issues/626
+ */
+const _tempFlatNestedRoutes = (routes: RouteRecordRaw[]) => {
+  const ret: RouteRecordRaw[] = [];
+
+  const tree = cloneDeep(routes);
+
+  formatTree(tree, {
+    format: (node) => {
+      // 这里利用findPath函数，即寻找树状结构的路径
+      const paths = findPath(
+        tree,
+        (n) => n.name === node.name
+      ) as RouteRecordRaw[];
+
+      // 只有菜单类型的需要处理
+      if (node.meta?.type === AppConstMenuType.MENU) {
+        // paths是一个数组，长度大于1，就代表是嵌套结构了
+        if (paths.length > 1) {
+          // 利用reduce把嵌套路由，拼接成单层路由
+          const newNode = paths.reduce(
+            (prev, next) =>
+              ({
+                name: next.name,
+                path: prev.path.startsWith("/")
+                  ? `${prev.path}/${next.path}`
+                  : `/${prev.path}/${next.path}`,
+                meta: next.meta,
+                component: next.component,
+              } as RouteRecordRaw)
+          );
+
+          ret.push(newNode);
+        } else if (!node.children) {
+          // 没有children的时候，给path前添加一个斜线
+          ret.push({ ...node, path: `/${node.path}` });
+        }
+      }
+    },
+  });
+
+  return ret;
 };
 ```

@@ -25,7 +25,7 @@
   - 17. 添加了`AbsImage`组件，即抽象选择图片的组件，同时封装了 blob、base64 和 url 之间互相转换的函数和不同方式下载文件的函数
   - 18. perf: 做了一点性能优化，即第三方库的 ref 采用`shallowRef`可以提高性能，例如`tinymce`、`baiduMap`、`cropper`和`echarts`的实例
   - 19. 重构了`auto-import`，现在`const`、`locales`、`router`、`store/modules`、`hooks`和`utils`文件夹下的所有内容都是默认导出的
-  - 20. 升级了依赖，`vite`也升级到了 3.0，速度确实又提升了不少（小项目可能看出来，我这个项目也是有点规模了，冷加载和首次加载都确实快了很多）
+  - 20. 升级了依赖，`vite`也升级到了 3.0，速度确实又提升了不少（小项目可能看不出来，我这个项目也是有点规模了，冷加载和首次加载都确实快了很多）
   - 21. `form`的`drawer`使用方法支持了`resizeable`（这里是 naive 新增的 drawer 特性，我只是把该属性传递了下去
   - 22. 添加了`animationMode`和`colorMode`配置项，其中`colorMode`支持五种不同滤镜的模式
   - 23. breaking change: 为了让`auto-import`生成的`d.ts`文件指向正确，同时也为了解决历史遗留问题，把原来的`/@/`别名换成了`@/`

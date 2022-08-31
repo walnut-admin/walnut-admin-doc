@@ -12,23 +12,13 @@ permissions: string[]
 
 ## 相关函数
 
-### buildPermissions
-
-- 通过 menu 数组构建权限数组
-
-- 具体介绍
-
-```ts
-// 直接map出permission数组且滤掉空的项目
-const buildPermissions = (payload: AppMenu[]): string[] =>
-  payload.map((i) => i.permission!).filter((i) => i);
-```
+具体查看[state](/guide/deep/state#user-permission)即可
 
 ## 相关组件
 
 ### AppAuthorize
 
-暂时逻辑是十分简单清晰的，就是从全局的状态中取出 permissions，再通过一个 includes 判断是否存在，进而 renderSlot。
+暂时逻辑是十分简单清晰的，就是通过 hasPermission 判断是否显示 slot
 
 ```vue
 <script lang="ts">
@@ -42,11 +32,10 @@ export default defineComponent({
   },
 
   setup(props, { slots }) {
-    const { menu } = useAppState();
-    const permissions = menu.value.permissions;
+    const userPermission = useAppStoreUserPermission();
 
     const render = () => {
-      if (permissions.includes(props.value!)) {
+      if (userPermission.hasPermission(props.value!)) {
         return renderSlot(slots, "default");
       }
       return null;

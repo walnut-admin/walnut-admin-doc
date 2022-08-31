@@ -307,6 +307,8 @@
 
 - `clearPermissions` 清空权限数组，用于登出
 
+- `hasPermission` 最单纯的 includes 判断
+
 </details>
 
 ## user-profile
@@ -316,7 +318,7 @@
 <details>
 <summary>state</summary>
 
-- `profile` 当前登录用户个人信息，是个object
+- `profile` 当前登录用户个人信息，是个 object
 
 </details>
 
