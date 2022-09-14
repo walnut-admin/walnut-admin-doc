@@ -77,8 +77,7 @@ npm -v
   - [how-to-configure-remote-access-for-mongodb-on-ubuntu-20-04][article2]
 
 :::warning
-mongo6.0 开始 shell 就不默认包含在主包内了，查看[这里](https://www.mongodb.com/docs/mongodb-shell/install/#std-label-mdb-shell-install)
-并且不再是直接mongo了，而是mongosh
+mongo6.0 开始不再是直接 mongo 了，而是 mongosh
 :::
 
 ::: tip
@@ -97,8 +96,15 @@ mongo6.0 开始 shell 就不默认包含在主包内了，查看[这里](https:/
 
 - 完整的配置 admin 用户格式
 
-```
-db.createUser({ user: "YourUserName", pwd: passwordPrompt(), roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ] })
+```js
+db.createUser({
+  user: "myUserAdmin",
+  pwd: passwordPrompt(), // or cleartext password
+  roles: [
+    { role: "userAdminAnyDatabase", db: "admin" },
+    { role: "readWriteAnyDatabase", db: "admin" },
+  ],
+});
 ```
 
 ## 第一阶段：纯 ip+反向代理
@@ -117,18 +123,28 @@ db.createUser({ user: "YourUserName", pwd: passwordPrompt(), roles: [ { role: "u
 
 - 下面文件的用处，就是把后台真实的接口地址，隐藏在 nginx 的代理保护下
 
-```nginx
-upstream proxy {
+### 后台部署
+
+- 在 `当前用户` 目录下建 `server` 文件夹，把**dist/env/package.json**扔到 `server` 文件夹里，执行`npm i`，安装完成后执行`npm run start:prod`
+
+- nginx
+
+  - 配置文件
+
+    就是简单的给后台配置一个假端口
+
+```bash
+upstream [***自定义名称***] {
   ip_hash;
   server [***云服务器内网IP***]:[***后台真实端口***];
 }
 
 server {
     listen [***自定义端口***];
-    server_name _;
+    server_name [***随便的一个名称***];
 
     location / {
-        proxy_pass http://proxy;
+        proxy_pass http://[***自定义名称***];
 
         proxy_redirect off;
         proxy_http_version 1.1;
@@ -143,9 +159,25 @@ server {
 }
 ```
 
-### 后台部署
+- pm2 挂载
 
-- 在 `当前用户` 目录下建 server 文件夹，把**dist/env/package.json**扔到 server 文件夹里，执行`npm i`，安装完成后执行`npm run start:prod`
+  - 用 pm2 跑 node 进程
+
+  ```bash
+  cross-env NODE_ENV=test pm2 start dist/main.js --name walnut-test
+  ```
+
+  - 保存 pm2 进程
+
+  ```bash
+  pm2 save
+  ```
+
+  - 开机自启 pm2 进程
+
+  ```bash
+  pm2 startup
+  ```
 
 ## 第二阶段：域名+https，前台配置 brotli 压缩
 
