@@ -116,27 +116,35 @@ export const sidebar: DefaultTheme.Sidebar = {
       items: [
         {
           text: "头像裁剪上传(cropper + OSS)",
-          link: "/component/vendor/avatarUpload",
+          link: "/component/Vendor/AvatarUpload",
         },
         {
           text: "图片裁剪(cropper)",
-          link: "/component/vendor/cropper",
+          link: "/component/Vendor/Cropper",
         },
         {
           text: "图表(echarts)",
-          link: "/component/vendor/echarts",
+          link: "/component/Vendor/Echarts",
         },
         {
           text: "地点选择(百度map)",
-          link: "/component/vendor/locationPicker",
+          link: "/component/Vendor/LocationPicker",
         },
         {
-          text: "文件前端直传(阿里OSS)",
-          link: "/component/vendor/OSSUpload",
+          text: "前端文件直传(OSSUpload)",
+          link: "/component/Vendor/OSSUpload",
         },
         {
           text: "富文本(tinymce)",
-          link: "/component/vendor/tinymce",
+          link: "/component/Vendor/Tinymce",
+        },
+        {
+          text: "签名版(signature_pad)",
+          link: "/component/Vendor/SignPad",
+        },
+        {
+          text: "代码编辑(codeMirror)",
+          link: "/component/Vendor/CodeMirror",
         },
       ],
     },
@@ -156,8 +164,8 @@ export const sidebar: DefaultTheme.Sidebar = {
         },
         {
           text: "docker记录",
-          link: "/record/docker"
-        }
+          link: "/record/docker",
+        },
       ],
     },
   ],

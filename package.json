@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "vitepress --port 8080",
+    "dev": "vitepress --port 8886",
     "build": "vitepress build",
     "serve": "vitepress serve"
   },

@@ -38,7 +38,7 @@ export const nav: DefaultTheme.NavItem[] = [
       },
       {
         text: "第三方组件",
-        link: "/component/vendor/avatarUpload",
+        link: "/component/Vendor/AvatarUpload",
       },
     ],
   },
