@@ -1,4 +1,4 @@
-# Cropper
+# 图片裁剪
 
 采用的是[cropperjs](https://github.com/fengyuanchen/cropperjs/tree/v2)的 `v2` 版本，用法和 v1 区别还是挺大的。性能上感觉提升了不少。
 
