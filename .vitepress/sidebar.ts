@@ -150,6 +150,22 @@ export const sidebar: DefaultTheme.Sidebar = {
     },
   ],
 
+  "/nestjs/": [
+    {
+      text: "后台",
+      items: [
+        {
+          text: "介绍",
+          link: "/nestjs/introduction",
+        },
+        {
+          text: "跨域",
+          link: "/nestjs/cors",
+        },
+      ],
+    },
+  ],
+
   "/record/": [
     {
       text: "记录",

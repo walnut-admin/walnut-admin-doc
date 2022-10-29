@@ -4,6 +4,7 @@ import { nav } from "./nav";
 import { sidebar } from "./sidebar";
 
 export default defineConfig({
+  base: '/',
   lang: "zh-CN",
   title: "Walnut Admin",
   titleTemplate: "Documentation",

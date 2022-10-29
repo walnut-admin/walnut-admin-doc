@@ -43,6 +43,20 @@ export const nav: DefaultTheme.NavItem[] = [
     ],
   },
   {
+    text: "后台",
+    activeMatch: "/nestjs/",
+    items: [
+      {
+        text: "介绍",
+        link: "/nestjs/introduction",
+      },
+      {
+        text: "跨域",
+        link: "/nestjs/cors",
+      },
+    ],
+  },
+  {
     text: "记录",
     activeMatch: "/record/",
     items: [
