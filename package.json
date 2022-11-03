@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "vitepress --port 8886",
+    "dev": "vitepress",
     "build": "vitepress build",
     "serve": "vitepress serve"
   },
@@ -12,5 +12,9 @@
   "license": "ISC",
   "dependencies": {
     "vitepress": "1.0.0-alpha.4"
+  },
+  "devDependencies": {
+    "markdown-it": "^13.0.1",
+    "vitepress-plugin-search": "1.0.4-alpha.14"
   }
 }

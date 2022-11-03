@@ -1,10 +1,11 @@
 import { defineConfig } from "vitepress";
+import { SearchPlugin } from "vitepress-plugin-search";
 
 import { nav } from "./nav";
 import { sidebar } from "./sidebar";
 
 export default defineConfig({
-  base: '/',
+  base: "/",
   lang: "zh-CN",
   title: "Walnut Admin",
   titleTemplate: "Documentation",
@@ -28,5 +29,14 @@ export default defineConfig({
         "https://github.com/Zhaocl1997/walnut-admin-doc/tree/main/src/:path",
       text: "Edit this page on GitHub",
     },
+  },
+
+  vite: {
+    server: {
+      port: 8886,
+      open: true,
+    },
+
+    plugins: [SearchPlugin()],
   },
 });
