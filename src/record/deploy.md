@@ -107,11 +107,28 @@ db.createUser({
 });
 ```
 
-## 第一阶段：纯 ip+反向代理
+## redis
+
+### 安装
+
+[这里](https://www.howtoforge.com/redis-ubuntu-20-04/)
+
+### 配置
+
+```bash
+nano /etc/redis/redis.conf
+```
+
+- 找到`bind`的那行，在最后面添加[***云服务器内网IP***]
+
+- 使劲往下拉，找到`requirepass`那行，解开注释，添加redis的密码
+
+
+## staging：纯ip+正反向代理
 
 ### 前台部署
 
-- 在 `当前用户` 目录下建 client 文件夹，把`dist`文件夹下的所有文件扔到 client 文件夹里
+- 在 `当前用户` 目录下建 `client` 文件夹，把`dist`文件夹下的所有文件扔到 `client` 文件夹里
 
 - 打开`/etc/nginx/sites-enabled/default`文件，把`root /var/www/html`改成`root/client`，`localtion`下的`try_files`最后一段改成`/index.html`（因为咱们项目是 spa，所有东西都是在 index.html 下渲染的，包括 404/500 之类的页面）
 
@@ -125,7 +142,7 @@ db.createUser({
 
 ### 后台部署
 
-- 在 `当前用户` 目录下建 `server` 文件夹，把**dist/env/package.json**扔到 `server` 文件夹里，执行`npm i`，安装完成后执行`npm run start:prod`
+- 在 `当前用户` 目录下建 `server` 文件夹，把**dist/env/package.json/lock文件**扔到 `server` 文件夹里，执行`pnpm i -P`，安装完成后执行`npm run start:test`检查是否能正常启动
 
 - nginx
 
