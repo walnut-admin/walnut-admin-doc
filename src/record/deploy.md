@@ -98,13 +98,13 @@ mongo6.0 开始不再是直接 mongo 了，而是 mongosh
 
 ```js
 db.createUser({
-  user: "myUserAdmin",
+  user: 'myUserAdmin',
   pwd: passwordPrompt(), // or cleartext password
   roles: [
-    { role: "userAdminAnyDatabase", db: "admin" },
-    { role: "readWriteAnyDatabase", db: "admin" },
+    { role: 'userAdminAnyDatabase', db: 'admin' },
+    { role: 'readWriteAnyDatabase', db: 'admin' },
   ],
-});
+})
 ```
 
 ## redis
