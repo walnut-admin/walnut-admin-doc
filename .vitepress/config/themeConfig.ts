@@ -16,4 +16,9 @@ export const themeConfig: DefaultTheme.Config = {
             'https://github.com/Zhaocl1997/walnut-admin-doc/tree/main/src/:path',
     text: 'Edit this page on GitHub',
   },
+
+  // docFooter: {
+  //   prev: 'Pagina prior',
+  //   next: 'Proxima pagina',
+  // },
 }

@@ -1,3 +1,4 @@
 node_modules
-dist
-cache
+.vitepress/dist
+.vitepress/cache
+old
