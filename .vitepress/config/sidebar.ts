@@ -156,6 +156,10 @@ export const sidebar: DefaultTheme.Sidebar = {
           text: '跨域',
           link: '/nestjs/cors',
         },
+        {
+          text: '数据库设计',
+          link: '/nestjs/mongodb',
+        },
       ],
     },
   ],
