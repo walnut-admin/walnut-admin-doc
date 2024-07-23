@@ -18,6 +18,8 @@
 以下部分文档没有国内加速，需自行挂梯子访问。
 :::
 
+前端知识：
+
 - [Vue3][vue3]
 - [Vite][vite]
 - [TypeScript][ts]
@@ -28,6 +30,13 @@
 - [Unocss][unocss]
 - [Iconify][iconify]
 
+后端知识：
+
+- [TypeScript][ts]
+- [Nest.js][nestjs]
+- [mongodb]
+- [Redis]
+
 ## 代码
 
 - [walnut-admin-client][walnut-admin-client]
@@ -37,10 +46,6 @@
 - [walnut-admin-server][walnut-admin-server]
 
 项目后端地址，数据库使用的是 mongodb。
-
-:::info
-后台是[Nest.js][nestjs]的单体应用，仓库暂时设置为私有了。
-:::
 
 ## vite 插件推荐
 
@@ -81,6 +86,8 @@
 [vue3]: https://v3.cn.vuejs.org/
 [vite]: https://cn.vitejs.dev/
 [naiveui]: https://www.naiveui.com/zh-CN/dark
+[mongodb]: https://www.mongodb.com/
+[Redis]: https://redis.io/
 [ts]: https://www.typescriptlang.org/
 [vitepress]: https://vitepress.vuejs.org/
 [vue-router]: https://next.router.vuejs.org/

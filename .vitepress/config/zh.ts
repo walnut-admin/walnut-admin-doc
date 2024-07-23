@@ -1,6 +1,105 @@
-import type { DefaultTheme } from 'vitepress'
+import { createRequire } from 'node:module'
+import { type DefaultTheme, defineConfig } from 'vitepress'
+import type { SearchConfig } from 'vitepress-plugin-pagefind'
+import { chineseSearchOptimize } from 'vitepress-plugin-pagefind'
 
-export const sidebar: DefaultTheme.Sidebar = {
+const require = createRequire(import.meta.url)
+const pkg = require('../../package.json')
+
+const nav: DefaultTheme.NavItem[] = [
+  {
+    text: '指南',
+    activeMatch: '/guide/',
+    items: [
+      {
+        text: '介绍',
+        link: '/guide/introduction',
+      },
+      { text: '深入', link: '/guide/deep/state' },
+    ],
+  },
+  {
+    text: '组件',
+    activeMatch: '/component/',
+    items: [
+      {
+        text: 'UI组件',
+        link: '/component/UI/button',
+      },
+      {
+        text: '其他组件',
+        link: '/component/Extra/arrow',
+      },
+      {
+        text: 'App级别组件',
+        link: '/component/App/authorize',
+      },
+      {
+        text: '高阶组件',
+        link: '/component/HOC/withValue',
+      },
+      {
+        text: '进阶组件',
+        link: '/component/Advanced/apiSelect',
+      },
+      {
+        text: '第三方组件',
+        link: '/component/Vendor/AvatarUpload',
+      },
+    ],
+  },
+  {
+    text: '后台',
+    activeMatch: '/nestjs/',
+    items: [
+      {
+        text: '介绍',
+        link: '/nestjs/introduction',
+      },
+      {
+        text: '跨域',
+        link: '/nestjs/cors',
+      },
+      {
+        text: '数据库设计',
+        link: '/nestjs/mongodb',
+      },
+    ],
+  },
+  {
+    text: '记录',
+    activeMatch: '/record/',
+    items: [
+      {
+        text: '日常记录',
+        link: '/record/daily',
+      },
+      {
+        text: '部署记录',
+        link: '/record/deploy',
+      },
+      {
+        text: 'docker记录',
+        link: '/record/docker',
+      },
+    ],
+  },
+  {
+    text: pkg.version,
+    items: [
+      {
+        text: '更新日志',
+        link: 'https://github.com/Zhaocl1997/walnut-admin-client/blob/main/CHANGELOG.md',
+      },
+      {
+        text: '参与贡献',
+        link: 'https://github.com/Zhaocl1997/walnut-admin-client',
+      },
+    ],
+  },
+]
+
+const sidebar: DefaultTheme.Sidebar = {
   '/guide/': [
     {
       text: '介绍',
@@ -164,23 +263,83 @@ export const sidebar: DefaultTheme.Sidebar = {
     },
   ],
 
-  '/record': [
+  '/record/': [
     {
       text: '记录',
       items: [
         {
           text: '日常记录',
-          link: 'daily',
+          link: '/record/daily',
         },
         {
           text: '部署记录',
-          link: 'deploy',
+          link: '/record/deploy',
         },
         {
           text: 'docker记录',
-          link: 'docker',
+          link: '/record/docker',
         },
       ],
     },
   ],
 }
+
+export const search: { [key: string]: SearchConfig } = {
+  root: {
+    btnPlaceholder: '搜索',
+    placeholder: '搜索文档',
+    emptyText: '空空如也',
+    heading: '共: {{searchResult}} 条结果',
+    // 搜索结果不展示最后修改日期日期
+    showDate: false,
+    customSearchQuery: chineseSearchOptimize,
+  },
+}
+
+export const zh = defineConfig({
+  lang: 'zh-Hans',
+  description: '核桃仁中后台全栈模板文档，仍在编写中。。。',
+
+  themeConfig: {
+    nav,
+    sidebar,
+
+    search: {
+      provider: 'local',
+    },
+
+    editLink: {
+      pattern: 'https://github.com/Zhaocl1997/walnut-admin-doc/tree/main/src/:path',
+      text: '在 GitHub 上编辑此页面',
+    },
+
+    footer: {
+      message: '基于 MIT 许可发布',
+      copyright: `版权所有 © 2019-${new Date().getFullYear()} 赵成林`,
+    },
+
+    docFooter: {
+      prev: '上一页',
+      next: '下一页',
+    },
+
+    outline: {
+      label: '页面导航',
+    },
+
+    lastUpdated: {
+      text: '最后更新于',
+      formatOptions: {
+        dateStyle: 'short',
+        timeStyle: 'medium',
+      },
+    },
+
+    langMenuLabel: '多语言',
+    returnToTopLabel: '回到顶部',
+    sidebarMenuLabel: '菜单',
+    darkModeSwitchLabel: '主题',
+    lightModeSwitchTitle: '切换到浅色模式',
+    darkModeSwitchTitle: '切换到深色模式',
+  },
+})

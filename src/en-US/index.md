@@ -4,29 +4,29 @@ layout: home
 hero:
   name: Walnut Admin
   text: Typescript & Vite & Naive UI & Nestjs
-  tagline: Vue 前沿技术栈中后台管理模板
+  tagline: Vue Frontier Technology Stack Backend Management Template
   image:
     src: /logo.png
     alt: Walnut Admin
   actions:
     - theme: brand
-      text: 快速开始
+      text: Quick Start
       link: /guide/introduction
     - theme: alt
-      text: 在线预览
+      text: Online Preview
       link: https://www.walnut-admin.com
 
 features:
-  - title: 💡 最新技术栈
-    details: 基于Vue3、Vite、TypeScript等最新技术栈开发
-  - title: ⚡️ 开发友好
-    details: 类型支持丰富,组件/类型自动引入
-  - title: 🛠️ 丰富的示例
-    details: 常见的Web端插件示例实现
-  - title: 📦 组件封装
-    details: 对日常使用频率较高的组件二次封装,满足基础工作需求
-  - title: 🔩 主题配置
-    details: 国际化、丰富的主题配置及黑暗主题适配
-  - title: 🔑 权限管理
-    details: 完善的前后端权限管理方案
+  - title: 💡 New Tech
+    details: Based on Vue3、Vite、TypeScript etc
+  - title: ⚡️ Develop Friendly
+    details: Fully typescript support, component/interface/type auto import
+  - title: 🛠️ Various Demos
+    details: Common web vendor plguins and demos
+  - title: 📦 Components
+    details: Secondary Packaging daily used components, meet basic work needs
+  - title: 🔩 Themes
+    details: I18n, Dark Mode, various theme settings
+  - title: 🔑 Authority
+    details: RABC Permission Management
 ---

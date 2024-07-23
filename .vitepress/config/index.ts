@@ -1,19 +1,26 @@
 import { defineConfig } from 'vitepress'
+import { pagefindPlugin } from 'vitepress-plugin-pagefind'
 
-import { localeConfig } from './locale'
-import { themeConfig } from './themeConfig'
-import { viteConfig } from './viteConfig'
+import { shared } from './shared'
+import { en, search as enSearch } from './en'
+import { zh, search as zhSearch } from './zh'
 
 export default defineConfig({
-  base: '/',
-  lang: 'zh-CN',
-  srcDir: 'src',
-  appearance: true,
-  lastUpdated: true,
-  ignoreDeadLinks: false,
-  cleanUrls: true,
+  ...shared,
+  locales: {
+    'root': { label: '简体中文', ...zh },
+    'en-US': { label: 'English', ...en },
+  },
+  vite: {
+    server: {
+      port: 8886,
+    },
 
-  locales: localeConfig,
-  themeConfig,
-  vite: viteConfig,
+    plugins: [pagefindPlugin({
+      locales: {
+        ...zhSearch,
+        ...enSearch,
+      },
+    })],
+  },
 })
