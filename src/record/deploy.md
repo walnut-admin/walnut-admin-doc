@@ -20,21 +20,8 @@ lsb_release -a
 
 - 文章
 
-[how-to-install-node-js-on-ubuntu-20-04](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04)
-
-[nodesource](https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions)
-
-- 执行 NodeSource 安装脚本
-
-```bash
-curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-```
-
-- 安装 node(自带 npm)
-
-```bash
-sudo apt install nodejs
-```
+看官方安装文档就行
+[nodesource](https://github.com/nodesource/distributions)
 
 - 检查版本
 
@@ -111,7 +98,7 @@ db.createUser({
 
 ### 安装
 
-[这里](https://www.howtoforge.com/redis-ubuntu-20-04/)
+[redis-ubuntu-22-04](https://www.howtoforge.com/redis-ubuntu-22-04/)
 
 ### 配置
 
@@ -121,10 +108,107 @@ nano /etc/redis/redis.conf
 
 - 找到`bind`的那行，在最后面添加[***云服务器内网IP***]
 
-- 使劲往下拉，找到`requirepass`那行，解开注释，添加redis的密码
+- 使劲往下拉，找到`requirePass`那行，解开注释，添加redis的密码
+
+- `rename-command` 安全起见可以把一些指令重命名，上面文章里也有写
 
 
-## staging：纯ip+正反向代理
+## 第一阶段：预生产环境，纯ip+正反向代理
+
+### 后台部署
+
+- 在 `当前用户` 目录下建 `server` 文件夹，把**dist，env，package.json，lock文件**扔到 `server` 文件夹里，执行`pnpm i -P`，安装完成后执行`npm run start:test`检查是否能正常启动
+
+- pm2
+
+  - 安装
+    ```bash
+    sudo npm i pm2 -g
+    ```
+
+  - 用 pm2 跑 node 进程
+
+    ```bash
+    sudo pnpm run pm2:test
+    ```
+
+  - 保存 pm2 进程
+
+    ```bash
+    sudo pm2 save
+    ```
+
+  - 开机自启 pm2 进程
+
+    ```bash
+    sudo pm2 startup
+    ```
+
+- nginx
+
+  - 配置文件
+  
+    就是简单的给后台配置一个假端口
+
+    ```bash
+    upstream [***一个随意的字符串***] {
+      ip_hash;
+      server [***云服务器内网IP***]:[***后台真实端口***];
+    }
+
+    server {
+        listen [***自定义端口***];
+        server_name [***随便的一个名称***];
+
+        location / {
+            proxy_pass http://[***一个随意的字符串***];
+
+            proxy_redirect off;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection keep-alive;
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+    }
+    ```
+
+  - socket
+
+  - 测试
+
+    1. 先看nginx语法有没有问题
+
+        ```bash
+        sudo nginx -t
+        ```
+
+    2. reload配置文件
+
+        ```bash
+        sudo systemctl reload nginx
+        ```
+
+    3. reload配置文件
+
+        ```bash
+        sudo systemctl reload nginx
+        ```
+
+    4. 查看nginx是否正常运行中
+
+        ```bash
+        sudo systemctl status nginx
+        ```
+
+    5. 测试接口，我用的是postman，测试一下最基础的接口就行
+
+- 总结
+ 
+  简单来说预生产环境下后端接口就是套了一层nginx，把真实接口隐藏掉
 
 ### 前台部署
 
@@ -140,61 +224,7 @@ nano /etc/redis/redis.conf
 
 - 下面文件的用处，就是把后台真实的接口地址，隐藏在 nginx 的代理保护下
 
-### 后台部署
 
-- 在 `当前用户` 目录下建 `server` 文件夹，把**dist/env/package.json/lock文件**扔到 `server` 文件夹里，执行`pnpm i -P`，安装完成后执行`npm run start:test`检查是否能正常启动
-
-- nginx
-
-  - 配置文件
-
-    就是简单的给后台配置一个假端口
-
-```bash
-upstream [***自定义名称***] {
-  ip_hash;
-  server [***云服务器内网IP***]:[***后台真实端口***];
-}
-
-server {
-    listen [***自定义端口***];
-    server_name [***随便的一个名称***];
-
-    location / {
-        proxy_pass http://[***自定义名称***];
-
-        proxy_redirect off;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection keep-alive;
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
-}
-```
-
-- pm2 挂载
-
-  - 用 pm2 跑 node 进程
-
-  ```bash
-  cross-env NODE_ENV=test pm2 start dist/main.js --name walnut-test
-  ```
-
-  - 保存 pm2 进程
-
-  ```bash
-  pm2 save
-  ```
-
-  - 开机自启 pm2 进程
-
-  ```bash
-  pm2 startup
-  ```
 
 ## 第二阶段：域名+https，前台配置 brotli 压缩
 

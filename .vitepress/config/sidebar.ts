@@ -164,21 +164,21 @@ export const sidebar: DefaultTheme.Sidebar = {
     },
   ],
 
-  '/record/': [
+  '/record': [
     {
       text: '记录',
       items: [
         {
           text: '日常记录',
-          link: '/record/daily',
+          link: 'daily',
         },
         {
           text: '部署记录',
-          link: '/record/deploy',
+          link: 'deploy',
         },
         {
           text: 'docker记录',
-          link: '/record/docker',
+          link: 'docker',
         },
       ],
     },
