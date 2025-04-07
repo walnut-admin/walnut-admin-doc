@@ -73,11 +73,11 @@ npm run icon:prod
 
 ```ts
 import { generateIconUsedBundle } from '../generate/icon-bundle'
+import { generateIconDevBundle } from '../generate/icon-bundle-dev'
 import { generateIconBundleImport } from '../generate/icon-import'
 import { cleanArr, generateIconList } from '../generate/icon-list'
 import { generateIconsUsed } from '../generate/icon-scan'
 import { generateIconSvg } from '../generate/icon-svg'
-import { generateIconDevBundle } from '../generate/icon-bundle-dev'
 import { IconBundleConfig } from './config';
 (async () => {
   // 获取命令行中的参数，是dev还是prod

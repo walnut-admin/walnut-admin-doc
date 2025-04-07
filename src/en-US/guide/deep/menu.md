@@ -163,7 +163,7 @@ interface AppSystemMenu extends BaseAppModel {
 - 具体介绍
 
 ```ts
-export const AppCoreFn1 = async () => {
+export async function AppCoreFn1() {
   const appMenu = useAppStoreMenu()
   const userPermission = useAppStoreUserPermission()
 

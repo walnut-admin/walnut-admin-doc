@@ -1,8 +1,8 @@
 import { defineConfig } from 'vitepress'
 import { pagefindPlugin } from 'vitepress-plugin-pagefind'
 
-import { shared } from './shared'
 import { en, search as enSearch } from './en'
+import { shared } from './shared'
 import { zh, search as zhSearch } from './zh'
 
 export default defineConfig({

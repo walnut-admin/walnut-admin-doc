@@ -160,7 +160,7 @@ interface AppThemeColors {
 ### 详细介绍
 
 ```ts
-const useAppDarkMode = () => {
+function useAppDarkMode() {
   const { app, settings } = useAppState()
 
   const isSystemDark = usePreferredDark()

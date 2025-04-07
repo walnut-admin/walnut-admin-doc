@@ -52,8 +52,8 @@ interface WDescValue {
 }
 
 export type WDescriptionsItem = DescriptionItemProps &
-Partial<WDescTypeTag | WDescTypeLink> &
-WDescValue
+  Partial<WDescTypeTag | WDescTypeLink> &
+  WDescValue
 
 type ExtendProps = Partial<ExtractPropTypes<typeof props>>
 

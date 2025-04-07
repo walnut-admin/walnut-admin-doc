@@ -112,7 +112,6 @@ nano /etc/redis/redis.conf
 
 - `rename-command` 安全起见可以把一些指令重命名，上面文章里也有写
 
-
 ## 第一阶段：预生产环境，纯ip+正反向代理
 
 ### 后台部署
@@ -147,7 +146,7 @@ nano /etc/redis/redis.conf
 - nginx
 
   - 配置文件
-  
+
     就是简单的给后台配置一个假端口
 
     ```bash
@@ -207,7 +206,7 @@ nano /etc/redis/redis.conf
     5. 测试接口，我用的是postman，测试一下最基础的接口就行
 
 - 总结
- 
+
   简单来说预生产环境下后端接口就是套了一层nginx，把真实接口隐藏掉
 
 ### 前台部署
@@ -223,8 +222,6 @@ nano /etc/redis/redis.conf
 - 前台 api 的地址改成[***云服务器公网 IP***]:[***自定义端口***]
 
 - 下面文件的用处，就是把后台真实的接口地址，隐藏在 nginx 的代理保护下
-
-
 
 ## 第二阶段：域名+https，前台配置 brotli 压缩
 

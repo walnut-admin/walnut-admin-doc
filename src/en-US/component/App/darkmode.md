@@ -36,7 +36,7 @@
 - 通过 watchEffect 监听并改变模式
 
 ```ts
-export const useAppDarkMode = () => {
+export function useAppDarkMode() {
   const { app } = useAppState()
 
   const isSystemDark = usePreferredDark()

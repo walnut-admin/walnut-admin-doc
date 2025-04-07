@@ -251,7 +251,7 @@ onOpen(async (done) => {
 函数内提前写好了一些基本的 validate 和 loading 的逻辑。具体如下
 
 ```ts
-const onYes = async () => {
+async function onYes() {
   // 第一步就是校验
   await formRef.value!.validate()
 
@@ -296,7 +296,7 @@ const onYes = async () => {
 一般取消按钮需要执行清空校验并关闭弹层的操作
 
 ```ts
-const onNo = () => {
+function onNo() {
   // 清空校验
   formRef.value!.restoreValidation()
 

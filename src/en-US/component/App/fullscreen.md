@@ -32,13 +32,12 @@
 ```ts
 import { toggleLeftMenuLayout } from '/@/settings'
 
-export const useAppFullScreen = () => {
+export function useAppFullScreen() {
   const { isFullscreen } = useFullscreen()
 
   watchEffect(() => {
     if (!isFullscreen.value)
       toggleLeftMenuLayout(true)
-
   })
 }
 ```

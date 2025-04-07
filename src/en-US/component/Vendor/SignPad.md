@@ -17,7 +17,7 @@ import type { WSignPadInst } from '@/components/Vendor/SignPad'
 const signPadRef = ref<WSignPadInst>()
 const image = ref()
 
-const onGetSign = async () => {
+async function onGetSign() {
   image.value = await signPadRef.value.getImage()
 }
 </script>

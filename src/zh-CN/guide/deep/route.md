@@ -53,13 +53,15 @@ interface RouteMeta {
 - 具体介绍
 
 ```ts
-const resolveParentComponent = (name: string) => () =>
-  new Promise((resolve) => {
-    resolve({
-      ...ParentComponent,
-      name,
+function resolveParentComponent(name: string) {
+  return () =>
+    new Promise((resolve) => {
+      resolve({
+        ...ParentComponent,
+        name,
+      })
     })
-  })
+}
 ```
 
 ### resolveIFrameComponent
@@ -69,13 +71,15 @@ const resolveParentComponent = (name: string) => () =>
 - 具体介绍
 
 ```ts
-const resolveIFrameComponent = (name: string) => () =>
-  new Promise((resolve) => {
-    resolve({
-      ...IFrameComponent,
-      name,
+function resolveIFrameComponent(name: string) {
+  return () =>
+    new Promise((resolve) => {
+      resolve({
+        ...IFrameComponent,
+        name,
+      })
     })
-  })
+}
 ```
 
 ### resolveViewModules
@@ -89,7 +93,7 @@ const resolveIFrameComponent = (name: string) => () =>
 // 后续或许需要要加上tsx，ts，js，jsx的glob支持
 const allViewModules = import.meta.glob('../views/**/*.vue')
 
-const resolveViewModules = (component: string) => {
+function resolveViewModules(component: string) {
   const keys = Object.keys(allViewModules)
 
   // 根据component查找索引
@@ -108,7 +112,7 @@ const resolveViewModules = (component: string) => {
 - 具体介绍
 
 ```ts
-const buildRoutes = (payload: AppMenu[]) => {
+function buildRoutes(payload: AppMenu[]) {
   const appMenu = useAppStoreMenu()
 
   // 过滤掉元素菜单
@@ -164,7 +168,7 @@ const buildRoutes = (payload: AppMenu[]) => {
 /**
  * @link https://github.com/vuejs/vue-router-next/issues/626
  */
-const _tempFlatNestedRoutes = (routes: RouteRecordRaw[]) => {
+function _tempFlatNestedRoutes(routes: RouteRecordRaw[]) {
   const ret: RouteRecordRaw[] = []
 
   const tree = cloneDeep(routes)
