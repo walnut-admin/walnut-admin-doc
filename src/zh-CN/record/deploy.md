@@ -16,6 +16,14 @@
 lsb_release -a
 ```
 
+### docker
+
+- 看官方安装文档就行
+[Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+
+- 官方文档报错了（正常来说不会），这个是可以的
+[install](https://www.cherryservers.com/blog/install-docker-ubuntu)
+
 ### node
 
 - 文章
@@ -35,7 +43,7 @@ npm -v
 
 ### nignx
 
-- 安装 [how-to-install-nginx-on-ubuntu-20-04][article4]
+- 安装 [install-and-configure-nginx][article4]
 
 - 卸载
 
@@ -356,7 +364,7 @@ load_module modules/ngx_http_brotli_static_module.so;
 ### nginx.conf
 
 - 这个文件应该算一个入口
-
+// eslint-disable-block style/no-tabs
 ```nginx
 user root;
 worker_processes auto;
@@ -366,46 +374,46 @@ include /etc/nginx/modules-enabled/*.conf;
 include /etc/nginx/modules.conf;
 
 events {
-	worker_connections 768;
-	# multi_accept on;
+  worker_connections 768;
+  # multi_accept on;
 }
 
 http {
 
-	##
-	# Basic Settings
-	##
+    ##
+    # Basic Settings
+    ##
 
-	sendfile on;
-	tcp_nopush on;
-	tcp_nodelay on;
-	keepalive_timeout 65;
-	types_hash_max_size 2048;
-	# server_tokens off;
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout 65;
+    types_hash_max_size 2048;
+    # server_tokens off;
 
-	# server_names_hash_bucket_size 64;
-	# server_name_in_redirect off;
+    # server_names_hash_bucket_size 64;
+    # server_name_in_redirect off;
 
-	include /etc/nginx/mime.types;
-	default_type application/octet-stream;
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
 
-	##
-	# SSL Settings
-	##
+    ##
+    # SSL Settings
+    ##
 
-	ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3; # Dropping SSLv3, ref: POODLE
-	ssl_prefer_server_ciphers on;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3; # Dropping SSLv3, ref: POODLE
+    ssl_prefer_server_ciphers on;
 
-	##
-	# Logging Settings
-	##
+    ##
+    # Logging Settings
+    ##
 
-	access_log /var/log/nginx/access.log;
-	error_log /var/log/nginx/error.log;
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log;
 
-	##
-	# Gzip Settings
-	##
+    ##
+    # Gzip Settings
+    ##
 
     # gzip
     gzip on;
@@ -425,12 +433,12 @@ http {
     brotli_min_length 20;
     brotli_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript image/svg+xml;
 
-	##
-	# Virtual Host Configs
-	##
+    ##
+    # Virtual Host Configs
+    ##
 
-	include /etc/nginx/conf.d/*.conf;
-	include /etc/nginx/sites-enabled/*;
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*;
 }
 ```
 
@@ -444,6 +452,6 @@ http {
 [article1]: https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-20-04
 [article2]: https://www.digitalocean.com/community/tutorials/how-to-configure-remote-access-for-mongodb-on-ubuntu-20-04
 [article3]: https://www.digitalocean.com/community/tutorials/how-to-secure-mongodb-on-ubuntu-20-04
-[article4]: https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04
+[article4]: https://ubuntu.com/tutorials/install-and-configure-nginx
 [article5]: https://linuxhint.com/enable-brotli-compression-nginx/
 [article6]: https://www.cnblogs.com/-wenli/p/13594882.html
