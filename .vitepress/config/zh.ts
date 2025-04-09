@@ -83,6 +83,10 @@ const nav: DefaultTheme.NavItem[] = [
         text: 'docker记录',
         link: '/record/docker',
       },
+      {
+        text: 'mongoDB记录',
+        link: '/record/mongo',
+      },
     ],
   },
   {
@@ -279,6 +283,10 @@ const sidebar: DefaultTheme.Sidebar = {
         {
           text: 'docker记录',
           link: '/record/docker',
+        },
+        {
+          text: 'mongoDB记录',
+          link: '/record/mongo',
         },
       ],
     },

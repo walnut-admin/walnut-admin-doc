@@ -16,14 +16,6 @@
 lsb_release -a
 ```
 
-### docker
-
-- 看官方安装文档就行
-[Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
-
-- 官方文档报错了（正常来说不会），这个是可以的
-[install](https://www.cherryservers.com/blog/install-docker-ubuntu)
-
 ### node
 
 - 文章
@@ -58,49 +50,6 @@ npm -v
   ```bash
   sudo apt-get purge nginx nginx-common
   ```
-
-## 数据库
-
-- 安装 mongodb，具体看官方文档即可
-
-  - [install-mongodb-on-ubuntu][doc1]
-
-- 安装完，需要配置远程连接的信任 ip，这两篇文章介绍的很详细
-
-  - [how-to-install-mongodb-on-ubuntu-20-04][article1]
-
-  - [how-to-configure-remote-access-for-mongodb-on-ubuntu-20-04][article2]
-
-:::warning
-mongo6.0 开始不再是直接 mongo 了，而是 mongosh
-:::
-
-::: tip
-云服务器，mongo 的配置文件里的 bindip，要配的是内网 ip 不是外网 ip
-:::
-
-::: tip
-同时如果要在本机连接数据库，需要在云服务器的安全组中打开 27017 的端口
-:::
-
-- 配置 mongodb 的用户密码
-
-  - [how-to-secure-mongodb-on-ubuntu-20-04][article3]
-
-  - [还是看官网的把](https://www.mongodb.com/docs/manual/tutorial/configure-scram-client-authentication/)
-
-- 完整的配置 admin 用户格式
-
-```js
-db.createUser({
-  user: 'myUserAdmin',
-  pwd: passwordPrompt(), // or cleartext password
-  roles: [
-    { role: 'userAdminAnyDatabase', db: 'admin' },
-    { role: 'readWriteAnyDatabase', db: 'admin' },
-  ],
-})
-```
 
 ## redis
 
@@ -448,10 +397,6 @@ http {
 
 - 当然稍微懂点的都知道现在部署相关的技术越来越成熟了，就比如 docker。其实也可以直接上 docker，部署会更加方便。但这样从零开始配置服务器和 nginx 或许是每位开发者必须要经历的一段过程。有收获也有心得，这样对自己也是一次成长。
 
-[doc1]: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
-[article1]: https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-20-04
-[article2]: https://www.digitalocean.com/community/tutorials/how-to-configure-remote-access-for-mongodb-on-ubuntu-20-04
-[article3]: https://www.digitalocean.com/community/tutorials/how-to-secure-mongodb-on-ubuntu-20-04
 [article4]: https://ubuntu.com/tutorials/install-and-configure-nginx
 [article5]: https://linuxhint.com/enable-brotli-compression-nginx/
 [article6]: https://www.cnblogs.com/-wenli/p/13594882.html
