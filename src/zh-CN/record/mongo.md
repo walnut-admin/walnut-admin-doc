@@ -69,7 +69,7 @@ db.createUser({
 - 直接给你们一个url导入compass就行
 
 ```
-mongodb://root:[MONGODB_ROOT_PASSWORD]@[服务器公网IP]:[映射端口],[服务器公网IP]:[映射端口],[服务器公网IP]:[映射端口]/admin?readPreference=primary&replicaSet=[MONGODB_REPLICA_SET_KEY]&authSource=admin&tls=false
+mongodb://root:[MONGODB_ROOT_PASSWORD]@[服务器公网IP]:[映射端口],[服务器公网IP]:[映射端口],[服务器公网IP]:[映射端口]/admin?readPreference=primary&replicaSet=[MONGODB_REPLICA_SET_NAME]&authSource=admin&tls=false
 ```
 
 暂未写完...
