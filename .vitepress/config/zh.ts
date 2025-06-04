@@ -80,8 +80,16 @@ const nav: DefaultTheme.NavItem[] = [
         link: '/record/deploy',
       },
       {
+        text: '服务器记录',
+        link: '/record/server',
+      },
+      {
         text: 'docker记录',
         link: '/record/docker',
+      },
+      {
+        text: 'redis记录',
+        link: '/record/redis',
       },
       {
         text: 'mongoDB记录',
@@ -281,8 +289,16 @@ const sidebar: DefaultTheme.Sidebar = {
           link: '/record/deploy',
         },
         {
+          text: '服务器记录',
+          link: '/record/server',
+        },
+        {
           text: 'docker记录',
           link: '/record/docker',
+        },
+        {
+          text: 'redis记录',
+          link: '/record/redis',
         },
         {
           text: 'mongoDB记录',

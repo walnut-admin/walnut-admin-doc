@@ -11,6 +11,11 @@ export default defineConfig({
     'root': { label: '简体中文', ...zh },
     'en-US': { label: 'English', ...en },
   },
+  markdown: {
+    image: {
+      lazyLoading: true,
+    },
+  },
   vite: {
     server: {
       port: 8886,
