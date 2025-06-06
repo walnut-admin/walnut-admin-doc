@@ -20,3 +20,11 @@ nano /etc/redis/redis.conf
 :::tip
 我这个是最简单的redis配置哈，复杂的集群或者一些安全配置需要自己再去研究了。
 :::
+
+## 测试环境(纯ip)
+
+- 直接看[官网](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-on-linux/)
+
+- 改密码，同开发环境
+
+- bind ip，ctrl + w 找bind，打开后绑定云服务器内网IP

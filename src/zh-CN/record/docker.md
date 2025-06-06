@@ -13,36 +13,7 @@
 ### 配置
 
 #### 镜像
-- 有时候镜像拉不下来，同样的也是换成国内镜像
-
-```bash
-nano /etc/docker/daemon.json
-```
-
-```json
-{
-  "dns": ["8.8.8.8", "8.8.4.4"],
-  "registry-mirrors": [
-    "https://docker.m.daocloud.io/",
-    "https://huecker.io/",
-    "https://dockerhub.timeweb.cloud",
-    "https://noohub.ru/",
-    "https://dockerproxy.com",
-    "https://docker.mirrors.ustc.edu.cn",
-    "https://docker.nju.edu.cn",
-    "https://xx4bwyg2.mirror.aliyuncs.com",
-    "http://f1361db2.m.daocloud.io",
-    "https://registry.docker-cn.com",
-    "http://hub-mirror.c.163.com"
-  ],
-  "runtimes": {
-    "nvidia": {
-      "path": "nvidia-container-runtime",
-      "runtimeArgs": []
-    }
-  }
-}
-```
+- 有时候镜像拉不下来，同样的也是换成[国内清华镜像](https://mirrors.tuna.tsinghua.edu.cn/help/docker-ce/)
 
 ```bash
 systemctl restart docker
@@ -54,6 +25,14 @@ systemctl restart docker
 docker compose version
 ```
 
-New-NetFirewallRule -DisplayName "WSL" -Direction Inbound -InterfaceAlias "vEthernet (WSL (Hyper-V firewall))" -Action Allow
+## 测试环境(纯ip)
 
-https://stackoverflow.com/questions/60897021/wsl-2-cannot-conect-to-mongodb
+:::tip
+如果不行就reboot一下，apt update/upgrade后还是需要重启的
+:::
+
+:::tip
+docker镜像也得配哈
+:::
+
+- 和开发环境的wsl差不多

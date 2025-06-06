@@ -16,23 +16,6 @@
 lsb_release -a
 ```
 
-### node
-
-- 文章
-
-看官方安装文档就行
-[nodesource](https://github.com/nodesource/distributions)
-
-- 检查版本
-
-```bash
-node -v
-```
-
-```bash
-npm -v
-```
-
 ### nignx
 
 - 安装 [install-and-configure-nginx][article4]
@@ -50,24 +33,6 @@ npm -v
   ```bash
   sudo apt-get purge nginx nginx-common
   ```
-
-## redis
-
-### 安装
-
-[redis-ubuntu-22-04](https://www.howtoforge.com/redis-ubuntu-22-04/)
-
-### 配置
-
-```bash
-nano /etc/redis/redis.conf
-```
-
-- 找到`bind`的那行，在最后面添加[***云服务器内网IP***]
-
-- 使劲往下拉，找到`requirePass`那行，解开注释，添加redis的密码
-
-- `rename-command` 安全起见可以把一些指令重命名，上面文章里也有写
 
 ## 第一阶段：预生产环境，纯ip+正反向代理
 

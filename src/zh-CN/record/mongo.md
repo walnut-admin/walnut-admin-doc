@@ -85,7 +85,7 @@ windows主机的`hosts`(C:\Windows\System32\drivers\etc)文件需要配置一下
 ### 验证
 直接用`mongodb-compass`连接尝试即可
 
-```string
+```txt
 mongodb://root:123456@127.0.0.1:27017,127.0.0.1:27027,127.0.0.1:27037/?readPreference=primary&replicaSet=replicaset
 ```
 
@@ -136,3 +136,26 @@ db.createUser({
 [article1]: https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-20-04
 [article2]: https://www.digitalocean.com/community/tutorials/how-to-configure-remote-access-for-mongodb-on-ubuntu-20-04
 [article3]: https://www.digitalocean.com/community/tutorials/how-to-secure-mongodb-on-ubuntu-20-04
+
+## 测试环境(纯ip)
+
+- 和开发环境的wsl基本一样
+
+- 配置文件需要额外extra_flags配置bing ip，同样的是云服务器内网ip哈
+
+- 本机测试云服务器端口通不通
+```powershell
+Test-NetConnection -ComputerName 公网IP -Port 27017
+```
+
+- 查看容器内mongo日志
+```bash
+docker compose logs -f stage-mongodb-primary
+```
+
+- hosts
+```txt
+公网IP stage-mongodb-primary
+公网IP stage-mongodb-secondary
+公网IP stage-mongodb-arbiter
+```
