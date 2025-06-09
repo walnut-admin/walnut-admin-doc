@@ -76,10 +76,6 @@ const nav: DefaultTheme.NavItem[] = [
         link: '/record/daily',
       },
       {
-        text: '部署记录',
-        link: '/record/deploy',
-      },
-      {
         text: '服务器记录',
         link: '/record/server',
       },
@@ -94,6 +90,10 @@ const nav: DefaultTheme.NavItem[] = [
       {
         text: 'mongoDB记录',
         link: '/record/mongo',
+      },
+      {
+        text: 'nginx记录',
+        link: '/record/nginx',
       },
     ],
   },
@@ -285,10 +285,6 @@ const sidebar: DefaultTheme.Sidebar = {
           link: '/record/daily',
         },
         {
-          text: '部署记录',
-          link: '/record/deploy',
-        },
-        {
           text: '服务器记录',
           link: '/record/server',
         },
@@ -303,6 +299,10 @@ const sidebar: DefaultTheme.Sidebar = {
         {
           text: 'mongoDB记录',
           link: '/record/mongo',
+        },
+        {
+          text: 'nginx记录',
+          link: '/record/nginx',
         },
       ],
     },
