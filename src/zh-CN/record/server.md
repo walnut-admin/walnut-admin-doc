@@ -81,3 +81,4 @@ apt-get upgrade
 - [docker](./docker.md)
 - [redis](./redis.md)
 - [mongo](./mongo.md)
+- [nginx](./nginx.md)
