@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: Walnut Admin
-  text: Typescript & Vite & Naive UI & Nestjs
+  text: Typescript Vue3 NestJS 全栈项目模板
   tagline: Vue 前沿技术栈中后台管理模板
   image:
     src: /logo.png

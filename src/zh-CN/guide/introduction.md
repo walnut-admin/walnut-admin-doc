@@ -7,7 +7,7 @@
 ## 文档
 
 - 中文文档地址为 [wadlnut-admin-doc][doc]，采用 [vitepress][vitepress] 开发。如发现文档有误，欢迎提 pr 帮助我们改进。
-- 英文文档暂时写，[vitepress][vitepress]还未进入稳定版本。
+- 英文文档暂时写，中文文档完成度暂时也很低。
 
 ## 所需知识
 
@@ -41,11 +41,11 @@
 
 - [walnut-admin-client][walnut-admin-client]
 
-项目前端地址，也是 walnut 的重心。
+项目前端地址，也是 walnut-admin 的开源部分。
 
 - [walnut-admin-server][walnut-admin-server]
 
-项目后端地址，数据库使用的是 mongodb。
+项目后端地址，walnut-admin的私有仓库。
 
 ## vite 插件推荐
 
@@ -79,8 +79,8 @@
 <!-- links -->
 
 [author]: https://github.com/Zhaocl1997
-[walnut-admin-client]: https://github.com/Zhaocl1997/walnut-admin-client
-[walnut-admin-server]: https://github.com/Zhaocl1997/walnut-admin-server
+[walnut-admin-client]: https://github.com/walnut-admin/walnut-admin-client
+[walnut-admin-server]: https://github.com/walnut-admin/walnut-admin-server
 [doc]: https://www.baidu.com
 [antfu]: https://github.com/antfu
 [vue3]: https://v3.cn.vuejs.org/
