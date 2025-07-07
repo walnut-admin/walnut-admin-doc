@@ -1,6 +1,6 @@
-import { createRequire } from 'node:module'
 import type { DefaultTheme } from 'vitepress'
 import type { SearchConfig } from 'vitepress-plugin-pagefind'
+import { createRequire } from 'node:module'
 import { defineConfig } from 'vitepress'
 
 const require = createRequire(import.meta.url)
