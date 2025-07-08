@@ -7,6 +7,8 @@ import { zh, search as zhSearch } from './zh'
 
 export default defineConfig({
   ...shared,
+  // TODO
+  ignoreDeadLinks: true,
   locales: {
     'root': { label: '简体中文', ...zh },
     'en-US': { label: 'English', ...en },

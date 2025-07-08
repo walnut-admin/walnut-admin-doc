@@ -28,18 +28,6 @@
 
 | 名称 | 类型 | 默认值 | 说明 |
 |--|--|--|--|
-| black-list | string[] | - | 输入黑名单字符（自动过滤） |
-| suffix | string | - | 输入框后缀文本 |
-| prefix | string | - | 输入框前缀文本 |
-| prefix-class | string | - | 前缀自定义类名 |
-| suffix-class | string | - | 后缀自定义类名 |
-| suffix-icon | string | - | 后缀图标名称（格式：库名:图标名） |
-| prefix-icon | string | - | 前缀图标名称（格式：库名:图标名） |
-| help-message | string | - | 帮助提示信息 |
-| copiable | boolean | false | 是否可复制输入内容 |
-| value-modifiers | { trim?: boolean, capitalize?: boolean, uppercase?: boolean } | - | 输入值修饰符（去空格/首字母大写/全大写） |
-| on-keyup-enter | (e: KeyboardEvent) => void | - | 回车键按下回调 |
-```| ... | InputProps | - | 继承 naive-ui 的 InputProps 属性 |
 | blackList | string[] | [] | 黑名单，即不可输入的字符名单 |
 | suffix | string | - | prop 形式的 suffix（naive 默认提供的是 slot） |
 | prefix | string | - | prop 形式的 prefix |
@@ -49,8 +37,8 @@
 | prefixIcon | string | - | prefix 图标 |
 | helpMessage | string | - | 帮助信息 |
 | copiable | boolean | - | 是否可复制 |
-| valueModifiers | { trim?: boolean, capitalize?: boolean, uppercase?: boolean } | - | vue3 的修饰符，默认内置了去空格，首字母大写和全大写的修饰符 |
-| onKeyupEnter | (e: KeyboardEvent) => void | - | 按下回车键时的回调函数 |
+| valueModifiers | object | - | vue3 的修饰符，默认内置了去空格，首字母大写和全大写的修饰符 |
+| onKeyupEnter | function | - | 按下回车键时的回调函数 |
 
 ## Type
 

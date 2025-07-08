@@ -172,7 +172,7 @@ const [register] = useForm<typeof configFormData.value>({
 | help-message | string | - | 标题帮助提示信息 |
 | default-button | boolean | true | 是否显示默认确认/取消按钮 |
 | show-in-content | boolean | false | 是否在内容区域显示 |
-| before-close | () => Promise<boolean> | - | 关闭前回调（返回false可阻止关闭） |
+| before-close | function | - | 关闭前回调（返回false可阻止关闭） |
 
 ## Type
 

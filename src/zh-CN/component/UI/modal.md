@@ -41,8 +41,8 @@
 | fullscreen | boolean | true | 是否支持全屏 |
 | default-button | boolean | true | 是否显示默认确认/取消按钮 |
 | segmented | boolean | true | 是否显示分割线（soft风格） |
-| before-close | () => Promise<boolean> | - | 关闭前回调（返回false可阻止关闭） |
-| （继承自naive-ui ModalProps） | - | - | 支持naive-ui原生模态框所有属性（除segmented） |
+| before-close | function | - | 关闭前回调（返回false可阻止关闭） |
+
 ```ts
 import type { ModalProps } from 'naive-ui'
 
