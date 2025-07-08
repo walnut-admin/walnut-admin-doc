@@ -31,6 +31,14 @@ const nav: DefaultTheme.NavItem[] = [
         text: '简化的项目配置',
         link: '/vue/base/project',
       },
+      {
+        text: 'naive-ui',
+        link: '/vue/base/naive-ui',
+      },
+      {
+        text: 'vite插件',
+        link: '/vue/base/plugin',
+      },
     ],
   },
   // {
@@ -159,6 +167,14 @@ const sidebar: DefaultTheme.Sidebar = {
     {
       text: '简化的项目配置',
       link: '/vue/base/project',
+    },
+    {
+      text: 'naive-ui',
+      link: '/vue/base/naive-ui',
+    },
+    {
+      text: 'vite插件',
+      link: '/vue/base/plugin',
     },
   ],
 

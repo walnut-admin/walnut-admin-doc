@@ -9,9 +9,9 @@
  - 基础技术栈：typescript + vue3 + vite6 + unocss + naive-ui + pinia + vue-router4 + vueuse + axios + iconify
  - 基础功能：RBAC、暗色模式、国际化、多维度登录、第三方oauth
  - 现代化的常见工具：lodash-es、nanoid、lru-cache、ua-parse-js
- - 简化的项目配置，无需 eslint + pritter + husky 一配置一天的苦逼经历，simple-git-hook + antfu大佬的eslint规则，简化配置过程，[查看这里](./base/project.md)
+ - 简化的项目配置，无需 eslint + pritter + husky 配置很多的苦逼经历，simple-git-hook + antfu大佬的eslint规则，简化配置过程，[查看这里](./base/project.md)
  - 基于naive-ui的全局扩展，[查看这里](./base/naive-ui.md)
- - 多样的vite插件支持，[查看这里](./base/plguin.md)
+ - 多样的vite插件支持，[查看这里](./base/plugin.md)
  - 开箱即用的基础组件和高阶组件，[查看这里](./component/index.md)
  - 丰富的axios扩展功能，[查看这里](./base/axios.md)
  - 方便的icon配置，[查看这里](./base/icon.md)
