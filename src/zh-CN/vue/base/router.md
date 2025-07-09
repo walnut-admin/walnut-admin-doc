@@ -1,4 +1,4 @@
-# 项目 Router 模块详细文档
+# <WPageTitle></WPageTitle>
 
 ## 1. 全局路由配置模块
 ### 核心文件：`router/index.ts`

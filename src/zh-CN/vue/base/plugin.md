@@ -1,4 +1,4 @@
-# vite插件
+# <WPageTitle></WPageTitle>
 
 ## 一、插件概述
 项目基于[Vite]生态，使用了近20种插件以实现功能开发、性能优化及开发体验提升。插件配置入口位于项目根目录下的 `build/vite/plugin/index.ts`。

@@ -1,4 +1,4 @@
-# naive-ui全局扩展
+# <WPageTitle></WPageTitle>
 
 ## 一、UI库的选择
 项目早期使用[Element Plus]，后因[Vue3] 作者尤雨溪（Evan You）推荐，切换为[Naive UI]。选择原因是[Naive UI]的设计理念前卫，符合现代组件库设计，相比[Element Plus]更贴合项目需求。

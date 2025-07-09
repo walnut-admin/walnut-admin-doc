@@ -1,4 +1,4 @@
-# 简化的项目配置
+# <WPageTitle></WPageTitle>
 
 ## 一、配置方案的演变
 
