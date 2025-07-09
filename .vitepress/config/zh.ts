@@ -7,6 +7,57 @@ import { chineseSearchOptimize } from 'vitepress-plugin-pagefind'
 const require = createRequire(import.meta.url)
 const pkg = require('../../package.json')
 
+const vueItems = [
+  {
+    text: '介绍',
+    link: '/vue/introduction',
+  },
+  {
+    text: '简化的项目配置',
+    link: '/vue/base/project',
+  },
+  {
+    text: 'naive-ui',
+    link: '/vue/base/naive-ui',
+  },
+  {
+    text: 'i18n',
+    link: '/vue/base/i18n',
+  },
+  {
+    text: 'vite插件',
+    link: '/vue/base/plugin',
+  },
+  {
+    text: '组件',
+    link: '/vue/component/',
+  },
+  {
+    text: 'axios',
+    link: '/vue/base/axios',
+  },
+  {
+    text: '图标icon',
+    link: '/vue/base/icon',
+  },
+  {
+    text: '路由router',
+    link: '/vue/base/router',
+  },
+  {
+    text: '第三方插件',
+    link: '/vue/base/vendor',
+  },
+  {
+    text: '安全加密',
+    link: '/vue/base/crypto',
+  },
+  {
+    text: 'hooks',
+    link: '/vue/base/hooks',
+  },
+]
+
 const nav: DefaultTheme.NavItem[] = [
   {
     text: '指南',
@@ -22,24 +73,7 @@ const nav: DefaultTheme.NavItem[] = [
   {
     text: '前端',
     activeMatch: '/vue/',
-    items: [
-      {
-        text: '介绍',
-        link: '/vue/introduction',
-      },
-      {
-        text: '简化的项目配置',
-        link: '/vue/base/project',
-      },
-      {
-        text: 'naive-ui',
-        link: '/vue/base/naive-ui',
-      },
-      {
-        text: 'vite插件',
-        link: '/vue/base/plugin',
-      },
-    ],
+    items: vueItems,
   },
   // {
   //   text: '组件',
@@ -159,24 +193,7 @@ const sidebar: DefaultTheme.Sidebar = {
     },
   ],
 
-  '/vue/': [
-    {
-      text: '介绍',
-      link: '/vue/introduction',
-    },
-    {
-      text: '简化的项目配置',
-      link: '/vue/base/project',
-    },
-    {
-      text: 'naive-ui',
-      link: '/vue/base/naive-ui',
-    },
-    {
-      text: 'vite插件',
-      link: '/vue/base/plugin',
-    },
-  ],
+  '/vue/': vueItems,
 
   // '/component/': [
   //   {

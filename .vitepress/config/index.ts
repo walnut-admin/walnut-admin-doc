@@ -21,6 +21,7 @@ export default defineConfig({
   vite: {
     server: {
       port: 8886,
+      open: true,
     },
 
     plugins: [pagefindPlugin({
