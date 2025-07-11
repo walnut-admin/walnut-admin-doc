@@ -2,32 +2,28 @@
 
 ## 介绍
 
-[Walnut Admin][walnut-admin-client] 是一个基于 [Vue3.0][vue3]、[Vite][vite]、 [Naive UI][naiveui]、[TypeScript][ts]、[Nest.js][nestjs] 的前后端分离的全栈解决方案，目标是为开发中大型项目提供开箱即用的解决方案。项目的重点是前端，所以本文档的重点也是偏向前端。其中前端包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。项目会使用前端较新的技术栈，可以作为项目的启动模版，以帮助你快速搭建企业级中后台产品原型。也可以作为一个示例，用于学习 `vue3`、`vite`、`ts` 等主流技术。该项目会持续跟进最新技术，并将其应用在项目中。
+[Walnut Admin][walnut-admin-client] 是一个基于 <WBaseLink preset="vue">Vue 3</WBaseLink>、<WBaseLink preset="vite">Vite</WBaseLink>、 <WBaseLink preset="naive-ui">Naive UI</WBaseLink>、<WBaseLink preset="ts">TypeScript</WBaseLink>、[Nest.js][nestjs] 的前后端分离的全栈解决方案，目标是为开发中大型项目提供开箱即用的解决方案。项目的重点是前端，所以本文档的重点也是偏向前端。其中前端包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。项目会使用前端较新的技术栈，可以作为项目的启动模版，以帮助你快速搭建企业级中后台产品原型。也可以作为一个示例，用于学习 `vue3`、`vite`、`ts` 等主流技术。该项目会持续跟进最新技术，并将其应用在项目中。
 
 ## 所需知识
 
-本项目需要一定前端基础知识，请确保掌握 Vue 的基础知识，以便能处理一些常见的问题。
+本项目需要一定的软件知识，请确保掌握了下面的基础支持，以便能处理一些常见的问题。
 建议在开发前先学一下以下内容，提前了解和学习这些知识，会对项目理解非常有帮助:
-
-::: info 提示
-以下部分文档没有国内加速，需自行挂梯子访问。
-:::
 
 前端知识：
 
-- [vue3]
-- [vite]
-- [TypeScript]
-- [vue-router]
-- [vue-i18n]
-- [naiveui]
-- [vueuse]
-- [unocss]
-- [iconify]
+- <WBaseLink preset="vue">Vue</WBaseLink>
+- <WBaseLink preset="vite">Vite</WBaseLink>
+- <WBaseLink preset="ts">TypeScript</WBaseLink>
+- <WBaseLink preset="vue-router">vue-router</WBaseLink>
+- <WBaseLink preset="i18n">vue-i18n</WBaseLink>
+- <WBaseLink preset="naive-ui">Naive UI</WBaseLink>
+- <WBaseLink preset="vueuse">Vue Use</WBaseLink>
+- <WBaseLink preset="unocss">UnoCSS</WBaseLink>
+- <WBaseLink preset="iconify">Iconify</WBaseLink>
 
 后端知识：
 
-- [TypeScript]
+- <WBaseLink preset="ts">TypeScript</WBaseLink>
 - [nestjs]
 - [mongodb]
 - [Redis]
@@ -55,19 +51,9 @@
 
 <!-- links -->
 
-[author]: https://github.com/Zhaocl1997
 [walnut-admin]: https://github.com/walnut-admin
 [walnut-admin-client]: https://github.com/walnut-admin/walnut-admin-client
 [walnut-admin-server]: https://github.com/walnut-admin/walnut-admin-server
-[vue3]: https://v3.cn.vuejs.org/
-[vite]: https://cn.vitejs.dev/
-[naiveui]: https://www.naiveui.com/zh-CN/dark
 [mongodb]: https://www.mongodb.com/
 [Redis]: https://redis.io/
-[TypeScript]: https://www.typescriptlang.org/
-[vue-router]: https://next.router.vuejs.org/
 [nestjs]: https://nestjs.com/
-[vueuse]: https://vueuse.org/
-[unocss]: https://github.com/unocss/unocss
-[iconify]: https://iconify.design/
-[vue-i18n]: https://vue-i18n.intlify.dev/

@@ -1,6 +1,6 @@
 # <WPageTitle></WPageTitle>
 
-## `hooks/component` 目录
+## <WFrontLink path="/src/hooks/component">`hooks/component`</WFrontLink> 目录
 
 ### <WFrontLink path="/src/hooks/component/useMessage.ts">`useMessage.ts`</WFrontLink>
 - **功能**：封装消息提示函数，支持成功、信息、警告、错误等类型，可配置显示时长、是否可关闭、显示位置等。
@@ -22,7 +22,7 @@
 - **功能**：提供确认对话框功能，用于询问用户是否继续操作。
 - **使用场景**：删除数据、提交表单等需用户确认的操作场景。
 
-## `hooks/core` 目录
+## <WFrontLink path="/src/hooks/core">`hooks/core`</WFrontLink> 目录
 
 ### <WFrontLink path="/src/hooks/core/useProps.ts">`useProps.ts`</WFrontLink>
 - **功能**：提供组件属性的设置和获取方法，支持属性合并与响应式更新。
@@ -80,7 +80,7 @@
 - **功能**：根据应用设置和系统偏好，控制应用动画效果。
 - **使用场景**：需为用户提供流畅或简洁动画体验时。
 
-## `hooks/vueuse` 目录
+## <WFrontLink path="/src/hooks/vueuse">`hooks/vueuse`</WFrontLink> 目录
 
 ### <WFrontLink path="/src/hooks/vueuse/useBreakpoints.ts">`useBreakpoints.ts`</WFrontLink>
 - **功能**：使用 Tailwind CSS 断点配置，提供响应式断点检测。
@@ -134,7 +134,7 @@
 - **功能**：创建可获取百分比的计时器，支持设置总时长和更新回调。
 - **使用场景**：需实现带进度条的倒计时（如下载进度）时。
 
-## `hooks/web` 目录
+## <WFrontLink path="/src/hooks/web">`hooks/web`</WFrontLink> 目录
 
 ### <WFrontLink path="/src/hooks/web/useExternalGeoIP.ts">`useExternalGeoIP.ts`</WFrontLink>
 - **功能**：获取用户地理位置信息，进行持久化存储。

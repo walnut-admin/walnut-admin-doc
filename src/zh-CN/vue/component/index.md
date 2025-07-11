@@ -1,22 +1,21 @@
 # <WPageTitle></WPageTitle>
 
-项目 `components` 目录按 **功能分层** 规划了 7 个子文件夹（以下重点解析前 3 类核心目录），覆盖从通用能力到业务专属的组件体系：
+项目 <WFrontLink path="/src/components">`components`</WFrontLink> 目录按 **功能分层** 规划了 7 个子文件夹，覆盖从通用能力到业务专属的组件体系：
 
 :::info
 - **目录结构**：每个组件的文档独立编写，按分类存放在对应子目录（如 `./advanced/`、`./app/`、`./business/`）。
-- **命名规则**：文件名采用 **kebab-case** 格式（如 `app-authorize.md`），确保路由和链接的一致性。
 :::
 
-## 1. Advanced：通用高级组件
+## 1. <WFrontLink path="/src/components/Advanced">`Advanced`</WFrontLink>：通用高级组件
 **定位**：封装复杂交互逻辑的 **可配置型组件**，通过 Prop 注入接口等参数，实现跨场景复用。
 
 | 组件名                                  | 功能说明                                                                       |
 | --------------------------------------- | ------------------------------------------------------------------------------ |
-| [ApiSelect](./advanced/api-select.md)   | 接口驱动的下拉选择器，内置虚拟列表、懒加载、回显等逻辑（接口通过 Prop 传入）   |
+| [ApiSelect](./advanced/api-select.md)   | 待重构，接口驱动的下拉选择器，内置虚拟列表、懒加载、回显等逻辑（接口通过 Prop 传入）   |
 | [CRUD](./advanced/crud.md)              | 一站式封装“增删改查”全流程（查询表单、数据表格、增编表单、列操作、导入导出等） |
-| [RoleSelect](./advanced/role-select.md) | 基于 ApiSelect 二次封装的角色选择组件（直接传入角色列表接口，无额外逻辑）      |
+| [RoleSelect](./advanced/role-select.md) | 待重构，基于 ApiSelect 二次封装的角色选择组件（直接传入角色列表接口，无额外逻辑）      |
 
-## 2. App：应用级全局组件
+## 2. <WFrontLink path="/src/components/App">`App`</WFrontLink>：应用级全局组件
 **定位**：与 **应用全局状态/功能强绑定** 的组件，部分需配合后端接口实现核心能力（如权限、主题、国际化）。
 
 | 组件名                                          | 功能说明                          |
@@ -30,7 +29,7 @@
 | [AppSearch](./app/app-search.md)                | 全局搜索组件（依赖搜索接口）      |
 | [AppSettings](./app/app-settings.md)            | 应用设置面板（主题、布局等配置）  |
 
-## 3. Business：业务强关联组件
+## 3. <WFrontLink path="/src/components/Business">`Business`</WFrontLink>：业务强关联组件
 **定位**：**与具体业务接口深度绑定** 的组件，脱离接口无法独立运行（如地区级联、头像上传、业务字典）。
 
 | 组件名                                      | 功能说明                              |
@@ -43,7 +42,7 @@
 | [ForceQuit](./business/force-quit.md)       | 强制退出组件（依赖权限状态接口）      |
 | [LangSelect](./business/lang-select.md)     | 语言选择组件（与国际化接口绑定）      |
 
-## 4. Extra：通用辅助组件
+## 4. <WFrontLink path="/src/components/Extra">`Extra`</WFrontLink>：通用辅助组件
 **定位**：覆盖工具类、交互增强、格式处理等场景的 **通用辅助组件**，补充主流程外的多样化能力。
 
 | 组件名                                                    | 功能说明                                                  |
@@ -72,14 +71,14 @@
 | [TransitionSelect](./extra/transition-select.md)          | 动画选择器                                                |
 | [VerifyCode](./extra/verify-code.md)                      | 验证码输入组件                                            |
 
-## 5. HOC：高阶组件（待补充）
+## 5.  <WFrontLink path="/src/components/HOC">`HOC`</WFrontLink>：高阶组件（待补充）
 **定位**：通过高阶函数封装 **业务逻辑或交互模式** 的复用型组件（如权限包裹、异步加载、状态增强等）
 
 | 组件名    | 功能说明                                       |
 | --------- | ---------------------------------------------- |
 | WithValue | v-model:value的拦截，支持自定义value的格式转换 |
 
-## 6. UI：原子化基础组件
+## 6. <WFrontLink path="/src/components/UI">`UI`</WFrontLink>：原子化基础组件
 **定位**：构成界面的 **原子化UI单元**，覆盖按钮、表单、弹窗等基础交互，提供统一视觉风格和交互规范，都是基于naive-ui原有组件上的二次封装。
 
 | 组件名                                  | 功能说明     |
@@ -110,7 +109,7 @@
 | [Tree](./ui/tree.md)                    | 树形组件     |
 | [TreeSelect](./ui/tree-select.md)       | 树形选择器   |
 
-## 7. Vendor：第三方依赖组件
+## 7. <WFrontLink path="/src/components/Vendor">`Vendor`</WFrontLink>：第三方依赖组件
 **定位**：集成第三方库的 **封装型组件**，桥接外部依赖与项目技术体系，降低直连第三方 API 的复杂度。
 
 | 组件名                                  | 功能说明                         |

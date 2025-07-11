@@ -20,24 +20,6 @@
   - `useAppRouter`：获取路由实例（替代 `useRouter`）；
   - `useAppRouterPush`：封装路由跳转方法，统一处理跳转逻辑。
 
-#### 关键代码示例：
-```typescript
-// 创建路由实例
-export const AppRouter = createRouter({
-  history: createWebHistory(),
-  routes,
-  strict: true,
-  stringifyQuery,
-  parseQuery,
-})
-
-// 初始化路由
-export function setupRouter(app: App) {
-  app.use(AppRouter)
-  createRouterGuard(AppRouter) // 注册所有守卫
-}
-```
-
 ## 2. 路由定义与合并模块
 该模块负责管理路由的“骨架”，定义各类路由规则并合并为完整路由列表，支持内置路由与业务路由的分离管理。
 

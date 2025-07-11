@@ -67,7 +67,7 @@ const nav: DefaultTheme.NavItem[] = [
         text: '介绍',
         link: '/guide/introduction',
       },
-      { text: '深入', link: '/guide/deep/state' },
+      // { text: '深入', link: '/guide/deep/state' },
     ],
   },
   {
@@ -174,23 +174,23 @@ const sidebar: DefaultTheme.Sidebar = {
       text: '介绍',
       items: [
         { text: '简介', link: '/guide/introduction' },
-        { text: '开始', link: '/guide/start' },
-        { text: '项目配置', link: '/guide/configuration' },
-        { text: '项目规范', link: '/guide/lint' },
+        // { text: '开始', link: '/guide/start' },
+        // { text: '项目配置', link: '/guide/configuration' },
+        // { text: '项目规范', link: '/guide/lint' },
       ],
     },
-    {
-      text: '深入',
-      items: [
-        { text: '状态', link: '/guide/deep/state' },
-        { text: '配置', link: '/guide/deep/config' },
-        { text: '菜单', link: '/guide/deep/menu' },
-        { text: '路由', link: '/guide/deep/route' },
-        { text: '权限', link: '/guide/deep/permission' },
-        { text: '选项卡', link: '/guide/deep/tab' },
-        { text: '图标', link: '/guide/deep/icon' },
-      ],
-    },
+    // {
+    //   text: '深入',
+    //   items: [
+    //     { text: '状态', link: '/guide/deep/state' },
+    //     { text: '配置', link: '/guide/deep/config' },
+    //     { text: '菜单', link: '/guide/deep/menu' },
+    //     { text: '路由', link: '/guide/deep/route' },
+    //     { text: '权限', link: '/guide/deep/permission' },
+    //     { text: '选项卡', link: '/guide/deep/tab' },
+    //     { text: '图标', link: '/guide/deep/icon' },
+    //   ],
+    // },
   ],
 
   '/vue/': vueItems,

@@ -2,10 +2,11 @@
 
 ## 一、插件分类概述
 项目中的第三方插件分为两类：
-1. **UI组件类**：位于`components vendor`目录下，带有UI界面，可能需要配合表单录入或实现特殊功能。
+1. **UI组件类**：位于<WFrontLink path="/src/components/Vendor">`components/Vendor`</WFrontLink>目录下，带有UI界面，可能需要配合表单录入或实现特殊功能。详情查看[组件章节](../components/vendor.md)。
+
 2. **功能性辅助类**：通过编程方式调用，提供各种功能性支持。
 
-## 二、非components vendor目录下的第三方插件
+## 二、非<WFrontLink path="/src/components/Vendor">`components/Vendor`</WFrontLink>目录下的第三方插件
 
 ### 1. [crypto-js]
 - **功能**：实现数据的加密和解密，包括请求数据加密、响应数据解密、storage数据加密等。

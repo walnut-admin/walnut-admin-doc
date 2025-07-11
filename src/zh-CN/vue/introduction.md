@@ -1,18 +1,21 @@
 # 介绍
 
-:::info
-项目不涉及常规的低代码生成或者拖拽生成表单之类的，这个项目的方向是高度封装组件简化复制粘贴的过程，后面慢慢会有具体写到。
+:::warning
+项目不涉及常规的低代码生成或者拖拽生成表单之类的，这个项目的方向是高度封装组件的方向。
 :::
 
 ## 涵盖内容
 
 :::info
-暂时都是想到什么写什么，写文档也是门学问（
+- 暂时都是想到什么写什么，写文档也是门学问（
+
+- 文档是在豆包的辅助下生成的，我也有简单审核，所以有些地方ai味会很重，不过描述的很清晰就可以了。
 :::
 
- - 基础技术栈：typescript + vue3 + vite6 + unocss + naive-ui + pinia + vue-router4 + vueuse + axios + iconify
+ - 基础技术栈：<WBaseLink preset="ts">typescript</WBaseLink> + <WBaseLink preset="vue">vue3</WBaseLink> + <WBaseLink preset="vite">vite6</WBaseLink> + <WBaseLink preset="unocss">unocss</WBaseLink> + <WBaseLink preset="naive-ui">naive-ui</WBaseLink> + <WBaseLink preset="pinia">pinia</WBaseLink> + <WBaseLink preset="vue-router">vue-router4</WBaseLink> + <WBaseLink preset="vueuse">vueuse</WBaseLink> + <WBaseLink preset="axios">axios</WBaseLink> + <WBaseLink preset="iconify">iconify</WBaseLink>
+
  - 基础功能：RBAC、暗色模式、国际化、多维度登录、第三方oauth
- - 现代化的常见工具：lodash-es、nanoid、lru-cache、ua-parse-js
+ - 现代化的常见工具：<WBaseLink preset="lodash-es">lodash-es</WBaseLink>、<WBaseLink preset="nanoid">nanoid</WBaseLink>、<WBaseLink preset="lru-cache">lru-cache</WBaseLink>、<WBaseLink preset="ua-parser-js">ua-parser-js</WBaseLink>等
  - 简化的项目配置，无需 eslint + pritter + husky 配置很多的苦逼经历，simple-git-hook + antfu大佬的eslint规则，简化配置过程，[查看这里](./base/project.md)
  - 基于naive-ui的全局扩展，[查看这里](./base/naive-ui.md)
  - 需要接口支持的i18n，[查看这里](./base/i18n.md)

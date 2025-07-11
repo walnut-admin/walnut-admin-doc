@@ -1,7 +1,7 @@
 # <WPageTitle></WPageTitle>
 
 ## 一、整体架构
-项目基于 [Axios](https://github.com/axios/axios) 进行请求层封装，覆盖 **配置增强、拦截器扩展、适配器拓展、Token 无感刷新** 四大核心能力，支撑复杂业务场景下的请求管理。
+项目基于 <WBaseLink preset="axios">Axios</WBaseLink>进行请求层封装，覆盖 **配置增强、拦截器扩展、适配器拓展、Token 无感刷新** 四大核心能力，支撑复杂业务场景下的请求管理。
 
 ## 二、核心模块解析
 
@@ -51,7 +51,7 @@
   - 兼容 `CAPJS Token`（人机校验 Token）的类似刷新逻辑，但存在 **双 Token 同时过期时重复请求** 的潜在问题（暂未修复，优先级较低）。
 
 ### 3. 适配器拓展（`adapters`）
-通过 `axios-extensions` 扩展 5 种增强适配器，代码位于 `src/adapters/` 目录：
+基于 [`axios-extensions`](https://github.com/kuitos/axios-extensions) 扩展 5 种增强适配器，代码位于<WFrontLink path="/src/utils/axios/src/adapters">`src/adapters/`</WFrontLink>  目录：
 
 | 适配器文件                     | 功能                                                         |
 |--------------------------------|--------------------------------------------------------------|
