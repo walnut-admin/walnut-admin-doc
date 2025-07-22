@@ -1,8 +1,8 @@
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
+import BaseLink from '../components/BaseLink.vue'
 import FrontLink from '../components/FrontLink.vue'
 import PageTitle from '../components/PageTitle.vue'
-import BaseLink from '../components/WBaseLink.vue'
 
 export default {
   extends: DefaultTheme,

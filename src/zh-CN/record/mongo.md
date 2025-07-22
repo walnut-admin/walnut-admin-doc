@@ -10,62 +10,6 @@
 
 - docker-compose 文件直接用的[bitnami](https://github.com/bitnami/containers/blob/main/bitnami/mongodb/docker-compose-replicaset.yml)的，很好用，配置环境变量就行
 
-```yml
-services:
-  dev-mongodb-primary:
-    image: docker.io/bitnami/mongodb:8.0
-    restart: always
-    container_name: dev-mongodb-primary
-    environment:
-      - MONGODB_ADVERTISED_HOSTNAME=dev-mongodb-primary
-      - MONGODB_REPLICA_SET_MODE=primary
-      - MONGODB_ROOT_USER=root
-      - MONGODB_ROOT_PASSWORD=123456
-      - MONGODB_REPLICA_SET_KEY=replicasetkey123
-    volumes:
-      - 'mongodb_master_data:/bitnami/mongodb'
-    ports:
-      - 27017:27017
-
-  dev-mongodb-secondary:
-    image: docker.io/bitnami/mongodb:8.0
-    restart: always
-    container_name: dev-mongodb-secondary
-    depends_on:
-      - dev-mongodb-primary
-    environment:
-      - MONGODB_REPLICA_SET_MODE=secondary
-      - MONGODB_ADVERTISED_HOSTNAME=dev-mongodb-secondary
-      - MONGODB_INITIAL_PRIMARY_HOST=dev-mongodb-primary
-      - MONGODB_INITIAL_PRIMARY_ROOT_USER=root
-      - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=123456
-      - MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017
-      - MONGODB_REPLICA_SET_KEY=replicasetkey123
-    ports:
-      - 27027:27017
-
-  dev-mongodb-arbiter:
-    image: docker.io/bitnami/mongodb:8.0
-    restart: always
-    container_name: dev-mongodb-arbiter
-    depends_on:
-      - dev-mongodb-primary
-    environment:
-      - MONGODB_REPLICA_SET_MODE=arbiter
-      - MONGODB_ADVERTISED_HOSTNAME=dev-mongodb-arbiter
-      - MONGODB_INITIAL_PRIMARY_HOST=dev-mongodb-primary
-      - MONGODB_INITIAL_PRIMARY_ROOT_USER=root
-      - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=123456
-      - MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017
-      - MONGODB_REPLICA_SET_KEY=replicasetkey123
-    ports:
-      - 27037:27017
-
-volumes:
-  mongodb_master_data:
-    driver: local
-```
-
 ```bash
 docker compose up --detach
 docker compose down
@@ -89,7 +33,21 @@ windows主机的`hosts`(C:\Windows\System32\drivers\etc)文件需要配置一下
 mongodb://root:123456@127.0.0.1:27017,127.0.0.1:27027,127.0.0.1:27037/?readPreference=primary&replicaSet=replicaset
 ```
 
-## 单一数据库
+## 非开发环境
+
+- 和开发环境的wsl基本一样
+
+- 本机测试云服务器端口通不通
+```powershell
+Test-NetConnection -ComputerName 公网IP -Port 27017
+```
+
+- 查看容器内mongo日志
+```bash
+docker compose logs -f stage-mongodb-primary
+```
+
+## ~~~单一数据库~~~
 
 - 安装 mongodb，具体看官方文档即可
 
@@ -136,26 +94,3 @@ db.createUser({
 [article1]: https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-20-04
 [article2]: https://www.digitalocean.com/community/tutorials/how-to-configure-remote-access-for-mongodb-on-ubuntu-20-04
 [article3]: https://www.digitalocean.com/community/tutorials/how-to-secure-mongodb-on-ubuntu-20-04
-
-## 测试环境(纯ip)
-
-- 和开发环境的wsl基本一样
-
-- 配置文件需要额外extra_flags配置bing ip，同样的是云服务器内网ip哈
-
-- 本机测试云服务器端口通不通
-```powershell
-Test-NetConnection -ComputerName 公网IP -Port 27017
-```
-
-- 查看容器内mongo日志
-```bash
-docker compose logs -f stage-mongodb-primary
-```
-
-- hosts
-```txt
-公网IP stage-mongodb-primary
-公网IP stage-mongodb-secondary
-公网IP stage-mongodb-arbiter
-```

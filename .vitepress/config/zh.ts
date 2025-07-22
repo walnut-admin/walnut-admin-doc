@@ -5,7 +5,7 @@ import { defineConfig } from 'vitepress'
 import { chineseSearchOptimize } from 'vitepress-plugin-pagefind'
 
 const require = createRequire(import.meta.url)
-const pkg = require('../../package.json')
+const _pkg = require('../../package.json')
 
 const vueItems = [
   {
@@ -71,6 +71,10 @@ const nav: DefaultTheme.NavItem[] = [
     ],
   },
   {
+    text: '包含内容',
+    link: '/content',
+  },
+  {
     text: '前端',
     activeMatch: '/vue/',
     items: vueItems,
@@ -105,24 +109,24 @@ const nav: DefaultTheme.NavItem[] = [
   //     },
   //   ],
   // },
-  {
-    text: '后台',
-    activeMatch: '/nestjs/',
-    items: [
-      {
-        text: '介绍',
-        link: '/nestjs/introduction',
-      },
-      {
-        text: '跨域',
-        link: '/nestjs/cors',
-      },
-      {
-        text: '数据库设计',
-        link: '/nestjs/mongodb',
-      },
-    ],
-  },
+  // {
+  //   text: '后台',
+  //   activeMatch: '/nestjs/',
+  //   items: [
+  //     {
+  //       text: '介绍',
+  //       link: '/nestjs/introduction',
+  //     },
+  //     {
+  //       text: '跨域',
+  //       link: '/nestjs/cors',
+  //     },
+  //     {
+  //       text: '数据库设计',
+  //       link: '/nestjs/mongodb',
+  //     },
+  //   ],
+  // },
   {
     text: '记录',
     activeMatch: '/record/',
@@ -154,18 +158,27 @@ const nav: DefaultTheme.NavItem[] = [
     ],
   },
   {
-    text: pkg.version,
+    text: '公告',
     items: [
       {
-        text: '更新日志',
-        link: 'https://github.com/Zhaocl1997/walnut-admin-client/blob/main/CHANGELOG.md',
-      },
-      {
-        text: '参与贡献',
-        link: 'https://github.com/Zhaocl1997/walnut-admin-client',
+        text: '1.0.0',
+        link: '/announcement/v1.0.0',
       },
     ],
   },
+  // {
+  //   text: pkg.version,
+  //   items: [
+  //     {
+  //       text: '更新日志',
+  //       link: 'https://github.com/Zhaocl1997/walnut-admin-client/blob/main/CHANGELOG.md',
+  //     },
+  //     {
+  //       text: '参与贡献',
+  //       link: 'https://github.com/Zhaocl1997/walnut-admin-client',
+  //     },
+  //   ],
+  // },
 ]
 
 const sidebar: DefaultTheme.Sidebar = {
