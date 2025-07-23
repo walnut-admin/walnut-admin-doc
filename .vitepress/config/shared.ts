@@ -24,7 +24,7 @@ export const shared = defineConfig({
     logo: { src: '/logo.png', width: 24, height: 24 },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/Zhaocl1997/walnut-admin-doc' },
+      { icon: 'github', link: 'https://github.com/walnut-admin/walnut-admin-doc' },
       { icon: 'discord', link: 'https://discord.gg/kfVuasVXs2' },
     ],
   },

@@ -166,6 +166,10 @@ const nav: DefaultTheme.NavItem[] = [
       },
     ],
   },
+  {
+    text: '支持',
+    link: '/support',
+  },
   // {
   //   text: pkg.version,
   //   items: [
