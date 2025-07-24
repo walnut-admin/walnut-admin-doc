@@ -6,7 +6,7 @@
   - 数据库初始数据
   - `Postman`数据，`apifox`应该是支持的
   - `redis`连接串，我用的[another-redis-desktop-manager](https://github.com/qishibo/AnotherRedisDesktopManager)
-  - `MongoDB Compass`连接串
+  - [`MongoDB Compass`](https://www.mongodb.com/products/tools/compass)连接串
 
 ## 二、付费模式
 
@@ -36,6 +36,7 @@
   - 包括一次性付费所有权益
   - 加入年期付费微信群，同时可获得测试环境优先体验测试新内容
   - 付费后一年内加入`GitHub`组织，一年内可享受全量更新内容
+  - 可以提一个想要的功能或者模块，再或者从我的[TODO](https://github.com/walnut-admin/walnut-admin-client/blob/main/TODO.md)里优先`挑一项`开发，优先再下个版本发布时完成
 - 更新承诺：
   - 每月发布1个minor版本（如`1.1.0` => `1.2.0`），会有一定的新内容或功能上限
   - 每半年发布1个大版本（如`1.0` => `2.0`）（要是没做到记得拷打我 😇）
