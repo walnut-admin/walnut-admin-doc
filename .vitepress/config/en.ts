@@ -50,19 +50,19 @@ const nav: DefaultTheme.NavItem[] = [
   },
   {
     text: 'Backend',
-    activeMatch: '/nestjs/',
+    activeMatch: '/backend/',
     items: [
       {
         text: 'Intro',
-        link: '/nestjs/introduction',
+        link: '/backend/introduction',
       },
       {
         text: 'Cors',
-        link: '/nestjs/cors',
+        link: '/backend/cors',
       },
       {
         text: 'Database',
-        link: '/nestjs/mongodb',
+        link: '/backend/mongodb',
       },
     ],
   },
@@ -249,7 +249,7 @@ const sidebar: DefaultTheme.Sidebar = {
     ],
   },
 
-  '/en-US/nestjs/': {
+  '/en-US/backend/': {
     base: '/en-US',
     items: [
       {
@@ -257,15 +257,15 @@ const sidebar: DefaultTheme.Sidebar = {
         items: [
           {
             text: 'Intro',
-            link: '/nestjs/introduction',
+            link: '/backend/introduction',
           },
           {
             text: 'Cors',
-            link: '/nestjs/cors',
+            link: '/backend/cors',
           },
           {
             text: 'Database',
-            link: '/nestjs/mongodb',
+            link: '/backend/mongodb',
           },
         ],
       },

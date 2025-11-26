@@ -6,7 +6,7 @@ cap.js [官网](https://capjs.js.org) [仓库](https://github.com/tiagozip/cap) 
 
 后端可以像我一样集成到项目中，也有一个standalone的版本。社区也有各种版本，java/go/python等等，都可以前去尝试。
 
-:::info
+:::warning
 项目默认是全局的cap token guard守卫的，如果有不重要的公共接口就做cap token free处理，也就是添加一个cap token free的guard。
 :::
 

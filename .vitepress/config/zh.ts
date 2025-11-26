@@ -1,60 +1,69 @@
 import type { DefaultTheme } from 'vitepress'
 import type { SearchConfig } from 'vitepress-plugin-pagefind'
-import { createRequire } from 'node:module'
 import { defineConfig } from 'vitepress'
 import { chineseSearchOptimize } from 'vitepress-plugin-pagefind'
 
-const require = createRequire(import.meta.url)
-const _pkg = require('../../package.json')
+import versionInfo from '../../version.json' assert { type: 'json' }
 
-const vueItems = [
+const frontendContent = [
   {
     text: '介绍',
-    link: '/vue/introduction',
+    link: '/content/frontend/introduction',
   },
   {
     text: '简化的项目配置',
-    link: '/vue/base/project',
+    link: '/content/frontend/base/project',
   },
   {
     text: 'naive-ui',
-    link: '/vue/base/naive-ui',
+    link: '/content/frontend/base/naive-ui',
   },
   {
     text: 'i18n',
-    link: '/vue/base/i18n',
+    link: '/content/frontend/base/i18n',
   },
   {
     text: 'vite插件',
-    link: '/vue/base/plugin',
+    link: '/content/frontend/base/plugin',
   },
   {
     text: '组件',
-    link: '/vue/component/',
+    link: '/content/frontend/component/',
   },
   {
     text: 'axios',
-    link: '/vue/base/axios',
+    link: '/content/frontend/base/axios',
   },
   {
     text: '图标icon',
-    link: '/vue/base/icon',
+    link: '/content/frontend/base/icon',
   },
   {
     text: '路由router',
-    link: '/vue/base/router',
+    link: '/content/frontend/base/router',
   },
   {
     text: '第三方插件',
-    link: '/vue/base/vendor',
-  },
-  {
-    text: '接口签名安全防护',
-    link: '/vue/base/sign',
+    link: '/content/frontend/base/vendor',
   },
   {
     text: 'hooks',
-    link: '/vue/base/hooks',
+    link: '/content/frontend/base/hooks',
+  },
+]
+
+const backendContent = [
+  {
+    text: '介绍',
+    link: '/content/backend/introduction',
+  },
+  {
+    text: '跨域',
+    link: '/content/backend/cors',
+  },
+  {
+    text: '数据库设计',
+    link: '/content/backend/mongodb',
   },
 ]
 
@@ -67,66 +76,22 @@ const nav: DefaultTheme.NavItem[] = [
         text: '介绍',
         link: '/guide/introduction',
       },
-      // { text: '深入', link: '/guide/deep/state' },
     ],
   },
   {
     text: '包含内容',
-    link: '/content',
+    activeMatch: '/content/',
+    items: [
+      {
+        text: '前端',
+        link: '/content/frontend/introduction',
+      },
+      {
+        text: '后端',
+        link: '/content/backend/introduction',
+      },
+    ],
   },
-  {
-    text: '前端',
-    activeMatch: '/vue/',
-    items: vueItems,
-  },
-  // {
-  //   text: '组件',
-  //   activeMatch: '/component/',
-  //   items: [
-  //     {
-  //       text: 'UI组件',
-  //       link: '/component/UI/button',
-  //     },
-  //     {
-  //       text: '其他组件',
-  //       link: '/component/Extra/arrow',
-  //     },
-  //     {
-  //       text: 'App级别组件',
-  //       link: '/component/App/authorize',
-  //     },
-  //     {
-  //       text: '高阶组件',
-  //       link: '/component/HOC/withValue',
-  //     },
-  //     {
-  //       text: '进阶组件',
-  //       link: '/component/Advanced/apiSelect',
-  //     },
-  //     {
-  //       text: '第三方组件',
-  //       link: '/component/Vendor/AvatarUpload',
-  //     },
-  //   ],
-  // },
-  // {
-  //   text: '后台',
-  //   activeMatch: '/nestjs/',
-  //   items: [
-  //     {
-  //       text: '介绍',
-  //       link: '/nestjs/introduction',
-  //     },
-  //     {
-  //       text: '跨域',
-  //       link: '/nestjs/cors',
-  //     },
-  //     {
-  //       text: '数据库设计',
-  //       link: '/nestjs/mongodb',
-  //     },
-  //   ],
-  // },
   {
     text: '记录',
     activeMatch: '/record/',
@@ -170,47 +135,53 @@ const nav: DefaultTheme.NavItem[] = [
     text: '支持',
     link: '/support',
   },
-  // {
-  //   text: pkg.version,
-  //   items: [
-  //     {
-  //       text: '更新日志',
-  //       link: 'https://github.com/Zhaocl1997/walnut-admin-client/blob/main/CHANGELOG.md',
-  //     },
-  //     {
-  //       text: '参与贡献',
-  //       link: 'https://github.com/Zhaocl1997/walnut-admin-client',
-  //     },
-  //   ],
-  // },
+  {
+    text: versionInfo.version,
+    items: [
+      {
+        text: '更新日志',
+        link: 'https://github.com/walnut-admin/walnut-admin-client/blob/main/changelog-latest.md',
+      },
+      {
+        text: '参与贡献',
+        link: 'https://github.com/walnut-admin',
+      },
+      {
+        text: 'B站账号',
+        link: 'https://space.bilibili.com/3546944343378671',
+      },
+      {
+        text: '个人X账号',
+        link: 'https://x.com/Martin971222',
+      },
+    ],
+  },
 ]
 
 const sidebar: DefaultTheme.Sidebar = {
-  '/guide/': [
+  '/content/': [
     {
-      text: '介绍',
+      text: '前端',
+      items: frontendContent,
+    },
+    {
+      text: '后端',
+      items: backendContent,
+    },
+    {
+      text: '共享',
       items: [
-        { text: '简介', link: '/guide/introduction' },
-        // { text: '开始', link: '/guide/start' },
-        // { text: '项目配置', link: '/guide/configuration' },
-        // { text: '项目规范', link: '/guide/lint' },
+        {
+          text: '接口签名安全防护',
+          link: '/content/shared/sign',
+        },
+        {
+          text: 'Cap.js简易人机验证',
+          link: '/content/shared/capjs',
+        },
       ],
     },
-    // {
-    //   text: '深入',
-    //   items: [
-    //     { text: '状态', link: '/guide/deep/state' },
-    //     { text: '配置', link: '/guide/deep/config' },
-    //     { text: '菜单', link: '/guide/deep/menu' },
-    //     { text: '路由', link: '/guide/deep/route' },
-    //     { text: '权限', link: '/guide/deep/permission' },
-    //     { text: '选项卡', link: '/guide/deep/tab' },
-    //     { text: '图标', link: '/guide/deep/icon' },
-    //   ],
-    // },
   ],
-
-  '/vue/': vueItems,
 
   // '/component/': [
   //   {
@@ -331,26 +302,6 @@ const sidebar: DefaultTheme.Sidebar = {
   //   },
   // ],
 
-  '/nestjs/': [
-    {
-      text: '后台',
-      items: [
-        {
-          text: '介绍',
-          link: '/nestjs/introduction',
-        },
-        {
-          text: '跨域',
-          link: '/nestjs/cors',
-        },
-        {
-          text: '数据库设计',
-          link: '/nestjs/mongodb',
-        },
-      ],
-    },
-  ],
-
   '/record/': [
     {
       text: '记录',
@@ -409,7 +360,7 @@ export const zh = defineConfig({
     },
 
     editLink: {
-      pattern: 'https://github.com/Zhaocl1997/walnut-admin-doc/tree/main/src/:path',
+      pattern: 'https://github.com/walnut-admin/walnut-admin-doc/tree/main/src/:path',
       text: '在 GitHub 上编辑此页面',
     },
 
