@@ -25,7 +25,7 @@
  - 方便的icon配置，[查看这里](./base/icon.md)
  - 灵活的router配置，[查看这里](./base/router.md)
  - 多样的第三方插件植入，[查看这里](./base/vendor.md)
- - 符合要求的安全加密，[查看这里](./base/crypto.md)
+ - 稍微有些复杂的接口安全防护，[查看这里](./base/sign.md)
  - 功能强大的hooks封装，[查看这里](./base/hooks.md)
 
 ## 有趣的功能

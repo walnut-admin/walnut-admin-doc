@@ -49,8 +49,8 @@ const vueItems = [
     link: '/vue/base/vendor',
   },
   {
-    text: '安全加密',
-    link: '/vue/base/crypto',
+    text: '接口签名安全防护',
+    link: '/vue/base/sign',
   },
   {
     text: 'hooks',
