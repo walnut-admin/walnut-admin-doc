@@ -3,7 +3,7 @@ import type { SearchConfig } from 'vitepress-plugin-pagefind'
 import { defineConfig } from 'vitepress'
 import { chineseSearchOptimize } from 'vitepress-plugin-pagefind'
 
-import versionInfo from '../../version.json' assert { type: 'json' }
+import versionInfo from '../../version.json'
 
 const frontendContent = [
   {
@@ -49,6 +49,10 @@ const frontendContent = [
   {
     text: 'hooks',
     link: '/content/frontend/base/hooks',
+  },
+  {
+    text: 'google-analytics',
+    link: '/content/frontend/features/ga',
   },
 ]
 

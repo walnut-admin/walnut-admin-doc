@@ -1,5 +1,4 @@
 import { defineConfig } from 'vitepress'
-import { withMermaid } from 'vitepress-plugin-mermaid'
 import { pagefindPlugin } from 'vitepress-plugin-pagefind'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 
@@ -7,7 +6,7 @@ import { search as enSearch } from './en'
 import { shared } from './shared'
 import { zh, search as zhSearch } from './zh'
 
-export default withMermaid(defineConfig({
+export default defineConfig({
   ...shared,
   // TODO
   ignoreDeadLinks: true,
@@ -38,16 +37,4 @@ export default withMermaid(defineConfig({
       }),
     ],
   },
-
-  mermaid: {
-    // Mermaid 配置选项
-    theme: 'default',
-    flowchart: {
-      htmlLabels: true,
-      curve: 'basis',
-    },
-  },
-  mermaidPlugin: {
-    class: 'mermaid my-class', // set additional css classes for parent container
-  },
-}))
+})

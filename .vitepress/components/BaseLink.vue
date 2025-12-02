@@ -3,7 +3,7 @@ const props = defineProps<{ preset:
   'author'
   | 'antfu' | 'vue' | 'i18n'
   | 'vite' | 'naive-ui' | 'unocss' | 'ts' | 'pinia' | 'vue-router' | 'vueuse' | 'axios' | 'iconify'
-  | 'lodash-es' | 'nanoid' | 'lru-cache' | 'ua-parse-js'
+  | 'lodash-es' | 'nanoid' | 'lru-cache' | 'ua-parse-js' | 'google-analytics' | 'web-vitals' | 'gtag-js'
   | 'nestjs' | 'swc' | 'nestjs-i18n' | 'nestjs-jwt' | 'mongoose' | 'passport' | 'nestjs-passport'
   | 'nestjs-config' | 'nestjs-bull' | 'nestjs-cache' | 'keyv' | 'redis' | 'nestjs-axios'
   | 'express' | 'nestjs-socket' | 'nestjs-sse' | 'nestjs-swagger' | 'nestjs-throttler' | 'class-transformer' | 'class-validator'
@@ -28,6 +28,10 @@ const urlMap: Record<string, string> = {
   'nanoid': 'https://zelark.github.io/nano-id-cc/',
   'lru-cache': 'https://isaacs.github.io/node-lru-cache/',
   'ua-parser-js': 'https://uaparser.dev/',
+
+  'google-analytics': 'https://analytics.google.com/',
+  'web-vitals': 'https://web.dev/articles/vitals',
+  'gtag-js': 'https://developers.google.com/tag-platform/gtagjs',
 
   'nestjs': 'https://nestjs.com/',
   'swc': 'https://swc.rs/',
