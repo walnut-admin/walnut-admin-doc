@@ -26,7 +26,9 @@
   },
   "dependencies": {
     "dayjs": "^1.11.19",
-    "vitepress": "1.6.3"
+    "vitepress": "1.6.3",
+    "vitepress-mermaid-renderer": "1.1.5",
+    "vue": "3.5.25"
   },
   "devDependencies": {
     "@antfu/eslint-config": "4.16.2",
@@ -41,7 +43,6 @@
     "taze": "19.1.0",
     "typescript": "5.8.3",
     "vite": "5.4.19",
-    "vitepress-plugin-mermaid": "2.0.17",
     "vitepress-plugin-pagefind": "0.4.14",
     "vitepress-plugin-tabs": "^0.7.3"
   },
