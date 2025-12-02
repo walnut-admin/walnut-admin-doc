@@ -17,7 +17,7 @@
 
 ## 有趣的功能
 
- - ❤️ web-vitals 接入，可随时在 <WBaseLink preset="google-analytics"> 后台看到统计情况，维度很丰富，[查看这里](./features/ga.md)
+ - ❤️ web-vitals 接入，可随时在 <WBaseLink preset="google-analytics">google-analytics</WBaseLink> 后台看到统计情况，维度很丰富，[查看这里](./features/ga.md)
  - 🙌 driverjs 轻量化的引导，[查看这里](./features/driver.md)
  - 😒 html-to-image 页面快照？实则不然，就是个截图，[查看这里](./features/html-to-image.md)
  - 🤩 libphonenumber-js 实现的国际化手机号表单项，[查看这里](./component/extra/phone-number-input.md)
