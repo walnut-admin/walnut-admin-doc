@@ -94,6 +94,10 @@ const nav: DefaultTheme.NavItem[] = [
         text: '后端',
         link: '/content/backend/introduction',
       },
+      {
+        text: '共享',
+        link: '/content/shared/introduction',
+      },
     ],
   },
   {
@@ -176,12 +180,20 @@ const sidebar: DefaultTheme.Sidebar = {
       text: '共享',
       items: [
         {
+          text: '介绍',
+          link: '/content/shared/introduction',
+        },
+        {
           text: '接口签名安全防护',
           link: '/content/shared/sign',
         },
         {
           text: 'Cap.js简易人机验证',
           link: '/content/shared/capjs',
+        },
+        {
+          text: 'opaque认证',
+          link: '/content/shared/opaque',
         },
       ],
     },

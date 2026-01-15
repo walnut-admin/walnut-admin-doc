@@ -1,4 +1,4 @@
-# capjs人机校验
+# <WPageTitle></WPageTitle>
 
 cap.js [官网](https://capjs.js.org) [仓库](https://github.com/tiagozip/cap) 一款开源的，十分简单的人机校验方案，同时功能也比较完善。
 
