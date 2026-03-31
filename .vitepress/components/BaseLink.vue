@@ -7,7 +7,8 @@ const props = defineProps<{ preset:
   | 'nestjs' | 'swc' | 'nestjs-i18n' | 'nestjs-jwt' | 'mongoose' | 'passport' | 'nestjs-passport'
   | 'nestjs-config' | 'nestjs-bull' | 'nestjs-cache' | 'keyv' | 'redis' | 'nestjs-axios'
   | 'express' | 'nestjs-socket' | 'nestjs-sse' | 'nestjs-swagger' | 'nestjs-throttler' | 'class-transformer' | 'class-validator'
-  | 'nestjs-task' | 'nestjs-event' }>()
+  | 'nestjs-task' | 'nestjs-event'
+  | 'fingerprintjs' | 'mongodb' | 'bcryptjs' | 'dayjs' | 'winston' | 'sentry' | 'murlock' }>()
 
 const urlMap: Record<string, string> = {
   'author': 'https://github.com/Zhaocl1997',
@@ -55,6 +56,14 @@ const urlMap: Record<string, string> = {
   'class-validator': 'https://github.com/typestack/class-validator',
   'nestjs-task': 'https://docs.nestjs.com/techniques/task-scheduling',
   'nestjs-event': 'https://docs.nestjs.com/techniques/events',
+
+  'fingerprintjs': 'https://fingerprint.com/',
+  'mongodb': 'https://www.mongodb.com/',
+  'bcryptjs': 'https://github.com/dcodeIO/bcrypt.js',
+  'dayjs': 'https://day.js.org/',
+  'winston': 'https://github.com/winstonjs/winston',
+  'sentry': 'https://sentry.io/',
+  'murlock': 'https://github.com/nodeca/murlock',
 }
 
 const url = urlMap[props.preset]

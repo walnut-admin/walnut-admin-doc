@@ -13,7 +13,7 @@
 - 技术栈 `tech stack`
     - <WBaseLink preset="nestjs">NestJS 11.x</WBaseLink> + <WBaseLink preset="swc">swc</WBaseLink> 构建，比tsc快10倍的开发体验！
     - <WBaseLink preset="express">express</WBaseLink> 基于express的app应用，原有概念完全继承，方便上手！
-    - <WBaseLink preset="mongoose">mongoose</WBaseLink> mongodb + mongoose，动态灵活的数据库支持，同时支持事务回滚！
+    - <WBaseLink preset="mongoose">mongoose</WBaseLink> <WBaseLink preset="mongodb">mongodb</WBaseLink> + mongoose，动态灵活的数据库支持，同时支持事务回滚！
     - <WBaseLink preset="nestjs-i18n">nestjs-i18n</WBaseLink> 接口返回信息也可以做国际化处理！
     - <WBaseLink preset="nestjs-jwt">@nestjs/jwt</WBaseLink> 基于jwt和<WBaseLink preset="passport">passport</WBaseLink>的完整的认证流程，支持email/phone认证、oauth认证等等！
     - <WBaseLink preset="nestjs-config">@nestjs/config</WBaseLink> 完备的env config管理，支持加载时的校验！
@@ -27,11 +27,11 @@
     - <WBaseLink preset="class-transformer">class-transformer</WBaseLink>和<WBaseLink preset="class-validator">class-validator</WBaseLink>，类的序列化和校验的核心！
     - <WBaseLink preset="nestjs-task">@nestjs/schedule</WBaseLink> 任务调度模块，支持定时任务和周期任务
     - <WBaseLink preset="nestjs-event">@nestjs/event-emitter</WBaseLink> 事件模块，支持发布订阅模式的事件处理
-    - 基于`winton`的日志记录和轮转，后续前端考虑做一个查看日志的地方
+    - 基于 <WBaseLink preset="winston">winston</WBaseLink> 的日志记录和轮转，后续前端考虑做一个查看日志的地方
     - 腾讯的短信发送接入，ali的sts接入，简单的邮件发送，基于网易的smtp服务
-    - `bcryptjs`和`cryptojs`接入，敏感数据/请求返回数据加密解密
-    - `dayjs`和`lodash`接入，方便时间操作和常用工具函数使用
-    - `murlock`事务锁接入（还需深入研究）
+    - <WBaseLink preset="bcryptjs">bcryptjs</WBaseLink> 和 cryptojs 接入，敏感数据/请求返回数据加密解密
+    - <WBaseLink preset="dayjs">dayjs</WBaseLink> 和 <WBaseLink preset="lodash-es">lodash</WBaseLink> 接入，方便时间操作和常用工具函数使用
+    - <WBaseLink preset="murlock">murlock</WBaseLink> 事务锁接入（还需深入研究）
 
 - 模块 `modules`
     - `角色/用户/菜单(权限)`，用户可拥有多角色，角色可拥有多权限，用户在多角色的情况下支持角色切换或者角色权限合并
@@ -44,7 +44,7 @@
     - `用户关联模块`，目前包括两张表，用户设备和用户oauth，后续计划添加用户偏好等等模块
     - `认证模块`，包括账号密码/邮箱验证码/短信验证码/oauth第三方认证登录
     - `示例模块`，crud增删改查的一个示例模块，同时也是一些新功能测试的模块
-    - `错误模块`，对于一些关键错误进行入库处理，后续同时会考虑接入sentry
+    - `错误模块`，对于一些关键错误进行入库处理，后续同时会考虑接入 <WBaseLink preset="sentry">sentry</WBaseLink>
     - `监控模块`，包含用户监控、缓存监控、服务器监控，后续会添加数据库监控，socket监控等等
     - `配置模块`，全局应用级别的配置项目，默认有缓存支持
     - `基于capjs的人机校验模块`，全局的cap token验证guard，防止接口被脚本或机器人刷

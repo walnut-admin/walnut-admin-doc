@@ -10,10 +10,10 @@
 
 这套机制的核心思想是：
 
-1. **浏览器指纹采集**：客户端通过 FingerprintJS 等指纹库采集设备特征（硬件信息、屏幕分辨率、网络类型等）
+1. **浏览器指纹采集**：客户端通过 <WBaseLink preset="fingerprintjs">FingerprintJS</WBaseLink> 等指纹库采集设备特征（硬件信息、屏幕分辨率、网络类型等）
 2. **服务端哈希生成**：将指纹 ID 通过 HMAC-SHA256 哈希生成唯一的 Device ID，防止客户端伪造
 3. **Cookie + LocalStorage 双重存储**：Device ID 同时存储在 Cookie（用于请求传递）和 LocalStorage（用于前端缓存）
-4. **Redis 多维度关联**：Device ID 作为 Redis 缓存的 Key 组成部分，关联 RSA 公钥、AES 密钥、会话信息、权限数据等
+4. **<WBaseLink preset="redis">Redis</WBaseLink> 多维度关联**：Device ID 作为 Redis 缓存的 Key 组成部分，关联 RSA 公钥、AES 密钥、会话信息、权限数据等
 5. **设备状态管理**：支持设备锁定、禁用、活跃状态追踪，以及 IP 变更检测
 
 需要说明的是：
@@ -33,7 +33,7 @@
 
 ### 1. Visitor ID（浏览器指纹）
 
-`Visitor ID` 是由 FingerprintJS 等指纹库生成的浏览器唯一标识：
+`Visitor ID` 是由 <WBaseLink preset="fingerprintjs">FingerprintJS</WBaseLink> 等指纹库生成的浏览器唯一标识：
 
 - 基于硬件信息（CPU 核心数、内存、GPU）、屏幕分辨率、Canvas 指纹等
 - 前端采集后发送给服务端，作为生成 Device ID 的原始输入
@@ -268,12 +268,12 @@ Device ID 是签名系统的核心锚点。签名相关的所有密钥（RSA 公
 |---------|------|-------|------|
 | Cookie | Device ID | 30天 | HTTP 请求自动携带 |
 | LocalStorage | Device ID | 30天 | 前端缓存，避免重复初始化 |
-| MongoDB | 设备详细记录 | 永久 | 设备信息持久化 |
-| Redis | 设备状态缓存 | 无限期 | 高频读取场景 |
+| <WBaseLink preset="mongodb">MongoDB</WBaseLink> | 设备详细记录 | 永久 | 设备信息持久化 |
+| <WBaseLink preset="redis">Redis</WBaseLink> | 设备状态缓存 | 无限期 | 高频读取场景 |
 
 ### 性能优化
 
-1. **缓存优先** - 设备状态优先从 Redis 读取，减少数据库查询
+1. **缓存优先** - 设备状态优先从 <WBaseLink preset="redis">Redis</WBaseLink> 读取，减少数据库查询
 2. **Upsert 操作** - 初始化时使用 `findOneAndUpdate` 的 upsert 模式，一次操作完成创建或更新
 3. **MurLock 分布式锁** - IP 变更时使用分布式锁，防止并发请求导致重复写入
 4. **IP 历史限制** - ipHistory 最多保留 10 条记录，防止数据无限增长
