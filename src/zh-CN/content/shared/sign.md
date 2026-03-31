@@ -1,8 +1,7 @@
 # <WPageTitle></WPageTitle>
 
 :::warning
-- 内容由免费的闪电说提供语音识别，再由gpt提供的去口头化润色
-- 流程图由claude生成
+- 由claude生成
 :::
 
 ## 介绍
@@ -30,8 +29,6 @@
 ## 相关链接
 
 - [体验地址](https://www.walnut-admin.com/)
-- [前端代码仓库](https://github.com/Zhaocl1997/walnut-admin-client)
-- [后端代码仓库](https://github.com/Zhaocl1997/walnut-admin-server)
 
 ## 关键影响维度说明
 
@@ -41,9 +38,12 @@
 
 `Device ID` 是客户端的唯一标识，用于在服务端区分不同的设备。在当前实现中：
 
-- 由前端生成并存储在 `localStorage` 中
+- 由服务端通过 HMAC-SHA256 哈希浏览器指纹生成，确保客户端无法伪造
+- 存储在 Cookie（HTTP 请求自动携带）和 `localStorage`（前端缓存）中
 - 作为 Redis 中 RSA 公钥、AES 密钥等数据的 Key 的一部分
 - 一旦 Device ID 发生变化，需要重新进行 RSA 握手
+
+详细的设备标识流程请参考 [设备追踪](/content/shared/device)。
 
 ### 2. RSA 密钥对
 

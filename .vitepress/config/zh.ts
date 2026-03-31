@@ -178,12 +178,16 @@ const sidebar: DefaultTheme.Sidebar = {
           link: '/content/shared/introduction',
         },
         {
-          text: '接口签名安全防护',
-          link: '/content/shared/sign',
+          text: '设备追踪',
+          link: '/content/shared/device',
         },
         {
           text: 'Cap.js简易人机验证',
           link: '/content/shared/capjs',
+        },
+        {
+          text: '接口签名安全防护',
+          link: '/content/shared/sign',
         },
         {
           text: 'opaque认证',
