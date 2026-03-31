@@ -11,7 +11,7 @@ hero:
   actions:
     - theme: brand
       text: 快速开始
-      link: /guide/introduction
+      link: /content/introduction
     - theme: alt
       text: 在线预览
       link: https://www.walnut-admin.com

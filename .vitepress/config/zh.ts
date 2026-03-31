@@ -73,19 +73,13 @@ const backendContent = [
 
 const nav: DefaultTheme.NavItem[] = [
   {
-    text: '指南',
-    activeMatch: '/guide/',
-    items: [
-      {
-        text: '介绍',
-        link: '/guide/introduction',
-      },
-    ],
-  },
-  {
     text: '包含内容',
     activeMatch: '/content/',
     items: [
+      {
+        text: '介绍',
+        link: '/content/introduction',
+      },
       {
         text: '前端',
         link: '/content/frontend/introduction',

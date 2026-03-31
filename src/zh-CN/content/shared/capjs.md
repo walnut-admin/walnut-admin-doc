@@ -11,73 +11,190 @@ cap.js [官网](https://capjs.js.org) [仓库](https://github.com/tiagozip/cap) 
 :::
 
 :::tabs
-== 新用户流程
-
+== Guard流程
 ```mermaid
-flowchart TD
-    %% 样式定义
-    classDef startEnd fill:#10b981,stroke:#059669,color:#fff
-    classDef frontend fill:#3b82f6,stroke:#2563eb,color:#fff
-    classDef backend fill:#8b5cf6,stroke:#7c3aed,color:#fff
-    classDef success fill:#22c55e,stroke:#16a34a,color:#fff
-    classDef error fill:#ef4444,stroke:#dc2626,color:#fff
-    classDef process fill:#f3f4f6,stroke:#9ca3af,color:#111
+sequenceDiagram
+    participant Client as 客户端<br/>(浏览器)
+    participant Guard as CAP Guard<br/>(WalnutAdminGuardCap)
+    participant Cache as Redis缓存
+    participant Lock as MurLock<br/>(分布式锁)
+    participant CapAPI as CapJS API<br/>(第三方)
+    participant Challenge as Challenge<br/>State Service
 
-    %% 流程开始
-    Start(["新用户未登录"]):::startEnd --> LoginAPI["点击登录按钮"]:::frontend
-    LoginAPI --> BackendAuth["调用/need接口，多维度获取是否需要cap token"]:::backend
-    BackendAuth --> NeedCAP{"是否需要验证码验证？"}:::backend
+    Note over Client,Challenge: 每个请求都会执行 CAP Guard
 
-    NeedCAP -->|是| TriggerCAP["检测到需验证码 → 唤起全局 CAP 组件"]:::frontend
-    NeedCAP -->|否| LoginSuccess["继续登录逻辑"]:::success
+    Client->>Guard: HTTP 请求<br/>(携带 capToken Cookie)
+    activate Guard
 
-    TriggerCAP --> UserSolve["用户点击完成验证"]:::frontend
-    UserSolve --> RedeemAPI["widget内部连续调用/challenge、/redeem"]:::frontend
-    RedeemAPI --> ContinueLogin["后端验证成功 → cookie中设置 cap token"]:::backend
-    ContinueLogin --> LoginSuccess
+    Note over Guard: Step 1: 检查是否跳过
+    Guard->>Guard: 检查 @WalnutAdminGuardCapFree()<br/>或 Postman 请求
 
-    LoginSuccess --> Finish(["后续请求都会携带cap token的cookie做验证"]):::success
+    alt 需要跳过验证
+        Guard-->>Client: 跳过验证,直接通过
+    end
 
-    %% 样式分配
-    class Start,Finish startEnd
-    class LoginAPI,TriggerCAP,UserSolve,RedeemAPI,ContinueLogin frontend
-    class BackendAuth,NeedCAP,ReturnFlag,SetCookie backend
-    class LoginSuccess success
+    Note over Guard: Step 2: 读取风险决策
+    Guard->>Guard: 读取 request.risk.comprehensive<br/>.recommendation
+
+    alt 无风险评估数据
+        Guard-->>Client: 警告并允许通过
+    end
+
+    Note over Guard: Step 3: CAP Token 硬校验
+    Guard->>Guard: 获取 Cookie 中的 capToken
+
+    alt Token 缺失
+        alt shouldChallenge = true
+            Guard-->>Client: 40116 Interaction Required<br/>(需要明确交互)
+        else shouldChallenge = false
+            Guard-->>Client: 40117 Refresh Required<br/>(无感刷新)
+        end
+    end
+
+    Note over Guard,Cache: Token 存在,验证有效性
+    Guard->>Cache: getCapTokenCache(deviceId)
+
+    alt 缓存命中
+        Cache-->>Guard: 返回缓存结果 (true/false)
+        Guard->>Guard: 快速路径验证通过
+    else 缓存未命中
+        Guard->>Lock: 请求分布式锁<br/>Key: CAP:{deviceId}
+        Lock-->>Guard: 获取锁成功 (3s 超时)
+
+        Note over Guard: Double-Check 模式
+        Guard->>Cache: 再次检查缓存<br/>(防止并发重复验证)
+
+        alt Double-Check 缓存命中
+            Cache-->>Guard: 返回缓存结果
+        else 缓存仍未命中
+            Guard->>CapAPI: AppCapJS.validateToken(capToken)
+            activate CapAPI
+            CapAPI-->>Guard: { success: true/false }
+            deactivate CapAPI
+
+            alt 验证失败
+                Guard-->>Client: 40111 You Are Bot<br/>(判定为机器人)
+            else 验证成功
+                Guard->>Cache: setCapTokenCache(deviceId)<br/>(缓存验证结果)
+                Cache-->>Guard: 缓存成功
+            end
+        end
+
+        Guard->>Lock: 释放分布式锁
+    end
+
+    Note over Guard: Step 4: 标记 Critical Factors
+    Guard->>Challenge: markChallengeHandled()<br/>批量标记所有 criticalFactors
+    activate Challenge
+    Challenge->>Challenge: 根据 userId 自动区分<br/>Pre Auth / Post Auth 因子
+    Challenge-->>Guard: 标记成功
+    deactivate Challenge
+
+    Guard-->>Client: 验证通过,继续执行业务逻辑
+    deactivate Guard
+
+    Note over Client: 请求进入 Controller 层
 ```
 
-== 老用户流程
+== 交互完整流程
 ```mermaid
-flowchart TD
-    %% 样式定义
-    classDef startEnd fill:#10b981,stroke:#059669,color:#fff
-    classDef frontend fill:#3b82f6,stroke:#2563eb,color:#fff
-    classDef backend fill:#8b5cf6,stroke:#7c3aed,color:#fff
-    classDef warning fill:#f59e0b,stroke:#d97706,color:#fff
-    classDef success fill:#22c55e,stroke:#16a34a,color:#fff
-    classDef error fill:#ef4444,stroke:#dc2626,color:#fff
-    classDef process fill:#f3f4f6,stroke:#9ca3af,color:#111
+sequenceDiagram
+    participant User as 用户
+    participant Client as 前端<br/>(Vue/Axios)
+    participant Interceptor as Axios<br/>拦截器
+    participant Queue as Singleton<br/>Promise Queue
+    participant Store as Pinia Store<br/>(CapJS)
+    participant Widget as Cap Widget<br/>(Web Component)
+    participant Server as 后端服务器
+    participant CapAPI as CapJS API
 
-    %% 起点
-    Start(["老用户访问"]):::startEnd -->  SendAPI["发送请求到后端"]:::frontend
-    SendAPI --> Guard["后端 Guard 校验 token"]:::backend
-    Guard --> TokenValid{"token 是否有效？"}:::backend
+    Note over User,CapAPI: 场景 1: 交互式验证 (40116 错误)
 
-    TokenValid -->|有效| Return200["返回 200 响应"]:::success
-    TokenValid -->|无效| ThrowBotFail["抛出 BotValidateFailed 异常 40011"]:::error
+    User->>Client: 发起请求 (登录/敏感操作)
+    Client->>Server: HTTP 请求
+    activate Server
+    Server->>Server: CAP Guard 验证<br/>Token 缺失/无效
+    Server-->>Client: 40116 Interaction Required
+    deactivate Server
 
-    ThrowBotFail --> ReceiveFail["前端axios拦截器走到40011代码块中"]:::frontend
-    ReceiveFail --> RefreshToken["触发 refreshCapJSToken() 流程"]:::warning
-    RefreshToken --> ReloadCAP["无感无组件刷新，直接调用cap.solve，调用后台接口"]:::warning
-    ReloadCAP --> GetNewToken["后台生成新cap token并写入cookie"]:::frontend
-    GetNewToken --> RetryRequest["拦截器中 重试原请求"]:::frontend
-    RetryRequest --> SendAPI
-    Return200 --> Success["响应成功处理"]:::success
-    Success --> Finish(["操作完成"]):::success
+    Client->>Interceptor: 拦截 40116 错误
+    activate Interceptor
+    Interceptor->>Queue: SingletonPromiseCapJSInteraction()
+    activate Queue
 
-    %% 样式分配
-    class Start,Finish startEnd
-    class AxiosInterceptor,SendAPI,ReceiveFail,RefreshToken,ReloadCAP,GetNewToken,RetryRequest frontend
-    class Guard,TokenValid,ThrowBotFail backend
-    class RefreshToken,ReloadCAP warning
+    Note over Queue: 防止并发多次弹窗
+    Queue->>Store: compStoreCapJS.onOpenCapModal()
+    activate Store
+
+    Store->>Store: loadCap()<br/>加载 Cap Widget 脚本
+    Store->>Store: show = true<br/>显示模态框
+    Store-->>Widget: 渲染 <cap-widget>
+    deactivate Store
+
+    Widget->>Server: POST /security/cap/challenge
+    activate Server
+    Server->>Server: SecurityCapService.challenge()
+    Server->>CapAPI: AppCapJS.createChallenge({<br/>  count, size, difficulty, ttl })
+    CapAPI-->>Server: 返回挑战数据
+    Server-->>Widget: 返回挑战
+    deactivate Server
+
+    Widget-->>User: 展示验证挑战<br/>(图形/拼图等)
+
+    User->>Widget: 完成挑战
+    Widget->>Widget: 本地验证解决方案
+
+    Widget->>Server: POST /security/cap/redeem<br/>{ solution }
+    activate Server
+    Server->>Server: SecurityCapService.redeem()
+    Server->>CapAPI: AppCapJS.redeemChallenge(solution)
+    CapAPI-->>Server: { token, success }
+    Server->>Server: 设置 capToken 到 Cookie<br/>(maxAge: ttl)
+    Server-->>Widget: { token }
+    deactivate Server
+
+    Widget->>Store: @solve 事件触发<br/>onCapSolve({ detail: { token } })
+    activate Store
+    Store->>Store: onSuccess(token) 回调
+    Store->>Store: show = false<br/>关闭模态框
+    Store-->>Queue: 返回 token
+    deactivate Store
+
+    Queue-->>Interceptor: Promise resolve
+    deactivate Queue
+
+    Interceptor->>Client: 重新发起原始请求<br/>AppAxios.request(res.config)
+    deactivate Interceptor
+
+    Client->>Server: 重试请求 (携带新 capToken)
+    Server->>Server: CAP Guard 验证通过
+    Server-->>Client: 返回业务数据
+    Client-->>User: 显示结果
+
+    Note over User,CapAPI: 场景 2: 无感刷新 (40117 错误)
+
+    User->>Client: 发起请求
+    Client->>Server: HTTP 请求
+    Server-->>Client: 40117 Refresh Required<br/>(Token 过期)
+
+    Client->>Interceptor: 拦截 40117 错误
+    Interceptor->>Queue: SingletonPromiseCapJSRefresh()
+    activate Queue
+
+    Queue->>Store: compStoreCapJS.refreshCapJSToken()
+    activate Store
+    Store->>Store: 后台创建隐藏 Cap 实例
+    Store->>Widget: cap.solve()<br/>(自动解决,无 UI)
+    deactivate Store
+
+    Widget->>Server: 自动完成 challenge + redeem
+    Server-->>Widget: 返回新 token
+
+    Widget-->>Queue: 返回 token
+    deactivate Queue
+
+    Interceptor->>Client: 自动重试请求
+    Client->>Server: 重试 (携带新 token)
+    Server-->>Client: 返回数据
+    Client-->>User: 无感完成,用户无感知
 ```
-:::
