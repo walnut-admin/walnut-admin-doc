@@ -99,6 +99,10 @@ const nav: DefaultTheme.NavItem[] = [
     activeMatch: '/record/',
     items: [
       {
+        text: 'wsl',
+        link: '/record/wsl',
+      },
+      {
         text: '日常记录',
         link: '/record/daily',
       },
@@ -320,6 +324,10 @@ const sidebar: DefaultTheme.Sidebar = {
     {
       text: '记录',
       items: [
+        {
+          text: 'wsl',
+          link: '/record/wsl',
+        },
         {
           text: '日常记录',
           link: '/record/daily',

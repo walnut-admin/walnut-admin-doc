@@ -1,38 +1,5 @@
 # MongoDB 相关记录
 
-## 开发环境 - windows的wsl2
-
-:::tip
-前提是docker已经安装完成
-:::
-
-### 安装
-
-- docker-compose 文件直接用的[bitnami](https://github.com/bitnami/containers/blob/main/bitnami/mongodb/docker-compose-replicaset.yml)的，很好用，配置环境变量就行
-
-```bash
-docker compose up --detach
-docker compose down
-docker compose ps
-```
-
-### 配置
-
-windows主机的`hosts`(C:\Windows\System32\drivers\etc)文件需要配置一下
-
-```txt
-127.0.0.1 dev-mongodb-primary
-127.0.0.1 dev-mongodb-secondary
-127.0.0.1 dev-mongodb-arbiter
-```
-
-### 验证
-直接用`mongodb-compass`连接尝试即可
-
-```txt
-mongodb://root:123456@127.0.0.1:27017,127.0.0.1:27027,127.0.0.1:27037/?readPreference=primary&replicaSet=replicaset
-```
-
 ## 非开发环境
 
 - 和开发环境的wsl基本一样
